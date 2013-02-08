@@ -1,0 +1,69 @@
+package com.example.ucrinstagram;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+
+public class Profile extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_profile);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		return true;
+	}
+	
+	public void downloadPicture(View view) {
+        final ProgressDialog dialog = ProgressDialog.show(this, "Download",
+                "downloading");
+        dialog.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final Bitmap downloadBitmap = downloadBitmap("http://www.vogella.de/img/lars/LarsVogelArticle7.png");
+                    final ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageBitmap(downloadBitmap);
+                        }
+                    });
+ 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    dialog.dismiss();
+                }
+            }
+        }).start();
+ 
+    }
+ 
+    private Bitmap downloadBitmap(String url) throws IOException {
+        HttpUriRequest request = new HttpGet(url.toString());
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpResponse response = httpClient.execute(request);
+ 
+        StatusLine statusLine = response.getStatusLine();
+        int statusCode = statusLine.getStatusCode();
+        if (statusCode == 200) {
+            HttpEntity entity = response.getEntity();
+            byte[] bytes = EntityUtils.toByteArray(entity);
+ 
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0,
+                    bytes.length);
+            return bitmap;
+        } else {
+            throw new IOException("Download failed, HTTP response code "
+                    + statusCode + " - " + statusLine.getReasonPhrase());
+        }
+    }
+
+}

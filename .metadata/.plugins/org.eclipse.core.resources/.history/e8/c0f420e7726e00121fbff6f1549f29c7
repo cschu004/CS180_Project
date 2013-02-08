@@ -1,0 +1,61 @@
+package com.example.ucrinstagram;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.ImageView;
+
+public class Profile extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_profile);
+		
+	    try {
+	        URL url = new URL(imageUrl);
+	        HttpGet httpRequest = null;
+
+	        httpRequest = new HttpGet(url.toURI());
+
+	        HttpClient httpclient = new DefaultHttpClient();
+	        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+
+	        HttpEntity entity = response.getEntity();
+	        BufferedHttpEntity b_entity = new BufferedHttpEntity(entity);
+	        InputStream input = b_entity.getContent();
+
+	        Bitmap bitmap = BitmapFactory.decodeStream(input);
+
+	         ImageView i = (ImageView) findViewById(R.id.image);
+	         i.setImageBitmap(bitmap);
+	     } catch (MalformedURLException e) {
+	         Log.e("log", "bad url", t);
+	     } catch (IOException e) {
+	         Log.e("log", "io error", t);
+	     }
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		return true;
+	}
+
+}

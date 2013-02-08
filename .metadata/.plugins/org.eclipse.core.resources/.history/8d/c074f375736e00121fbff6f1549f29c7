@@ -1,0 +1,59 @@
+package com.example.ucrinstagram;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+
+public class Profile extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_profile);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		return true;
+	}
+	
+	  String url = "http://images.google.com/hosted/life/l?imgurl=46d75bbfa52a8450";
+	    InputStream ins = null;
+	    try {
+	        ins = new java.net.URL(url).openStream();
+	    } catch (MalformedURLException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    Bitmap b = BitmapFactory.decodeStream(new FlushedInputStream(ins));
+	    imageview.setImageBitmap(b);
+
+	 static class FlushedInputStream extends FilterInputStream {
+	    public FlushedInputStream(InputStream inputStream) {
+	        super(inputStream);
+	    }
+
+	    @Override
+	    public long skip(long n) throws IOException {
+	        long totalBytesSkipped = 0L;
+	        while (totalBytesSkipped < n) {
+	            long bytesSkipped = in.skip(n - totalBytesSkipped);
+	            if (bytesSkipped == 0L) {
+	                int b = read();
+	                if (b < 0) {
+	                    break; // we reached EOF
+	                } else {
+	                    bytesSkipped = 1; // we read one byte
+	                }
+	            }
+	            totalBytesSkipped += bytesSkipped;
+	        }
+	        return totalBytesSkipped;
+	    }
+	  }
+
+}

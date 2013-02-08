@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/username" />
+
+    <TextView
+        android:id="@+id/following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginRight="36dp"
+        android:text="@string/following" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/following"
+        android:layout_alignBottom="@+id/following"
+        android:layout_marginRight="17dp"
+        android:layout_toLeftOf="@+id/following"
+        android:text="@string/followers" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_marginRight="18dp"
+        android:layout_toLeftOf="@+id/textView3"
+        android:text="@string/photos" />
+    
+<!--     <TextView -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_below="@id/textView1" -->
+<!--         android:layout_alignParentLeft="true" -->
+<!--         android:text="Loading image from url" -->
+<!--         android:layout_margin="10dip" /> -->
+ 
+    <ImageView android:id="@+id/image"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_below="@id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dip"/>
+    
+<!-- 	<WebView  xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--     	android:id="@+id/webview" -->
+<!--     	android:layout_width="wrap_content" -->
+<!--     	android:layout_height="wrap_content" /> -->
+
+</RelativeLayout>

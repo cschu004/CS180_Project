@@ -1,0 +1,43 @@
+package com.example.ucrinstagram;
+
+import java.io.InputStream;
+import java.net.URL;
+
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.Menu;
+
+public class Profile extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_profile);
+		
+        ImageView imgView =(ImageView)findViewById(R.id.ImageView1);
+        Drawable drawable = LoadImageFromWeb("http://www.example.com/android.png");
+        imgView.setImageDrawable(drawable);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		return true;
+	}
+	
+	   private Drawable LoadImageFromWeb(String url)
+	   {
+	  try
+	  {
+	   InputStream is = (InputStream) new URL(url).getContent();
+	   Drawable d = Drawable.createFromStream(is, "src name");
+	   return d;
+	  }catch (Exception e) {
+	   System.out.println("Exc="+e);
+	   return null;
+	  }
+	 }
+
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+ <PreferenceCategory
+   android:summary="Username and password information"
+   android:title="Login information" >
+  <EditTextPreference
+     android:key="nickname"
+     android:summary="Please enter your nickname"
+     android:title="Nickname" />
+ </PreferenceCategory>
+
+ <PreferenceCategory
+   android:summary="Private Information"
+   android:title="Private Settings" >
+  <EditTextPreference
+     android:key="email"
+     android:summary="Enter your e-mail"
+     android:title="E-Mail" />
+  <ListPreference
+     android:entries="@array/genderOptions"
+     android:entryValues="@array/genderValues"
+     android:key="listpref"
+     android:summary="Gender"
+     android:title="Gender" />
+  
+    <CheckBoxPreference
+     android:key="checkBox"
+     android:summary="On/Off"
+     android:title="Keep me logged in" />
+ </PreferenceCategory>
+</PreferenceScreen>

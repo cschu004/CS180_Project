@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewMember" >
+
+    <EditText
+        android:id="@+id/new_member_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="82dp"
+        android:ems="10"
+        android:text="@string/new_member_username" />
+
+    <EditText
+        android:id="@+id/new_member_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/new_member_username"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="@string/new_member_password" />
+
+    <Button
+        android:id="@+id/button_new_member_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/new_member_password"
+        android:layout_marginTop="15dp"
+        android:onClick="HomeScreen"
+        android:text="@string/button_new_member_test" />
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ucrinstagram"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.ucrinstagram.Signup_Login"
+            android:label="@string/title_activity_signup__login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.NewMember"
+            android:label="@string/title_activity_new_member"
+            android:parentActivityName="com.example.ucrinstagram"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ucrinstagram" />
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.HomeScreen"
+            android:label="@string/title_activity_home_screen" >
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.Profile"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.Explore"
+            android:label="@string/title_activity_explore" >
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.Camera"
+            android:label="@string/title_activity_camera" >
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.HomeScreenListActivity"
+            android:label="@string/title_homescreen_list" >
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.HomeScreenDetailActivity"
+            android:label="@string/title_homescreen_detail"
+            android:parentActivityName=".HomeScreenListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreenListActivity" />
+        </activity>
+        <activity
+            android:name="com.example.ucrinstagram.PrefsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+    </application>
+
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+</manifest>
