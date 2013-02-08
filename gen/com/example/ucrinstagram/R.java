@@ -15,26 +15,25 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int Login=0x7f070012;
-        public static final int SignUp=0x7f070011;
-        public static final int button1=0x7f070002;
-        public static final int button2=0x7f070003;
-        public static final int button_new_member_test=0x7f07000d;
-        public static final int camera_button=0x7f070006;
-        public static final int editText1=0x7f07000f;
-        public static final int explore_button=0x7f070005;
-        public static final int home_button=0x7f070004;
-        public static final int imageView=0x7f070001;
-        public static final int imageView1=0x7f07000e;
-        public static final int linearLayout1=0x7f070010;
-        public static final int member_password=0x7f070009;
-        public static final int member_sign_in=0x7f07000a;
-        public static final int member_username=0x7f070008;
-        public static final int menu_settings=0x7f070013;
-        public static final int new_member_password=0x7f07000c;
-        public static final int new_member_username=0x7f07000b;
-        public static final int profile_button=0x7f070007;
-        public static final int textView1=0x7f070000;
+        public static final int Login=0x7f070011;
+        public static final int SignUp=0x7f070010;
+        public static final int button1=0x7f070001;
+        public static final int button2=0x7f070000;
+        public static final int button_new_member_test=0x7f07000c;
+        public static final int camera_button=0x7f070005;
+        public static final int editText1=0x7f07000e;
+        public static final int explore_button=0x7f070004;
+        public static final int home_button=0x7f070003;
+        public static final int imageView1=0x7f07000d;
+        public static final int linearLayout1=0x7f07000f;
+        public static final int member_password=0x7f070008;
+        public static final int member_sign_in=0x7f070009;
+        public static final int member_username=0x7f070007;
+        public static final int menu_settings=0x7f070012;
+        public static final int new_member_password=0x7f07000b;
+        public static final int new_member_username=0x7f07000a;
+        public static final int profile_button=0x7f070006;
+        public static final int textView1=0x7f070002;
     }
     public static final class layout {
         public static final int activity_camera=0x7f030000;

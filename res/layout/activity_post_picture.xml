@@ -28,4 +28,13 @@
         <requestFocus />
     </EditText>
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp"
+        android:text="Share" />
+
 </RelativeLayout>

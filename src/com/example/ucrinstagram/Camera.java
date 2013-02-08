@@ -1,18 +1,14 @@
 package com.example.ucrinstagram;
 
-import java.io.ByteArrayOutputStream;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ImageView;
 
 public class Camera extends Activity {
     final int TAKE_PICTURE = 1;
@@ -56,7 +52,7 @@ public class Camera extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
-    	Bitmap bmp = null;
+    	//Bitmap bmp = null;
     	String filePath = null;
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == TAKE_PICTURE) {
@@ -69,7 +65,8 @@ public class Camera extends Activity {
 	            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 	            filePath = cursor.getString(columnIndex);
 	            cursor.close();
-	        	bmp = BitmapFactory.decodeFile(filePath);
+	            
+	        	//bmp = BitmapFactory.decodeFile(filePath);
 	            System.out.println(filePath);
 
 	        	//ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -95,7 +92,7 @@ public class Camera extends Activity {
             System.out.println(filePath);
             cursor.close();
 
-            Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
+            //Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
 	        //ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
 	        //myImage2.setImageBitmap(yourSelectedImage);
         }
