@@ -4,11 +4,104 @@
     android:layout_height="match_parent"
     tools:context=".Explore" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Explore goes here" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_toRightOf="@+id/imageView1"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView02"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignTop="@+id/ImageView01"
+        android:layout_toRightOf="@+id/ImageView01"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView03"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/imageView1"
+        android:layout_toLeftOf="@+id/ImageView01"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView04"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/ImageView01"
+        android:layout_toLeftOf="@+id/ImageView02"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView05"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ImageView02"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView06"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ImageView03"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView08"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/ImageView04"
+        android:layout_toRightOf="@+id/ImageView04"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ImageView07"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignTop="@+id/ImageView08"
+        android:layout_toLeftOf="@+id/ImageView08"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>
