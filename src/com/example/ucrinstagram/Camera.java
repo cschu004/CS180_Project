@@ -75,9 +75,9 @@ public class Camera extends Activity {
 		       // ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
 		       //myImage2.setImageBitmap(bmp);
        }
-        else {
-                //Toast.makeText(getBaseContext(), "Please capture again", Toast.LENGTH_LONG).show();
-       }
+       // else {
+         //       Toast.makeText(getBaseContext(), "Please try again", Toast.LENGTH_LONG).show();
+      // }
 
 
         if(resultCode == RESULT_OK && requestCode == ACTIVITY_SELECT_IMAGE){  
@@ -96,8 +96,12 @@ public class Camera extends Activity {
 	        //ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
 	        //myImage2.setImageBitmap(yourSelectedImage);
         }
-
-        done(filePath);
+       // else {
+           // Toast.makeText(getBaseContext(), "Please try again", Toast.LENGTH_LONG).show();
+        //}
+        if (filePath!=null){
+        	done(filePath);
+        }
    }
     
 }

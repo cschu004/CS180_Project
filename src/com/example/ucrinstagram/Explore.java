@@ -3,14 +3,12 @@ package com.example.ucrinstagram;
 import java.io.InputStream;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.widget.ImageView;
 
 
@@ -39,10 +37,7 @@ public class Explore extends Activity {
 		new DownloadImageTask((ImageView) findViewById(R.id.ImageView08))
         .execute("http://ideabastard.com/sites/default/files/images/instagram.thumbnail.jpeg");
 	}
-    public void camera(View view){
-    	Intent intent = new Intent(this, Camera.class);
-    	startActivity(intent);    	
-    }
+
     
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

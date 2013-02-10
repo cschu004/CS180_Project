@@ -35,6 +35,7 @@
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="79dp"
+        android:onClick="clickShare"
         android:text="Share" />
 
 
