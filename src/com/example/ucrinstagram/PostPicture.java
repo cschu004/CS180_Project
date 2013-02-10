@@ -3,6 +3,7 @@ package com.example.ucrinstagram;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.widget.ImageView.ScaleType;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public class PostPicture extends Activity {
@@ -31,7 +33,9 @@ public class PostPicture extends Activity {
 	
 	    filePath = getIntent().getExtras().getString("picture");
 		System.out.println("TEST: "+filePath);
-    	Bitmap bmp = BitmapFactory.decodeFile(filePath);
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inSampleSize = 8;
+    	Bitmap bmp = BitmapFactory.decodeFile(filePath,options);
         ImageView myImage2 = (ImageView) findViewById(R.id.imageView1);
         myImage2.setScaleType(ScaleType.FIT_XY);
         myImage2.setImageBitmap(bmp);
@@ -40,6 +44,8 @@ public class PostPicture extends Activity {
 
 	public void clickShare(View view){
         new S3PutObjectTask().execute();
+    	Intent intent = new Intent(this, HomeScreen.class);
+    	startActivity(intent);    	
 	}
 	
 	@Override
@@ -73,6 +79,7 @@ public class PostPicture extends Activity {
 		protected Void doInBackground(Void... arg0) {
 			s3Client.createBucket("ucrinstagram");
 			PutObjectRequest por = new PutObjectRequest("ucrinstagram","pictureName",new java.io.File(filePath));
+			por.setCannedAcl(CannedAccessControlList.PublicRead);
 			s3Client.putObject(por);
 			return null;
 		}
