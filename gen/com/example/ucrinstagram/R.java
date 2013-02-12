@@ -28,10 +28,10 @@ public final class R {
         public static final int button1=0x7f070001;
         public static final int button2=0x7f070000;
         public static final int button_new_member_test=0x7f070015;
-        public static final int camera_button=0x7f07000e;
+        public static final int camera_button=0x7f07000d;
         public static final int editText1=0x7f070016;
-        public static final int explore_button=0x7f07000d;
-        public static final int home_button=0x7f07000c;
+        public static final int explore_button=0x7f07000c;
+        public static final int home_button=0x7f07000b;
         public static final int imageView1=0x7f070002;
         public static final int linearLayout1=0x7f070017;
         public static final int member_password=0x7f070011;
@@ -40,8 +40,8 @@ public final class R {
         public static final int menu_settings=0x7f07001a;
         public static final int new_member_password=0x7f070014;
         public static final int new_member_username=0x7f070013;
-        public static final int profile_button=0x7f07000f;
-        public static final int textView1=0x7f07000b;
+        public static final int profile_button=0x7f07000e;
+        public static final int textView1=0x7f07000f;
     }
     public static final class layout {
         public static final int activity_camera=0x7f030000;

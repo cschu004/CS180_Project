@@ -2,6 +2,8 @@ package com.example.ucrinstagram;
 
 import java.io.InputStream;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,16 +15,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class HomeScreen extends Activity {
+	String caption=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
+	    caption = getIntent().getExtras().getString("caption");
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-        .execute("https://s3.amazonaws.com/ucrinstagram/pictureName");
+        .execute("https://s3.amazonaws.com/ucrinstagram/"+caption);
+        TextView textView = (TextView)findViewById(R.id.textView1);
+        textView.setText(caption);
 	}
 
 	@Override
