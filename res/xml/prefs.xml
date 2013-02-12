@@ -26,10 +26,6 @@
      android:key="email"
      android:summary="Enter your e-mail"
      android:title="E-Mail" />
-  
-    <CheckBoxPreference
-     android:key="checkBox"
-     android:summary="On/Off"
-     android:title="Keep me logged in" />
+
  </PreferenceCategory>
 </PreferenceScreen>

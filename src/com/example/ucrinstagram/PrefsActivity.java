@@ -6,12 +6,16 @@ import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 
 public class PrefsActivity extends PreferenceActivity {
-
+	private static final int TAKE_PICTURE = 1;
+	final int ACTIVITY_SELECT_IMAGE = 1234;
+	
+	
 @Override
 protected void onCreate(Bundle savedInstanceState) {
    super.onCreate(savedInstanceState);
    getActionBar().setDisplayHomeAsUpEnabled(true);
    addPreferencesFromResource(R.xml.prefs);
+
 }
 
 @Override
@@ -30,6 +34,5 @@ public boolean onOptionsItemSelected(MenuItem item) {
     }
     return super.onOptionsItemSelected(item);
 }
-
 
 }
