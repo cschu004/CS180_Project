@@ -13,7 +13,6 @@ import android.view.View;
 public class Camera extends Activity {
     final int TAKE_PICTURE = 1;
     final int ACTIVITY_SELECT_IMAGE = 1234;
-    //byte[] byteArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +35,7 @@ public class Camera extends Activity {
     
     public void startCamera(View view){
     	Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
     	startActivityForResult(intent, TAKE_PICTURE);   
-    	//done();
     }
 
     public void startGallery(View view){
@@ -46,7 +43,6 @@ public class Camera extends Activity {
 	    intent.setType("image/*");
 	    intent.setAction(Intent.ACTION_GET_CONTENT);//
 	    startActivityForResult(Intent.createChooser(intent, "Select Picture for UCRinstagram"),ACTIVITY_SELECT_IMAGE);
-	    //done();
     }
     
     @Override
@@ -66,14 +62,8 @@ public class Camera extends Activity {
 	            filePath = cursor.getString(columnIndex);
 	            cursor.close();
 	            
-	        	//bmp = BitmapFactory.decodeFile(filePath);
 	            System.out.println(filePath);
 
-	        	//ByteArrayOutputStream stream = new ByteArrayOutputStream();
-	        	//bmp.compress(Bitmap.CompressFormat.PNG,100,stream);
-	        	//byteArray = stream.toByteArray();
-		       // ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
-		       //myImage2.setImageBitmap(bmp);
        }
        // else {
          //       Toast.makeText(getBaseContext(), "Please try again", Toast.LENGTH_LONG).show();
@@ -92,9 +82,6 @@ public class Camera extends Activity {
             System.out.println(filePath);
             cursor.close();
 
-            //Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
-	        //ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
-	        //myImage2.setImageBitmap(yourSelectedImage);
         }
        // else {
            // Toast.makeText(getBaseContext(), "Please try again", Toast.LENGTH_LONG).show();

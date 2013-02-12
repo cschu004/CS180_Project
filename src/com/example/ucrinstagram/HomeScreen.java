@@ -2,9 +2,6 @@ package com.example.ucrinstagram;
 
 import java.io.InputStream;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
