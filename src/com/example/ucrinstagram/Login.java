@@ -23,7 +23,7 @@ public class Login extends Activity {
 	
     public void HomeScreen(View view){
     	Intent intent = new Intent(this, HomeScreen.class);
-    	intent.putExtra("caption", "");
+    	intent.putExtra("caption", "bmwdg");
     	startActivity(intent);    	
     }
     

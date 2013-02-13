@@ -27,6 +27,12 @@ public class HomeScreen extends Activity {
         .execute("https://s3.amazonaws.com/ucrinstagram/"+caption);
         TextView textView = (TextView)findViewById(R.id.textView1);
         textView.setText(caption);
+        //===
+		new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
+        .execute("https://s3.amazonaws.com/ucrinstagram/"+caption);
+        TextView textView2 = (TextView)findViewById(R.id.textView2);
+        textView2.setText(caption);
+
 	}
 
 	@Override

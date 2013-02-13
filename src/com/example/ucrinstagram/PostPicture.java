@@ -41,7 +41,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public class PostPicture extends Activity {
 
-    private AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( "AKIAILEAHZ5ZHHKD5JMQ", "" ) );                    
+    private AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( "", "" ) );                    
     String filePath;
     String caption;
     String link;
