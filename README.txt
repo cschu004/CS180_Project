@@ -1,3 +1,5 @@
+*** You cannot run  this on a emulator. Emulators do not have google play services framework. Because this app uses your google account to login you can only run this on an actual device with a google account.
+
 
 Follow these steps to import the Google Play Services Library into your Eclipse Project.
 
