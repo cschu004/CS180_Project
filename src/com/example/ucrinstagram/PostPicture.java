@@ -43,11 +43,16 @@ public class PostPicture extends Activity {
 
     private AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( "", "" ) );                    
     String filePath;
-    String caption;
-    String link;
     EditText et;
 	InputStream is; 
+	
+	String username="apple4life";
+    String caption;
+    String link;
 
+    ArrayList<String> image_links = new ArrayList<String>();
+    
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,12 +74,13 @@ public class PostPicture extends Activity {
 	public void clickShare(View view){
         System.out.println(et.getText().toString());
         caption = et.getText().toString();
-        link = "https://s3.amazonaws.com/ucrinstagram/"+caption;
+        link = "https://s3.amazonaws.com/ucrinstagram/"+username+"/"+caption;
+        
         new S3PutObjectTask().execute();
         new getjSON().execute();
 
-    	Intent intent = new Intent(this, HomeScreen.class);
-    	intent.putExtra("caption", caption);
+    	Intent intent = new Intent(this,HomeScreen.class);
+    	intent.putStringArrayListExtra("links", image_links);
     	startActivity(intent);    	
 	}
 	
@@ -108,7 +114,7 @@ public class PostPicture extends Activity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			s3Client.createBucket("ucrinstagram");
-			PutObjectRequest por = new PutObjectRequest("ucrinstagram",caption,new java.io.File(filePath));
+			PutObjectRequest por = new PutObjectRequest("ucrinstagram",username+"/"+caption,new java.io.File(filePath));
 			por.setCannedAcl(CannedAccessControlList.PublicRead);
 			s3Client.putObject(por);
 			return null;
@@ -121,6 +127,10 @@ public class PostPicture extends Activity {
 			String result = "";
 			//the year data to send
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("user",username));
+			nameValuePairs.add(new BasicNameValuePair("password","password123"));
+			nameValuePairs.add(new BasicNameValuePair("gender","1"));
+
 			nameValuePairs.add(new BasicNameValuePair("caption",caption));
 			nameValuePairs.add(new BasicNameValuePair("image_url",link));
 
@@ -158,14 +168,13 @@ public class PostPicture extends Activity {
 			        JSONArray jArray = new JSONArray(result);
 			        for(int i=0;i<jArray.length();i++){
 			                JSONObject json_data = jArray.getJSONObject(i);
-			                Log.i("log_tag","id: "+json_data.getInt("id")+
+			               /* Log.i("log_tag","id: "+json_data.getInt("id")+
 			                        ", name: "+json_data.getString("user")+
 			                        ", sex: "+json_data.getInt("sex")+
 			                        ", birthyear: "+json_data.getInt("birthyear")
-			                );
-			                System.out.println("name:"+json_data.getString("user"));
-			                System.out.println("birthday:"+json_data.getInt("gender"));
-
+			                );*/
+			                System.out.println("LINK:"+json_data.getString("image_url"));
+			                image_links.add(json_data.getString("image_url"));
 			        }
 			}
 			catch(JSONException e){

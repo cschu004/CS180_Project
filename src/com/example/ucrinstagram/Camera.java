@@ -27,6 +27,21 @@ public class Camera extends Activity {
         return true;
     }
     
+    public void home(View view){
+    	Intent intent = new Intent(this, HomeScreen.class);
+    	startActivity(intent);    	
+    }
+    
+    public void explore(View view){
+    	Intent intent = new Intent(this, Explore.class);
+    	startActivity(intent);    	
+    }
+    
+    public void profile(View view){
+    	Intent intent = new Intent(this, Profile.class);
+    	startActivity(intent);    	
+    }
+    
     public void done(String path){
     	Intent myIntent = new Intent(this, PostPicture.class);
     	myIntent.putExtra("picture", path);
