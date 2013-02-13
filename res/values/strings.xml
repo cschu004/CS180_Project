@@ -27,6 +27,8 @@
     <string name="title_homescreen_list">Items</string>
     <string name="camera_string">Take a picture</string>
     <string name="gallery_string">Choose from gallery</string>
+	<string name="account_select_prompt">Select the google account associated with this account</string>
+
         
 
 </resources>

@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="16" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -62,6 +64,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreenListActivity" />
         </activity>
+        <activity android:name="SelectGoogleAccount"></activity>
+        <activity android:name="NewProfileInfo"></activity>
     </application>
 
 </manifest>
