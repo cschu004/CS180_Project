@@ -6,7 +6,6 @@ import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 
 public class PrefsActivity extends PreferenceActivity {
-	private static final int TAKE_PICTURE = 1;
 	final int ACTIVITY_SELECT_IMAGE = 1234;
 	
 	
