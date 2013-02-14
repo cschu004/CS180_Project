@@ -18,11 +18,12 @@ protected void onCreate(Bundle savedInstanceState) {
    getActionBar().setDisplayHomeAsUpEnabled(true);
    addPreferencesFromResource(R.xml.prefs);
 }
-
+/*
 @Override
-public void onDestroy(){
+public void onPause(){
 	updateUserInfo();
 }
+*/
 
 public void updateUserInfo() {
 	TextView usernametv = (TextView) findViewById(R.id.username);
