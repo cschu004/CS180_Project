@@ -26,6 +26,7 @@ public class Profile extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
 		
 		
         // Loader image - will be shown before loading image
