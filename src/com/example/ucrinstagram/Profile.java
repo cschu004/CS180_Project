@@ -1,9 +1,11 @@
 package com.example.ucrinstagram;
 
+import android.os.Bundle;
 import java.io.InputStream;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,10 +22,11 @@ public class Profile extends Activity {
 //    private String selectedImagePath;
 //    private ImageView img;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_profile);
+		
 		
         // Loader image - will be shown before loading image
         int loader = R.drawable.loader;
@@ -71,7 +74,7 @@ public class Profile extends Activity {
 		protected void onPostExecute(Bitmap result) {
 			bmImage.setImageBitmap(result);
 		}
-	}
+}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,6 +82,8 @@ public class Profile extends Activity {
 		getMenuInflater().inflate(R.menu.activity_profile, menu);
 		return true;
 	}
+	
+
 	
     public void home(View view){
     	Intent intent = new Intent(this, HomeScreen.class);

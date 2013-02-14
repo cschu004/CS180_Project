@@ -1,17 +1,14 @@
 package com.example.ucrinstagram;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 public class Camera extends Activity {
     final int TAKE_PICTURE = 1;
@@ -30,9 +27,29 @@ public class Camera extends Activity {
         return true;
     }
     
+    public void home(View view){
+    	Intent intent = new Intent(this, HomeScreen.class);
+    	startActivity(intent);    	
+    }
+    
+    public void explore(View view){
+    	Intent intent = new Intent(this, Explore.class);
+    	startActivity(intent);    	
+    }
+    
+    public void profile(View view){
+    	Intent intent = new Intent(this, Profile.class);
+    	startActivity(intent);    	
+    }
+    
+    public void done(String path){
+    	Intent myIntent = new Intent(this, PostPicture.class);
+    	myIntent.putExtra("picture", path);
+    	startActivity(myIntent);
+    }
+    
     public void startCamera(View view){
     	Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
     	startActivityForResult(intent, TAKE_PICTURE);   
     }
 
@@ -46,7 +63,8 @@ public class Camera extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
-    	Bitmap bmp = null;
+    	//Bitmap bmp = null;
+    	String filePath = null;
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == TAKE_PICTURE) {
 	            Uri selectedImage = data.getData();
@@ -56,16 +74,15 @@ public class Camera extends Activity {
 	            cursor.moveToFirst();
 	
 	            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-	            String filePath = cursor.getString(columnIndex);
+	            filePath = cursor.getString(columnIndex);
 	            cursor.close();
-	        	 bmp = BitmapFactory.decodeFile(filePath);
+	            
+	            System.out.println(filePath);
 
-		        ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
-		        myImage2.setImageBitmap(bmp);
        }
-        else {
-                Toast.makeText(getBaseContext(), "Please capture again", Toast.LENGTH_LONG).show();
-        }
+       // else {
+         //       Toast.makeText(getBaseContext(), "Please try again", Toast.LENGTH_LONG).show();
+      // }
 
 
         if(resultCode == RESULT_OK && requestCode == ACTIVITY_SELECT_IMAGE){  
@@ -76,14 +93,17 @@ public class Camera extends Activity {
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String filePath = cursor.getString(columnIndex);
+            filePath = cursor.getString(columnIndex);
+            System.out.println(filePath);
             cursor.close();
 
-            Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
-	        ImageView myImage2 = (ImageView) findViewById(R.id.imageView);
-	        myImage2.setImageBitmap(yourSelectedImage);
         }
-
-
+       // else {
+           // Toast.makeText(getBaseContext(), "Please try again", Toast.LENGTH_LONG).show();
+        //}
+        if (filePath!=null){
+        	done(filePath);
+        }
    }
+    
 }

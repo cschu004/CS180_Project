@@ -27,7 +27,9 @@
     <string name="title_homescreen_list">Items</string>
     <string name="camera_string">Take a picture</string>
     <string name="gallery_string">Choose from gallery</string>
-        
+    <string name="title_activity_post_picture">PostPicture</string>
+    <string name="post_picture_caption">Type your caption here</string>
+    
     
     <!--     profile pages -->
     <string name="username">Username</string>
