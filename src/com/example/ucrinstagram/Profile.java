@@ -74,6 +74,27 @@ public class Profile extends Activity {
         
 	}
 	
+	@Override
+	public void onResume(){
+		super.onResume();
+		
+		TextView usernametv = (TextView) findViewById(R.id.username);
+        TextView nicknametv = (TextView) findViewById(R.id.nickname);
+        TextView gendertv = (TextView) findViewById(R.id.gender);
+        TextView biotv = (TextView) findViewById(R.id.aboutme);
+        SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
+        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String username = sharedPrefs.getString("username", "username");
+        String nickname = defSharedPrefs.getString("nickname", "nickname");
+        String gender = defSharedPrefs.getString("listpref", "gender");
+        String bio = defSharedPrefs.getString("aboutme", "About Me");
+        
+        usernametv.setText(username);
+        nicknametv.setText(nickname);
+        gendertv.setText(gender);
+        biotv.setText(bio);
+	}
+	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 		public DownloadImageTask(ImageView bmImage) {

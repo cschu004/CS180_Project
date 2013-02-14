@@ -18,30 +18,7 @@ protected void onCreate(Bundle savedInstanceState) {
    getActionBar().setDisplayHomeAsUpEnabled(true);
    addPreferencesFromResource(R.xml.prefs);
 }
-/*
-@Override
-public void onPause(){
-	updateUserInfo();
-}
-*/
 
-public void updateUserInfo() {
-	TextView usernametv = (TextView) findViewById(R.id.username);
-    TextView nicknametv = (TextView) findViewById(R.id.nickname);
-    TextView gendertv = (TextView) findViewById(R.id.gender);
-    TextView biotv = (TextView) findViewById(R.id.aboutme);
-    SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
-    SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-    String username = sharedPrefs.getString("username", "username");
-    String nickname = defSharedPrefs.getString("nickname", "nickname");
-    String gender = defSharedPrefs.getString("listpref", "gender");
-    String bio = defSharedPrefs.getString("aboutme", "About Me");
-    
-    usernametv.setText(username);
-    nicknametv.setText(nickname);
-    gendertv.setText(gender);
-    biotv.setText(bio);
-}
 
 @Override
 public boolean onOptionsItemSelected(MenuItem item) {
