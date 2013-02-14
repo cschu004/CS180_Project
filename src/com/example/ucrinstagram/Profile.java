@@ -11,10 +11,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Profile extends Activity {
     //final int TAKE_PICTURE = 1;
@@ -27,6 +29,23 @@ public class Profile extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        
+        TextView usernametv = (TextView) findViewById(R.id.username);
+        TextView nicknametv = (TextView) findViewById(R.id.nickname);
+        TextView gendertv = (TextView) findViewById(R.id.gender);
+        TextView biotv = (TextView) findViewById(R.id.aboutme);
+        SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
+        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String username = sharedPrefs.getString("username", "username");
+        String nickname = defSharedPrefs.getString("nickname", "nickname");
+        String gender = defSharedPrefs.getString("listpref", "gender");
+        String bio = defSharedPrefs.getString("aboutme", "About Me");
+        
+        usernametv.setText(username);
+        nicknametv.setText(nickname);
+        gendertv.setText(gender);
+        biotv.setText(bio);
+        
 		
 		
         // Loader image - will be shown before loading image
