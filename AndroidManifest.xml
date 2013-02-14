@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="16" />
 
     <application
@@ -62,6 +62,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreenListActivity" />
         </activity>
+        <activity
+            android:name="com.example.ucrinstagram.PrefsActivity"
+            android:label="@string/settings" >
+        </activity>
     </application>
+
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
