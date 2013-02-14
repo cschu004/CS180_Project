@@ -1,6 +1,21 @@
 package com.example.ucrinstagram;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,28 +31,15 @@ import android.widget.ImageView;
 
 public class Explore extends Activity {
 
+	String username="apple4life";
+	InputStream is; 
+    ArrayList<String> image_links2 = new ArrayList<String>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_explore);
-		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-        .execute("http://farm9.staticflickr.com/8169/8042410447_cf6a9e6a8e.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
-        .execute("http://farm9.staticflickr.com/8457/7885797166_2c48f6e8e6.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView02))
-        .execute("http://farm9.staticflickr.com/8158/7513032270_2ca44fd224.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView03))
-        .execute("http://farm9.staticflickr.com/8144/7513020030_01abc535da_b.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView04))
-        .execute("http://farm6.staticflickr.com/5192/7187102038_cd979bee1b_z.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView06))
-        .execute("http://farm9.staticflickr.com/8155/7105388393_b5b873a40f_b.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView08))
-        .execute("http://farm6.staticflickr.com/5338/7044525825_e208803c67_c.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView07))
-        .execute("http://farm8.staticflickr.com/7140/6898418202_11aefd88f6_c.jpg");
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
-        .execute("http://ideabastard.com/sites/default/files/images/instagram.thumbnail.jpeg");
+        new getRandomImages().execute();
 	}
 
     
@@ -66,6 +68,89 @@ public class Explore extends Activity {
 	public void refresh(View view){
 		finish();
 		startActivity(getIntent());
+	}
+	
+	
+	private class getRandomImages extends AsyncTask<Void,Void,Void>{
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			String result = "";
+
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+			//http post
+			try{
+			        HttpClient httpclient = new DefaultHttpClient();
+			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/getRandomImages.php");
+			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			        HttpResponse response = httpclient.execute(httppost);
+			        HttpEntity entity = response.getEntity();
+			        is = entity.getContent();
+
+			}
+			catch(Exception e){
+			        Log.e("log_tag", "Error in http connection "+e.toString());
+			}
+			//convert response to string
+			try{
+
+			        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			        StringBuilder sb = new StringBuilder();
+			        String line = null;
+			        while ((line = reader.readLine()) != null) {
+			                sb.append(line + "\n");
+			        }
+			        is.close();
+			 
+			        result=sb.toString();
+			}catch(Exception e){
+			        Log.e("log_tag", "Error converting result "+e.toString());
+			}
+			 
+			//parse json data
+			try{
+			        JSONArray jArray = new JSONArray(result);
+			        for(int i=0;i<jArray.length();i++){
+			                JSONObject json_data = jArray.getJSONObject(i);
+			               /* Log.i("log_tag","id: "+json_data.getInt("id")+
+			                        ", name: "+json_data.getString("user")+
+			                        ", sex: "+json_data.getInt("sex")+
+			                        ", birthyear: "+json_data.getInt("birthyear")
+			                );*/
+			                image_links2.add(json_data.getString("image_url"));
+			                System.out.println(json_data.getString("image_url"));
+			        }
+
+			}
+			catch(JSONException e){
+			        Log.e("log_tag", "Error parsing data "+e.toString());
+			}
+        	
+			return null;
+
+		}
+		protected void onPostExecute(Void Result){
+			
+			new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+	        .execute(image_links2.get(0));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
+	        .execute(image_links2.get(1));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView02))
+	        .execute(image_links2.get(2));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView03))
+	        .execute(image_links2.get(3));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView04))
+	        .execute(image_links2.get(4));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView06))
+	        .execute(image_links2.get(5));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView08))
+	        .execute(image_links2.get(6));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView07))
+	        .execute(image_links2.get(7));
+			new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
+	        .execute(image_links2.get(8));
+		}
+
 	}
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		  ImageView bmImage;
