@@ -33,7 +33,7 @@ public class HomeScreen extends Activity {
 	String caption=null;
 	String link1="";
 	String link2="";
-	String username="apple4life";
+	String username="testUser1";
 	InputStream is; 
 
     ArrayList<String> image_links2 = new ArrayList<String>();
@@ -128,11 +128,14 @@ public class HomeScreen extends Activity {
 
 		}
 		protected void onPostExecute(Void Result){
-			new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-			.execute(image_links2.get(image_links2.size()-1));
-
-			new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
-			.execute(image_links2.get(image_links2.size()-2));
+			if (image_links2.size() > 0){
+				new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+				.execute(image_links2.get(image_links2.size()-1));
+			
+			if (image_links2.size() > 1)
+				new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
+				.execute(image_links2.get(image_links2.size()-2));
+			}
 			//TextView textView = (TextView)findViewById(R.id.textView1);
 			//textView.setText(caption);
 		}

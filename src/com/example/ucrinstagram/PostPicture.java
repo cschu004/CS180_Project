@@ -46,7 +46,7 @@ public class PostPicture extends Activity {
     EditText et;
 	InputStream is; 
 	
-	String username="apple4lifex";
+	String username="testUser1";
     String caption;
     String link;
 
