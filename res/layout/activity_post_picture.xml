@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostPicture" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/ic_launcher" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/imageView1"
+        android:ems="10"
+        android:hint="@string/post_picture_caption"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp"
+        android:onClick="clickShare"
+        android:text="Share" />
+
+
+</RelativeLayout>

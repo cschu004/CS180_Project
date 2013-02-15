@@ -3,8 +3,11 @@ package com.example.ucrinstagram;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 
 public class Login extends Activity {
 
@@ -22,7 +25,13 @@ public class Login extends Activity {
 	}
 	
     public void HomeScreen(View view){
+    	EditText edittext = (EditText) findViewById(R.id.member_username);
+    	SharedPreferences userInfo = getSharedPreferences("tempUsername", 0);
+		Editor userInfoEditor = userInfo.edit();
+		userInfoEditor.putString("username", edittext.getText().toString());
+		userInfoEditor.commit();
     	Intent intent = new Intent(this, HomeScreen.class);
+    	intent.putExtra("caption", "");
     	startActivity(intent);    	
     }
     
