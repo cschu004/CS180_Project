@@ -12,6 +12,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,69 +62,6 @@ public class Explore extends Activity {
     
     public void profile(View view){
     	Intent intent = new Intent(this, Profile.class);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick1(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(0);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick2(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(1);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick3(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(2);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick4(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(3);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick5(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(4);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick6(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(8);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick7(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(5);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick8(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(7);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);    	
-    }
-    
-    public void imageClick9(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(6);
-    	intent.putExtra("link", link1);
     	startActivity(intent);    	
     }
 	
@@ -226,9 +164,7 @@ public class Explore extends Activity {
 		      Bitmap mIcon11 = null;
 		      try {
 		        InputStream in = new java.net.URL(urldisplay).openStream();
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 2;
-		        mIcon11 = BitmapFactory.decodeStream(in,null,options);
+		        mIcon11 = BitmapFactory.decodeStream(in);
 		      } catch (Exception e) {
 		          Log.e("Error", e.getMessage());
 		          e.printStackTrace();

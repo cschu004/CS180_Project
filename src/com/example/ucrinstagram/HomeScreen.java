@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class HomeScreen extends Activity {
@@ -42,7 +43,14 @@ public class HomeScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
+		
         new getAllImages().execute();
+
+		new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
+        .execute(link2);
+        TextView textView2 = (TextView)findViewById(R.id.textView2);
+        textView2.setText(caption);
+
 	}
 
 	@Override
@@ -115,24 +123,23 @@ public class HomeScreen extends Activity {
 			                        ", birthyear: "+json_data.getInt("birthyear")
 			                );*/
 			                image_links2.add(json_data.getString("image_url"));
-			                System.out.println(json_data.getString("image_url"));
-
 			        }
+	                System.out.println(image_links2.get(0));
 
 			}
 			catch(JSONException e){
 			        Log.e("log_tag", "Error parsing data "+e.toString());
 			}
+        	System.out.print("RETURN");
         	
 			return null;
 
 		}
 		protected void onPostExecute(Void Result){
 			new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-			.execute(image_links2.get(image_links2.size()-1));
-
+			.execute(image_links2.get(0));
 			new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
-			.execute(image_links2.get(image_links2.size()-2));
+			.execute(image_links2.get(1));
 			//TextView textView = (TextView)findViewById(R.id.textView1);
 			//textView.setText(caption);
 		}
@@ -151,7 +158,7 @@ public class HomeScreen extends Activity {
 		      Bitmap mIcon11 = null;
 		      try {
 		  		BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 2;
+				options.inSampleSize = 5;
 		        InputStream in = new java.net.URL(urldisplay).openStream();
 		        mIcon11 = BitmapFactory.decodeStream(in,null,options);
 		      } catch (Exception e) {
