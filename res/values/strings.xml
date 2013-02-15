@@ -29,19 +29,18 @@
     <string name="gallery_string">Choose from gallery</string>
     <string name="title_activity_post_picture">PostPicture</string>
     <string name="post_picture_caption">Type your caption here</string>
-    
-    
-    <!--     profile pages -->
+
+    <!-- profile pages -->
     <string name="username">Username</string>
     <string name="nickname">Nickname</string>
     <string name="gender">Gender</string>
     <string name="profile_creation_date">Profile Created on:</string>
     <string name="followers">Followers</string>
-	<string name="following">Following</string>
-	<string name="photos">Photos</string>
-	<string name="about_me">About Me</string>
-	
-	<string name="settings">Settings</string>
-	<string name="logout">Log Out</string>
+    <string name="following">Following</string>
+    <string name="photos">Photos</string>
+    <string name="about_me">About Me</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Log Out</string>
+    <string name="title_activity_single_picture">SinglePicture</string>
 
 </resources>

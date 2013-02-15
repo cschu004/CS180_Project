@@ -140,6 +140,48 @@ public class Profile extends Activity {
     	startActivity(intent);    	
     }
     
+    public void imageClick1(View view){
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	String link1 = image_links2.get(0);
+    	intent.putExtra("link", link1);
+    	startActivity(intent);
+    }
+    
+    public void imageClick2(View view){
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	String link1 = image_links2.get(1);
+    	intent.putExtra("link", link1);
+    	startActivity(intent);
+    }
+    
+    public void imageClick3(View view){
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	String link1 = image_links2.get(2);
+    	intent.putExtra("link", link1);
+    	startActivity(intent);
+    }
+    
+    public void imageClick4(View view){
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	String link1 = image_links2.get(3);
+    	intent.putExtra("link", link1);
+    	startActivity(intent);
+    }
+    
+    public void imageClick5(View view){
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	String link1 = image_links2.get(4);
+    	intent.putExtra("link", link1);
+    	startActivity(intent);
+    }
+    
+    public void imageClick6(View view){
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	String link1 = image_links2.get(5);
+    	intent.putExtra("link", link1);
+    	startActivity(intent);
+    }
+    
     public void logout(){
         // Clearing all data from Shared Preferences
         SharedPreferences settings = getSharedPreferences("DB_NAME", 0);

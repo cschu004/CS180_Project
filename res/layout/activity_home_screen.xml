@@ -69,7 +69,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="@string/home_tab" 
-        android:textSize="12sp" />
+        android:textSize="12sp" android:minHeight="48dip" android:minWidth="64dp"/>
 
     	<Button
         android:id="@+id/explore_button"
