@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,13 +30,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.app.AlertDialog;
+import com.example.ucrinstagram.Models.User;
 
 public class HomeScreen extends Activity {
 	String caption=null;
 	String link1="";
 	String link2="";
 	String username="apple4life";
-	InputStream is; 
+	InputStream is;
 
     ArrayList<String> image_links2 = new ArrayList<String>();
 
@@ -43,7 +46,7 @@ public class HomeScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
-		
+
         new getAllImages().execute();
 
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
@@ -51,6 +54,19 @@ public class HomeScreen extends Activity {
         TextView textView2 = (TextView)findViewById(R.id.textView2);
         textView2.setText(caption);
 
+        //testing out creating a new user
+        User user1 =  new User("Oliver", "Chou",
+                "oliver@mgxcopy.com", "MGX", "mgxtech");
+
+        //testing out get request + gson
+        User user2 =  new User(2);
+
+        Toast.makeText(this.getApplicationContext(), user2.firstname, Toast.LENGTH_LONG).show();
+
+        new AlertDialog.Builder(this)
+                .setTitle("User 2")
+                .setMessage(user2.username)
+                .show();
 	}
 
 	@Override
@@ -59,22 +75,22 @@ public class HomeScreen extends Activity {
 		getMenuInflater().inflate(R.menu.activity_home_screen, menu);
 		return true;
 	}
-	
+
     public void explore(View view){
     	Intent intent = new Intent(this, Explore.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
     public void camera(View view){
     	Intent intent = new Intent(this, Camera.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
     public void profile(View view){
     	Intent intent = new Intent(this, Profile.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
 	private class getAllImages extends AsyncTask<Void,Void,Void>{
 		@Override
 		protected Void doInBackground(Void... arg0) {
@@ -106,12 +122,12 @@ public class HomeScreen extends Activity {
 			                sb.append(line + "\n");
 			        }
 			        is.close();
-			 
+
 			        result=sb.toString();
 			}catch(Exception e){
 			        Log.e("log_tag", "Error converting result "+e.toString());
 			}
-			 
+
 			//parse json data
 			try{
 			        JSONArray jArray = new JSONArray(result);
@@ -131,7 +147,7 @@ public class HomeScreen extends Activity {
 			        Log.e("log_tag", "Error parsing data "+e.toString());
 			}
         	System.out.print("RETURN");
-        	
+
 			return null;
 
 		}
@@ -172,7 +188,7 @@ public class HomeScreen extends Activity {
 		      bmImage.setImageBitmap(result);
 		  }
 	}
-	
 
-	
+
+
 }
