@@ -82,13 +82,12 @@ public class NewMember extends Activity {
 
  			ArrayList<NameValuePair> userinfo = new ArrayList<NameValuePair>();
  			userinfo.add(new BasicNameValuePair("user",username));
- 			userinfo.add(new BasicNameValuePair("password",password));
 
 
  			//http post
  			try{
  			        HttpClient httpclient = new DefaultHttpClient();
- 			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/checkUser.php");
+ 			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/checkNewUser.php");
  			        httppost.setEntity(new UrlEncodedFormEntity(userinfo));
  			        HttpResponse response = httpclient.execute(httppost);
  			        HttpEntity entity = response.getEntity();
@@ -151,7 +150,6 @@ public class NewMember extends Activity {
 
  			ArrayList<NameValuePair> userinfo = new ArrayList<NameValuePair>();
  			userinfo.add(new BasicNameValuePair("user",username));
- 			userinfo.add(new BasicNameValuePair("password",password));
 
 
  			//http post
