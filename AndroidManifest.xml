@@ -78,7 +78,7 @@
         </activity>
         <activity
             android:name="com.example.ucrinstagram.SinglePicture"
-            android:label="@string/title_activity_single_picture" >
+            android:label="Single picture" >
         </activity>
     </application>
 
