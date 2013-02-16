@@ -25,11 +25,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SinglePicture extends Activity {
-	String username="testUser1";
+	String username=Login.username;
 	InputStream is; 
 	String link;
 	String [] tokens;

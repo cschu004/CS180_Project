@@ -26,14 +26,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class HomeScreen extends Activity {
 	String caption=null;
 	String link1="";
 	String link2="";
-	String username="testUser1";
+	public static String username= Login.username;
 	InputStream is; 
 
     ArrayList<String> image_links2 = new ArrayList<String>();
@@ -131,8 +133,8 @@ public class HomeScreen extends Activity {
 			if (image_links2.size() > 0){
 				new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
 				.execute(image_links2.get(image_links2.size()-1));
-			
-			if (image_links2.size() > 1)
+			}
+			if (image_links2.size() > 1){
 				new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
 				.execute(image_links2.get(image_links2.size()-2));
 			}

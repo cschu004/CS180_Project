@@ -25,12 +25,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class Explore extends Activity {
 
-	String username="apple4life";
+	String username=Login.username;
 	InputStream is; 
     ArrayList<String> image_links2 = new ArrayList<String>();
 

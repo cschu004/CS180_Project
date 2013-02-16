@@ -36,4 +36,14 @@
         android:onClick="HomeScreen"
         android:text="@string/button_sign_in" />
 
+    <TextView
+        android:id="@+id/errorlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:text="@string/error_login"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </RelativeLayout>
