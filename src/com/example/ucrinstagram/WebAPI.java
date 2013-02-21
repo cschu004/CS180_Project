@@ -46,7 +46,7 @@ public class WebAPI {
 
     // TODO: create some kind of ack, whether the save was successful or not
     public void createUser(User user) {
-        String url = apiURL + User.urlSuffix + "/new.json";
+        String url = apiURL + User.urlSuffix;
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
     }

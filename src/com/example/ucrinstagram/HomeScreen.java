@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,9 +29,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import android.app.AlertDialog;
-import com.example.ucrinstagram.Models.User;
-
 public class HomeScreen extends Activity {
 	String caption=null;
 	String link1="";
@@ -53,20 +49,6 @@ public class HomeScreen extends Activity {
         .execute(link2);
         TextView textView2 = (TextView)findViewById(R.id.textView2);
         textView2.setText(caption);
-
-        //testing out creating a new user
-        User user1 =  new User("Oliver", "Chou",
-                "oliver@mgxcopy.com", "MGX", "mgxtech");
-
-        //testing out get request + gson
-        User user2 =  new User(2);
-
-        Toast.makeText(this.getApplicationContext(), user2.firstname, Toast.LENGTH_LONG).show();
-
-        new AlertDialog.Builder(this)
-                .setTitle("User 2")
-                .setMessage(user2.username)
-                .show();
 	}
 
 	@Override

@@ -79,6 +79,10 @@ public class User {
         new WebAPI().saveUser(this);
     }
 
+    public void create(){
+        new WebAPI().createUser(this);
+    }
+
     // GET
     public Profile getProfile() {
         return null;
@@ -115,13 +119,12 @@ public class User {
 
     public List<NameValuePair> getNameValuePairs(){
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
-        nameValuePairs.add(new BasicNameValuePair("id", Integer.toString(this.id)));
-        nameValuePairs.add(new BasicNameValuePair("firstname", this.firstname));
-        nameValuePairs.add(new BasicNameValuePair("lastname", this.lastname));
-        nameValuePairs.add(new BasicNameValuePair("email", this.email));
-        nameValuePairs.add(new BasicNameValuePair("display_name", this.display_name));
-        nameValuePairs.add(new BasicNameValuePair("username", this.username));
-        nameValuePairs.add(new BasicNameValuePair("password_hash", this.password_hash));
+        nameValuePairs.add(new BasicNameValuePair("user[firstname]", this.firstname));
+        nameValuePairs.add(new BasicNameValuePair("user[lastname]", this.lastname));
+        nameValuePairs.add(new BasicNameValuePair("user[email]", this.email));
+        nameValuePairs.add(new BasicNameValuePair("user[display_name]", this.display_name));
+        nameValuePairs.add(new BasicNameValuePair("user[username]", this.username));
+        nameValuePairs.add(new BasicNameValuePair("user[password_hash]", this.password_hash));
         return nameValuePairs;
     }
 
