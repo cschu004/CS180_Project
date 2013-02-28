@@ -22,10 +22,12 @@ import android.content.Intent;
 <<<<<<< HEAD
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-=======
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,9 +86,81 @@ public class Login extends Activity {
 			finish();
 			startActivity(getIntent());
 		}
->>>>>>> origin/master
     }
     
+    private class checkLogin extends AsyncTask<Void,Void,Void>{
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			String result = "";
+
+			ArrayList<NameValuePair> userinfo = new ArrayList<NameValuePair>();
+			userinfo.add(new BasicNameValuePair("user",username));
+			userinfo.add(new BasicNameValuePair("password",password));
+
+
+			//http post
+			try{
+			        HttpClient httpclient = new DefaultHttpClient();
+			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/checkUser.php");
+			        httppost.setEntity(new UrlEncodedFormEntity(userinfo));
+			        HttpResponse response = httpclient.execute(httppost);
+			        HttpEntity entity = response.getEntity();
+			        is = entity.getContent();
+
+			}
+			catch(Exception e){
+			        Log.e("log_tag", "Error in http connection "+e.toString());
+			}
+			//convert response to string
+			try{
+
+			        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+			        StringBuilder sb = new StringBuilder();
+			        String line = null;
+			        while ((line = reader.readLine()) != null) {
+			                sb.append(line + "\n");
+			        }
+			        is.close();
+			 
+			        result=sb.toString();
+					 
+			}catch(Exception e){
+			        Log.e("log_tag", "Error converting result "+e.toString());
+			}
+			 System.out.println("======================");
+
+			 
+			//parse json data
+			try{
+			        JSONArray jArray = new JSONArray(result);
+			        for(int i=0;i<jArray.length();i++){
+			                JSONObject json_data = jArray.getJSONObject(i);
+			                //userinfo.add(json_data.getInt("id"));
+			                Home = true;
+			                System.out.println(json_data.getInt("id"));
+			                //System.out.println(json_data.getString("image_url"));
+			        }
+
+			}
+			catch(JSONException e){
+					Home = false;
+					System.out.println(Home);
+			        Log.e("log_tag", "Error parsing data "+e.toString());
+			}
+			
+
+			 System.out.println("======================");
+			 //TextView tmp =(TextView)findViewById(R.id.errorlogin);
+			 //tmp.setText( "Incorrect username/password combination, please try again:");
+			 Finished = true;
+			return null;
+			
+
+		}
+		protected void onPostExecute(Void Result){
+		}
+
+	}
     private class checkLogin extends AsyncTask<Void,Void,Void>{
 		@Override
 		protected Void doInBackground(Void... arg0) {

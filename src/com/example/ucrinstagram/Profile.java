@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.preference.PreferenceManager;
 =======
 >>>>>>> origin/master
@@ -136,7 +135,6 @@ public class Profile extends Activity {
 		return true;
 	}
 	
-<<<<<<< HEAD
 
 	
     public void home(View view){
@@ -191,6 +189,25 @@ public class Profile extends Activity {
         	Intent intent = new Intent(this, Profile.class);
         	startActivity(intent);  
         	
+        	
+//            Uri selectedImageUri = data.getData();
+//            selectedImagePath = getPath(selectedImageUri);
+//            System.out.println("Image Path : " + selectedImagePath);
+//            img.setImageURI(selectedImageUri);
+////        }
+//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute(selectedImagePath);
+
+   }
+
+}
+    
+//    public String getPath(Uri uri) {
+//        String[] projection = { MediaStore.Images.Media.DATA };
+//        Cursor cursor = managedQuery(uri, projection, null, null, null);
+//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//        return cursor.getString(column_index);
+//    }
         	
 //            Uri selectedImageUri = data.getData();
 //            selectedImagePath = getPath(selectedImageUri);
