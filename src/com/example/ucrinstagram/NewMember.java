@@ -19,14 +19,9 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-<<<<<<< HEAD
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-=======
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
->>>>>>> origin/master
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -79,13 +74,13 @@ public class NewMember extends Activity {
 			finish();
 			startActivity(getIntent());
 		}
-		else{
-			//create new user
-			Finished = false;
-			new createnewuser().execute();
-			while(!Finished);
-	    	startActivity(intent); 
-		}   	
+//		else{
+//			//create new user
+//			Finished = false;
+//			new createnewuser().execute();
+//			while(!Finished);
+//	    	startActivity(intent);
+//		}
     }
     
     private class checkLogin extends AsyncTask<Void,Void,Void>{
