@@ -14,6 +14,9 @@
     <string name="title_activity_login">Login</string>
     <string name="member_username">Username</string>
     <string name="member_password">Password</string>
+    <string name="error_login"></string>
+    
+    
     <string name="button_sign_in">Sign In</string>
     <string name="home_tab">Home</string>
     <string name="explore_tab">Explore</string>

@@ -11,12 +11,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.preference.PreferenceManager;
+=======
+>>>>>>> origin/master
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+<<<<<<< HEAD
 import android.widget.TextView;
+=======
+>>>>>>> origin/master
 
 public class Profile extends Activity {
     //final int TAKE_PICTURE = 1;
@@ -29,6 +35,7 @@ public class Profile extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+<<<<<<< HEAD
         
         TextView usernametv = (TextView) findViewById(R.id.username);
         TextView nicknametv = (TextView) findViewById(R.id.nickname);
@@ -46,6 +53,8 @@ public class Profile extends Activity {
         gendertv.setText(gender);
         biotv.setText(bio);
         
+=======
+>>>>>>> origin/master
 		
 		
         // Loader image - will be shown before loading image
@@ -72,6 +81,7 @@ public class Profile extends Activity {
         
         new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute("http://api.androidhive.info/images/sample.jpg");
         
+<<<<<<< HEAD
 	}
 	
 	@Override
@@ -93,6 +103,8 @@ public class Profile extends Activity {
         nicknametv.setText(nickname);
         gendertv.setText(gender);
         biotv.setText(bio);
+=======
+>>>>>>> origin/master
 	}
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -124,6 +136,7 @@ public class Profile extends Activity {
 		return true;
 	}
 	
+<<<<<<< HEAD
 
 	
     public void home(View view){
@@ -186,6 +199,70 @@ public class Profile extends Activity {
 ////        }
 //        new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute(selectedImagePath);
 
+=======
+
+	
+    public void home(View view){
+    	Intent intent = new Intent(this, HomeScreen.class);
+    	startActivity(intent);    	
+    }
+	
+    public void explore(View view){
+    	Intent intent = new Intent(this, Explore.class);
+    	startActivity(intent);    	
+    }
+    
+    public void camera(View view){
+    	Intent intent = new Intent(this, Camera.class);
+    	startActivity(intent);    	
+    }
+    
+    public void settings(View view){
+    	Intent intent = new Intent(this, PrefsActivity.class);
+    	startActivity(intent);    	
+    }
+    
+    public void logout(){
+        // Clearing all data from Shared Preferences
+        SharedPreferences settings = getSharedPreferences("DB_NAME", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("user");
+        editor.remove("pass");
+        editor.clear();
+        editor.commit();
+        
+    	Intent intent = new Intent(this, Login.class);
+    	startActivity(intent);    	
+    }
+    
+    public void startGallery(View view){
+    	Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(intent, "Select Picture for UCRinstagram"),ACTIVITY_SELECT_IMAGE);
+		//done();
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+     //Bitmap bmp = null;
+        if(resultCode == RESULT_OK && requestCode == ACTIVITY_SELECT_IMAGE){
+        	//Upload the picture and associate it with the proper account
+
+        	//reload the profile page
+        	Intent intent = new Intent(this, Profile.class);
+        	startActivity(intent);  
+        	
+        	
+//            Uri selectedImageUri = data.getData();
+//            selectedImagePath = getPath(selectedImageUri);
+//            System.out.println("Image Path : " + selectedImagePath);
+//            img.setImageURI(selectedImageUri);
+////        }
+//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute(selectedImagePath);
+
+>>>>>>> origin/master
    }
 
 }
