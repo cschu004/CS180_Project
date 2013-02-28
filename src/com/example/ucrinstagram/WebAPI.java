@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 public class WebAPI {
 
     private Gson gson = new Gson();
-    private String apiURL = "http://www.mgx-dev.com/";
+    private String apiURL = "http://mgx-dev.com/";
 
     public WebAPI() {
     }
@@ -30,7 +30,7 @@ public class WebAPI {
     // ------------------------
     // ----- User Methods -----
     // ------------------------
-    public User[] getUsers() {
+    public User[] getAllUsers() {
         String url = apiURL + User.urlSuffix + ".json";
         HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
@@ -44,6 +44,14 @@ public class WebAPI {
         return gson.fromJson(json, User.class);
     }
 
+    public User getUser(String username) {
+        String url = apiURL + User.urlSuffix + "/username/" + username + ".json";
+        Log.i("OC", "Attempting to get User info by username: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, User.class);
+    }
+
     // TODO: create some kind of ack, whether the save was successful or not
     public void createUser(User user) {
         String url = apiURL + User.urlSuffix;
@@ -51,7 +59,7 @@ public class WebAPI {
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
     }
 
-    public void editUser(User user){
+    public void editUser(User user) {
         saveUser(user);
     }
 
@@ -69,16 +77,27 @@ public class WebAPI {
     }
 
     public com.example.ucrinstagram.Models.Profile getProfile(int user_id) {
-        return null;
+        String url = apiURL + User.urlSuffix + "/get_profile/" + user_id;
+        Log.i("OC", "Attempting to get Profile info by user id: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, com.example.ucrinstagram.Models.Profile.class);
+    }
+
+    public com.example.ucrinstagram.Models.Profile getProfile(User user) {
+        return getProfile(user.getId());
     }
 
     public void saveProfile(com.example.ucrinstagram.Models.Profile profile) {
     }
 
+    public void saveProfileFromUser(com.example.ucrinstagram.Models.Profile profile, User user) {
+    }
+
     // -------------------------
     // ----- Photo Methods -----
     // -------------------------
-    public Photo[] getPhotos() {
+    public Photo[] getAllPhotos() {
         String url = apiURL + Photo.urlSuffix + ".json";
         HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
@@ -87,12 +106,29 @@ public class WebAPI {
 
     public Photo getPhoto(int id) {
         String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(id);
+        Log.i("OC", "Attempting to get Profile info by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
         return gson.fromJson(json, Photo.class);
     }
 
-    public void savePhoto(Photo photo) {
+    public Photo[] getPhotosFromUser(int id) {
+        String url = apiURL + User.urlSuffix + "/get_photos/" + Integer.toString(id);
+        Log.i("OC", "Attempting to get Photos by user id: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, Photo[].class);
+    }
+
+    public Photo[] getPhotosFromUser(User user) {
+        return getPhotosFromUser(user.getId());
+    }
+
+    public void addPhotoToUser(Photo photo, User user) {
+        String url = apiURL + User.urlSuffix + "/add_photo/" + Integer.toString(user.getId());
+        Log.i("OC", "Attempting to add Photo by user id: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        getJSONFromServer(new HTTPParams(requestMethod, url, photo.getNameValuePairs()));
     }
 
     // -------------------------
@@ -208,9 +244,16 @@ class getJSONFromServer extends AsyncTask<HTTPParams, Void, String> {
                 writer.write(getQuery(params[0].nameValuePairs));
                 writer.close();
                 os.close();
-
             } else if (requestMethod == HTTPRequestMethod.PUT) {
                 connection.setRequestMethod("PUT");
+                connection.setDoOutput(true);
+
+                OutputStream os = connection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(getQuery(params[0].nameValuePairs));
+                writer.close();
+                os.close();
             } else if (requestMethod == HTTPRequestMethod.DELETE) {
                 connection.setRequestMethod("DELETE");
             } else {
@@ -287,13 +330,11 @@ class getJSONFromServer extends AsyncTask<HTTPParams, Void, String> {
         }
     }
 
-    private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException
-    {
+    private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
-        for (NameValuePair pair : params)
-        {
+        for (NameValuePair pair : params) {
             if (first)
                 first = false;
             else

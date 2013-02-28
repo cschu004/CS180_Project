@@ -69,6 +69,18 @@ public class User {
         this.username = tempUser.username;
     }
 
+    public User(String username){
+        WebAPI api = new WebAPI();
+        User tempUser = api.getUser(username);
+
+        this.id = tempUser.id;
+        this.firstname = tempUser.firstname;
+        this.lastname = tempUser.lastname;
+        this.email = tempUser.email;
+        this.display_name = tempUser.display_name;
+        this.username = tempUser.username;
+    }
+
     // --------------------------
     // ----- PUBLIC METHODS -----
     // --------------------------
@@ -79,17 +91,24 @@ public class User {
         new WebAPI().saveUser(this);
     }
 
-    public void create(){
+    public void create() {
         new WebAPI().createUser(this);
     }
 
     // GET
+    public Boolean checkPassword(String hash) {
+        if (hash == this.password_hash)
+            return true;
+        else
+            return false;
+    }
+
     public Profile getProfile() {
-        return null;
+        return new WebAPI().getProfile(this);
     }
 
     public Photo[] getPhotos() {
-        return null;
+        return new WebAPI().getPhotosFromUser(this);
     }
 
     public User[] getFollowers() {
@@ -98,9 +117,11 @@ public class User {
 
     // SAVE
     public void saveProfile(Profile profile) {
+        new WebAPI().saveProfileFromUser(profile, this);
     }
 
     public void savePhoto(Photo photo) {
+        new WebAPI().addPhotoToUser(photo, this);
     }
 
     public void savePhotos(Photo[] photos) {
@@ -117,8 +138,9 @@ public class User {
     // ----- Accessor METHODS -----
     // ----------------------------
 
-    public List<NameValuePair> getNameValuePairs(){
+    public List<NameValuePair> getNameValuePairs() {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+        // TODO: currently rails is creating the ID numbers, need to return ID number or let Java set it
         nameValuePairs.add(new BasicNameValuePair("user[firstname]", this.firstname));
         nameValuePairs.add(new BasicNameValuePair("user[lastname]", this.lastname));
         nameValuePairs.add(new BasicNameValuePair("user[email]", this.email));
@@ -128,7 +150,7 @@ public class User {
         return nameValuePairs;
     }
 
-    public int getId(){
+    public int getId() {
         return this.id;
     }
 
