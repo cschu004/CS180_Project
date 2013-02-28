@@ -39,9 +39,9 @@ import android.widget.TextView;
 
 public class Login extends Activity {
 
-	String username="apple4life";
-	String password="password123";
-	
+	public static String username="";
+	public static String password="";
+
 	InputStream is; 
 	boolean Home = true;
 	boolean Finished = false;
@@ -59,24 +59,14 @@ public class Login extends Activity {
 		getMenuInflater().inflate(R.menu.activity_login, menu);
 		return true;
 	}
-	
+
     public void HomeScreen(View view){
-<<<<<<< HEAD
-    	EditText edittext = (EditText) findViewById(R.id.member_username);
-    	SharedPreferences userInfo = getSharedPreferences("tempUsername", 0);
-		Editor userInfoEditor = userInfo.edit();
-		userInfoEditor.putString("username", edittext.getText().toString());
-		userInfoEditor.commit();
-    	Intent intent = new Intent(this, HomeScreen.class);
-    	intent.putExtra("caption", "");
-    	startActivity(intent);    	
-=======
     	Finished = false;
     	username = ((EditText)findViewById(R.id.member_username)).getText().toString();
     	password = ((EditText)findViewById(R.id.member_password)).getText().toString();
 		new checkLogin().execute();
 		while(!Finished);
-		
+
 		if(Home){
 			Intent intent = new Intent(this, HomeScreen.class);
 			intent.putExtra("caption", "");
@@ -121,15 +111,26 @@ public class Login extends Activity {
 			                sb.append(line + "\n");
 			        }
 			        is.close();
-			 
+
 			        result=sb.toString();
-					 
+
 			}catch(Exception e){
 			        Log.e("log_tag", "Error converting result "+e.toString());
 			}
 			 System.out.println("======================");
 
-			 
+
+			//parse json data
+			try{
+			        JSONArray jArray = new JSONArray(result);
+			        for(int i=0;i<jArray.length();i++){
+			                JSONObject json_data = jArray.getJSONObject(i);
+			                //userinfo.add(json_data.getInt("id"));
+			                Home = true;
+			                System.out.println(json_data.getInt("id"));
+			                //System.out.println(json_data.getString("image_url"));
+			        }
+
 			//parse json data
 			try{
 			        JSONArray jArray = new JSONArray(result);
@@ -228,6 +229,26 @@ public class Login extends Activity {
 			 Finished = true;
 			return null;
 			
+
+		}
+		protected void onPostExecute(Void Result){
+		}
+
+	}
+			}
+			catch(JSONException e){
+					Home = false;
+					System.out.println(Home);
+			        Log.e("log_tag", "Error parsing data "+e.toString());
+			}
+
+
+			 System.out.println("======================");
+			 //TextView tmp =(TextView)findViewById(R.id.errorlogin);
+			 //tmp.setText( "Incorrect username/password combination, please try again:");
+			 Finished = true;
+			return null;
+
 
 		}
 		protected void onPostExecute(Void Result){

@@ -1,14 +1,6 @@
 package com.example.ucrinstagram;
 
 import android.content.Intent;
-<<<<<<< HEAD
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.view.MenuItem;
-import android.widget.TextView;
-=======
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;

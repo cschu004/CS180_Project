@@ -46,7 +46,7 @@ public class PostPicture extends Activity {
     EditText et;
 	InputStream is; 
 	
-	String username="apple4lifex";
+	public static String username=HomeScreen.username;
     String caption;
     String link;
 
