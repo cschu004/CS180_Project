@@ -23,6 +23,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -33,6 +37,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -52,6 +57,11 @@ public class PostPicture extends Activity {
 
     ArrayList<String> image_links = new ArrayList<String>();
     
+    private TextView latituteField;
+    private TextView longitudeField;
+    private double lat;
+    private double lon;
+    //private String provider;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +79,50 @@ public class PostPicture extends Activity {
         myImage2.setScaleType(ScaleType.FIT_XY);
         myImage2.setImageBitmap(bmp);
         et = (EditText)findViewById(R.id.editText1);
-	}
+        
+        
+        latituteField = (TextView) findViewById(R.id.textView1);
+        longitudeField = (TextView) findViewById(R.id.textView2);
+        getLocation ();
+	}	
+	  private void getLocation ()
+	  {
+	    // Get the location manager
+	    LocationManager locationManager = (LocationManager)getSystemService (LOCATION_SERVICE);
+	    Criteria criteria = new Criteria ();
+	    String bestProvider = locationManager.getBestProvider (criteria, false);
+	    Location location = locationManager.getLastKnownLocation (bestProvider);
 
+	  LocationListener loc_listener = new LocationListener() {
+	  public void onLocationChanged(Location l) {
+	  }
+
+	  public void onProviderEnabled(String p) {
+	  }
+
+	  public void onProviderDisabled(String p) {
+	  }
+
+	  public void onStatusChanged(String p, int status, Bundle extras) {
+	  }      
+	};
+	locationManager.requestLocationUpdates(bestProvider,0 ,0, loc_listener);
+	location = locationManager.getLastKnownLocation (bestProvider);   
+
+	try
+	{
+	   lat = location.getLatitude ();
+	   lon = location.getLongitude ();
+	   latituteField.setText(Double.toString(lat));
+	   longitudeField.setText(Double.toString(lon));
+	}
+	catch (NullPointerException e)
+	{
+	  lat = -1.0;
+	  lon = -1.0;
+	}
+	  }
+	
 	public void clickShare(View view){
         System.out.println(et.getText().toString());
         caption = et.getText().toString();
