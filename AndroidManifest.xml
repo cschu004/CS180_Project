@@ -75,6 +75,10 @@
             android:name="com.example.ucrinstagram.PrefsActivity"
             android:label="@string/settings" >
         </activity>
+        <activity 
+            android:name="Updates"
+            android:label="Updates">
+         </activity>
     </application>
 
     <!-- Internet Permissions -->

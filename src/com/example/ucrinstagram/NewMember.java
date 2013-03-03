@@ -19,28 +19,23 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-<<<<<<< HEAD
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-=======
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
->>>>>>> origin/master
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
 public class NewMember extends Activity {
 
-	String username="apple4life";
-	String password="password123";
-	
+	String username="";
+	String password="";
+
 	InputStream is; 
 	boolean inDB = true;
 	boolean Finished = false;
 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,15 +50,6 @@ public class NewMember extends Activity {
 	}
 
     public void HomeScreen(View view){
-<<<<<<< HEAD
-    	EditText edittext = (EditText) findViewById(R.id.new_member_username);
-    	SharedPreferences userInfo = getSharedPreferences("tempUsername", 0);
-		Editor userInfoEditor = userInfo.edit();
-		userInfoEditor.putString("username", edittext.getText().toString());
-		userInfoEditor.commit();
-    	Intent intent = new Intent(this, HomeScreen.class);
-    	startActivity(intent);    	
-=======
     	Finished = false;
     	System.out.println("test0");
     	username = ((EditText)findViewById(R.id.new_member_username)).getText().toString();
@@ -84,10 +70,17 @@ public class NewMember extends Activity {
 			Finished = false;
 			new createnewuser().execute();
 			while(!Finished);
-	    	Intent intent = new Intent(this, HomeScreen.class);
-	    	startActivity(intent); 
-		}   	
->>>>>>> origin/master
+	    	Intent intent = new Intent(this, Login.class);
+			finish();
+			startActivity(getIntent());
+		}
+//		else{
+//			//create new user
+//			Finished = false;
+//			new createnewuser().execute();
+//			while(!Finished);
+//	    	startActivity(intent);
+//		}
     }
     
     private class checkLogin extends AsyncTask<Void,Void,Void>{
@@ -97,12 +90,13 @@ public class NewMember extends Activity {
 
  			ArrayList<NameValuePair> userinfo = new ArrayList<NameValuePair>();
  			userinfo.add(new BasicNameValuePair("user",username));
+ 			userinfo.add(new BasicNameValuePair("password",password));
 
 
  			//http post
  			try{
  			        HttpClient httpclient = new DefaultHttpClient();
- 			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/checkNewUser.php");
+ 			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/checkUser.php");
  			        httppost.setEntity(new UrlEncodedFormEntity(userinfo));
  			        HttpResponse response = httpclient.execute(httppost);
  			        HttpEntity entity = response.getEntity();
@@ -165,6 +159,7 @@ public class NewMember extends Activity {
 
  			ArrayList<NameValuePair> userinfo = new ArrayList<NameValuePair>();
  			userinfo.add(new BasicNameValuePair("user",username));
+ 			userinfo.add(new BasicNameValuePair("password",password));
 
 
  			//http post

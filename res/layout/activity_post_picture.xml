@@ -5,7 +5,7 @@
     tools:context=".PostPicture" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/homescreen_list_element_image"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
@@ -18,9 +18,9 @@
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView1"
+        android:layout_alignTop="@+id/homescreen_list_element_image"
         android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/homescreen_list_element_image"
         android:ems="10"
         android:hint="@string/post_picture_caption"
         android:inputType="textMultiLine" >
@@ -29,10 +29,10 @@
     </EditText>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/updates_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/homescreen_list_element_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="79dp"
         android:onClick="clickShare"

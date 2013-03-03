@@ -46,7 +46,7 @@ public class PostPicture extends Activity {
     EditText et;
 	InputStream is; 
 	
-	String username="apple4lifex";
+	String username="georgee";
     String caption;
     String link;
 
@@ -65,7 +65,7 @@ public class PostPicture extends Activity {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = 8;
     	Bitmap bmp = BitmapFactory.decodeFile(filePath,options);
-        ImageView myImage2 = (ImageView) findViewById(R.id.imageView1);
+        ImageView myImage2 = (ImageView) findViewById(R.id.homescreen_list_element_image);
         myImage2.setScaleType(ScaleType.FIT_XY);
         myImage2.setImageBitmap(bmp);
         et = (EditText)findViewById(R.id.editText1);

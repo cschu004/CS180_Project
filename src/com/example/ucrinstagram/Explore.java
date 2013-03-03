@@ -131,7 +131,7 @@ public class Explore extends Activity {
 		}
 		protected void onPostExecute(Void Result){
 			
-			new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+			new DownloadImageTask((ImageView) findViewById(R.id.homescreen_list_element_image))
 	        .execute(image_links2.get(0));
 			new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
 	        .execute(image_links2.get(1));

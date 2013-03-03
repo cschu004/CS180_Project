@@ -25,14 +25,14 @@ public class SinglePicture extends Activity {
 	    String noPrefixStr = link.substring(link.indexOf(prefix)+ prefix.length());
 	    String [] tokens = noPrefixStr.split("/");
 
-		TextView textView = (TextView)findViewById(R.id.textView1);
+		TextView textView = (TextView)findViewById(R.id.homescreen_list_element_comments);
 		textView.setText(tokens[1]);
 		
 
 		TextView textView2 = (TextView)findViewById(R.id.textView2);
 		textView2.setText(tokens[2]);
 		
-		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+		new DownloadImageTask((ImageView) findViewById(R.id.homescreen_list_element_image))
         .execute(link);
 	}
 

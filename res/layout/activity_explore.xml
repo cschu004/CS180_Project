@@ -17,7 +17,7 @@
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/homescreen_list_element_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_alignParentLeft="true"
@@ -32,8 +32,8 @@
                 android:id="@+id/ImageView01"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_alignTop="@+id/imageView1"
-                android:layout_toRightOf="@+id/imageView1"
+                android:layout_alignTop="@+id/homescreen_list_element_image"
+                android:layout_toRightOf="@+id/homescreen_list_element_image"
                 android:adjustViewBounds="true"
                 android:clickable="true"
                 android:scaleType="fitXY"
@@ -54,7 +54,7 @@
                 android:id="@+id/ImageView03"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_below="@+id/imageView1"
+                android:layout_below="@+id/homescreen_list_element_image"
                 android:layout_toLeftOf="@+id/ImageView01"
                 android:adjustViewBounds="true"
                 android:clickable="true"
@@ -169,7 +169,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/updates_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/scrollView1"

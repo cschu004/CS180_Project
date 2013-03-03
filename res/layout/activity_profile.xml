@@ -111,7 +111,7 @@
         android:text="@string/settings" />
     
     <ImageView
-		android:id="@+id/imageView1"
+		android:id="@+id/homescreen_list_element_image"
 		android:layout_width="120dp"
 		android:layout_height="120dp"
 		android:layout_below="@id/aboutme"
@@ -170,7 +170,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_below="@+id/aboutme"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/homescreen_list_element_image"
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
@@ -192,7 +192,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/homescreen_list_element_image"
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
@@ -202,8 +202,8 @@
         android:id="@+id/ImageView04"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_below="@+id/imageView1"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_below="@+id/homescreen_list_element_image"
+        android:layout_toRightOf="@+id/homescreen_list_element_image"
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
