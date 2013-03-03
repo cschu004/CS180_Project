@@ -3,9 +3,12 @@ package com.example.ucrinstagram;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,7 +26,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -34,6 +39,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -58,7 +64,7 @@ public class PostPicture extends Activity {
     ArrayList<String> image_links = new ArrayList<String>();
     
     private TextView latituteField;
-    private TextView longitudeField;
+    private TextView longitudeField, cityField;
     private double lat;
     private double lon;
     //private String provider;
@@ -83,8 +89,26 @@ public class PostPicture extends Activity {
         
         latituteField = (TextView) findViewById(R.id.textView1);
         longitudeField = (TextView) findViewById(R.id.textView2);
-        getLocation ();
+        cityField = (TextView) findViewById(R.id.textView3);
+		latituteField.setText("");
+		longitudeField.setText("");
+		cityField.setText("");
 	}	
+	
+	public void clickShareLocation(View view){
+		boolean checked = ((CheckBox) view).isChecked();
+		switch(view.getId()){
+			case R.id.checkBox1:
+				if (checked)
+					getLocation();
+				else{
+					latituteField.setText("");
+					longitudeField.setText("");
+					cityField.setText("");
+				}
+				
+		}
+	}
 	  private void getLocation ()
 	  {
 	    // Get the location manager
@@ -115,6 +139,19 @@ public class PostPicture extends Activity {
 	   lon = location.getLongitude ();
 	   latituteField.setText(Double.toString(lat));
 	   longitudeField.setText(Double.toString(lon));
+	   Geocoder gcd = new Geocoder(this, Locale.getDefault());
+	try {
+		   List<Address> addresses;
+		   addresses = gcd.getFromLocation(lat, lon, 1);
+		   if (addresses.size() > 0) 
+			   cityField.setText(addresses.get(0).getLocality());
+		   else
+			   cityField.setText("Unable to deteremine your location.");
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
 	}
 	catch (NullPointerException e)
 	{
