@@ -43,7 +43,8 @@ public class Camera extends Activity {
     }
     
     public void done(String path){
-    	Intent myIntent = new Intent(this, PostPicture.class);
+    	//Intent myIntent = new Intent(this, PostPicture.class);
+    	Intent myIntent = new Intent(this, Filter.class);
     	myIntent.putExtra("picture", path);
     	startActivity(myIntent);
     }
