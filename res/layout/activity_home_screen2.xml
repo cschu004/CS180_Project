@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/homescreen_data_list"
+        android:layout_width="match_parent"
+        android:layout_height="337dp"
+        android:layout_weight="0.76" >
+    </ListView>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.24" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/homescreen_list_element_button_like"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/homescreen_list_element_button_comment"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:onClick="explore"
+                android:text="Explore"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:onClick="camera"
+                android:text="Camera"
+                android:textSize="9sp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:onClick="updates"
+                android:text="Updates"
+                android:textSize="9sp" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:onClick="profile"
+                android:text="Profile"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
