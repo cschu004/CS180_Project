@@ -111,13 +111,14 @@
         android:text="@string/settings" />
     
     <ImageView
-		android:id="@+id/homescreen_list_element_image"
+		android:id="@+id/imageView1"
 		android:layout_width="120dp"
 		android:layout_height="120dp"
 		android:layout_below="@id/aboutme"
 		android:adjustViewBounds="true"
 		android:clickable="true"
 		android:scaleType="fitXY"
+		android:onClick="imageClick1"
 		android:src="@drawable/ic_launcher" />
     
 <!-- 	<WebView  xmlns:android="http://schemas.android.com/apk/res/android" -->
@@ -131,9 +132,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:minWidth="64dp"
         android:onClick="home"
-        android:textSize="12sp"
-        android:text="@string/home_tab" />
+        android:text="@string/home_tab"
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/explore_button"
@@ -174,6 +176,7 @@
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
+        android:onClick="imageClick2"
         android:src="@drawable/ic_launcher" />
 
     <ImageView
@@ -185,6 +188,7 @@
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
+        android:onClick="imageClick3"
         android:src="@drawable/ic_launcher" />
 
     <ImageView
@@ -196,6 +200,7 @@
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
+        android:onClick="imageClick4"
         android:src="@drawable/ic_launcher" />
 
     <ImageView
@@ -207,6 +212,7 @@
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
+        android:onClick="imageClick5"
         android:src="@drawable/ic_launcher" />
 
     <ImageView
@@ -218,6 +224,7 @@
         android:adjustViewBounds="true"
         android:clickable="true"
         android:scaleType="fitXY"
+        android:onClick="imageClick6"
         android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

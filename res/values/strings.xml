@@ -43,8 +43,11 @@
 	<string name="following">Following</string>
 	<string name="photos">Photos</string>
 	<string name="about_me">About Me</string>
-	
+
 	<string name="settings">Settings</string>
 	<string name="logout">Log Out</string>
+
+    <!-- website address for api calls -->
+    <string name="apiURL">http://www.mgx-dev.com/</string>
 
 </resources>

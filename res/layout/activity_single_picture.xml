@@ -32,4 +32,14 @@
         android:text="Caption"
         android:textSize="16sp" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginRight="20dp"
+        android:onClick="delete"
+        android:text="DELETE" />
+
 </RelativeLayout>
