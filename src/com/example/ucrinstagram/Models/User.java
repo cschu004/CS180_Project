@@ -1,5 +1,6 @@
 package com.example.ucrinstagram.Models;
 
+import android.util.Log;
 import com.amazonaws.services.elasticloadbalancing.model.SetLoadBalancerPoliciesForBackendServerRequest;
 import com.example.ucrinstagram.WebAPI;
 import org.apache.http.NameValuePair;
@@ -61,24 +62,30 @@ public class User {
         WebAPI api = new WebAPI();
         User tempUser = api.getUser(id);
 
-        this.id = tempUser.id;
-        this.firstname = tempUser.firstname;
-        this.lastname = tempUser.lastname;
-        this.email = tempUser.email;
-        this.display_name = tempUser.display_name;
-        this.username = tempUser.username;
+        if (tempUser != null){
+            this.id = tempUser.id;
+            this.firstname = tempUser.firstname;
+            this.lastname = tempUser.lastname;
+            this.email = tempUser.email;
+            this.display_name = tempUser.display_name;
+            this.username = tempUser.username;
+            this.password_hash = tempUser.password_hash;
+        }
     }
 
     public User(String username){
         WebAPI api = new WebAPI();
         User tempUser = api.getUser(username);
 
-        this.id = tempUser.id;
-        this.firstname = tempUser.firstname;
-        this.lastname = tempUser.lastname;
-        this.email = tempUser.email;
-        this.display_name = tempUser.display_name;
-        this.username = tempUser.username;
+        if (tempUser != null){
+            this.id = tempUser.id;
+            this.firstname = tempUser.firstname;
+            this.lastname = tempUser.lastname;
+            this.email = tempUser.email;
+            this.display_name = tempUser.display_name;
+            this.username = tempUser.username;
+            this.password_hash = tempUser.password_hash;
+        }
     }
 
     // --------------------------
@@ -97,7 +104,7 @@ public class User {
 
     // GET
     public Boolean checkPassword(String hash) {
-        if (hash == this.password_hash)
+        if (hash.equals(this.password_hash))
             return true;
         else
             return false;
@@ -111,8 +118,8 @@ public class User {
         return new WebAPI().getPhotosFromUser(this);
     }
 
-    public User[] getFollowers() {
-        return null;
+    public User[] getFriends() {
+        return new WebAPI().getFriends(this);
     }
 
     // SAVE
@@ -120,26 +127,43 @@ public class User {
         new WebAPI().saveProfileFromUser(profile, this);
     }
 
-    public void savePhoto(Photo photo) {
+    public void addPhoto(Photo photo) {
         new WebAPI().addPhotoToUser(photo, this);
     }
 
-    public void savePhotos(Photo[] photos) {
+    public void addPhotos(Photo[] photos) {
     }
 
-    public void saveFollower(User user) {
+    public void addFriend(User friend){
+        new WebAPI().addFriend(this, friend);
     }
 
-    public void saveFollower(User[] users) {
+    public void addFriends(User[] friends) {
     }
 
+    // DELETE
+    public void removePhoto(Photo photo){
+
+    }
+
+    public void removePhotos(Photo[] photos){
+
+    }
+
+    public void removeFriend(User friend){
+        new WebAPI().removeFriend(this, friend);
+    }
+
+    public void removeFriends(User[] friends){
+
+    }
 
     // ----------------------------
     // ----- Accessor METHODS -----
     // ----------------------------
 
     public List<NameValuePair> getNameValuePairs() {
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         // TODO: currently rails is creating the ID numbers, need to return ID number or let Java set it
         nameValuePairs.add(new BasicNameValuePair("user[firstname]", this.firstname));
         nameValuePairs.add(new BasicNameValuePair("user[lastname]", this.lastname));
