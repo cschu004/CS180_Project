@@ -22,7 +22,8 @@ import java.util.concurrent.ExecutionException;
 public class WebAPI {
 
     private Gson gson = new Gson();
-    private String apiURL = "http://mgx-dev.com/";
+//    private String apiURL = "http://mgx-dev.com/";
+    private String apiURL = "http://www.mgx-dev.sparkscene.com/";
 
     public WebAPI() {
     }
@@ -149,8 +150,8 @@ public class WebAPI {
     }
 
     public Photo getPhoto(int id) {
-        String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(id);
-        Log.i("OC", "Attempting to get Profile info by user id: " + url);
+        String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(id) + ".json";
+        Log.i("OC", "Attempting to get Photo info by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
         return gson.fromJson(json, Photo.class);
@@ -172,6 +173,28 @@ public class WebAPI {
         String url = apiURL + User.urlSuffix + "/add_photo/" + Integer.toString(user.getId());
         Log.i("OC", "Attempting to add Photo by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        getJSONFromServer(new HTTPParams(requestMethod, url, photo.getNameValuePairs()));
+    }
+
+    public Comment[] getCommentsFromPhoto(Photo photo){
+        String url = apiURL + Photo.urlSuffix + "/get_comments/" + Integer.toString(photo.getId());
+        Log.i("OC", "Attempting to get comments from photos: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, Comment[].class);
+    }
+
+    public void addCommentToPhoto(Photo photo, Comment comment){
+        String url = apiURL + Photo.urlSuffix + "/add_comment/" + Integer.toString(photo.getId());
+        Log.i("OC", "Attempting to add a Comment to Photo: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
+    }
+
+    public void savePhoto(Photo photo) {
+        String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(photo.getId());
+        Log.i("OC", "Attempting to edit Photo info: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
         getJSONFromServer(new HTTPParams(requestMethod, url, photo.getNameValuePairs()));
     }
 
@@ -213,6 +236,10 @@ public class WebAPI {
     }
 
     public void saveComment(Comment comment) {
+        String url = apiURL + Comment.urlSuffix + "/" + Integer.toString(comment.getId());
+        Log.i("OC", "Attempting to edit comment: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
+        getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
     }
 
 
