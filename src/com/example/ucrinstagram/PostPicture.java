@@ -78,9 +78,9 @@ public class PostPicture extends Activity {
 	
 	    filePath = getIntent().getExtras().getString("picture");
 		System.out.println("TEST: "+filePath);
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize = 8;
-    	Bitmap bmp = BitmapFactory.decodeFile(filePath,options);
+		//BitmapFactory.Options options = new BitmapFactory.Options();
+		//options.inSampleSize = 8;
+    	Bitmap bmp = BitmapFactory.decodeFile(filePath);
         ImageView myImage2 = (ImageView) findViewById(R.id.imageView1);
         myImage2.setScaleType(ScaleType.FIT_XY);
         myImage2.setImageBitmap(bmp);
