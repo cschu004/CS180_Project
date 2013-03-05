@@ -53,6 +53,7 @@ public class WebAPI {
     }
 
     // TODO: create some kind of ack, whether the save was successful or not
+    // TODO: boolean return value, or create a set of exceptions/error codes?
     public void createUser(User user) {
         String url = apiURL + User.urlSuffix;
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
@@ -67,6 +68,42 @@ public class WebAPI {
         String url = apiURL + User.urlSuffix + "/" + Integer.toString(user.getId()) + ".json";
         HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
+    }
+
+    // --------------------------
+    // ----- Friend Methods -----
+    // --------------------------
+    public User[] getFriends(User user){
+        String url = apiURL + User.urlSuffix + "/get_friends/" + Integer.toString(user.getId());
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, User[].class);
+    }
+
+    public void addFriend(int user_id, int friend_id){
+        String url = apiURL + User.urlSuffix + "/add_friend";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("friend_id", Integer.toString(friend_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+
+    public void addFriend(User user, User friend){
+        addFriend(user.getId(), friend.getId());
+    }
+
+    public void removeFriend(int user_id, int friend_id){
+        String url = apiURL + User.urlSuffix + "/remove_friend";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("friend_id", Integer.toString(friend_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+
+    public void removeFriend(User user, User friend){
+        removeFriend(user.getId(), friend.getId());
     }
 
     // ---------------------------
