@@ -65,6 +65,10 @@ public class Photo {
         return nameValuePairs;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
 }
 
 

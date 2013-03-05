@@ -38,7 +38,6 @@ public class User {
     // TODO: write validations before saving to enforce that a new user account has a password
     public User(String firstname, String lastname, String email,
                 String display_name, String username) {
-        this.id = new Random().nextInt();
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -48,7 +47,6 @@ public class User {
 
     public User(String firstname, String lastname, String email,
                 String display_name, String username, String password_hash) {
-        this.id = new Random().nextInt();
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -99,6 +97,7 @@ public class User {
     }
 
     public void create() {
+        // automatically creates a default profile w/empty values
         new WebAPI().createUser(this);
     }
 

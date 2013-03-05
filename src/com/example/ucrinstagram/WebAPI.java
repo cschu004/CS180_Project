@@ -65,7 +65,8 @@ public class WebAPI {
     }
 
     public void saveUser(User user) {
-        String url = apiURL + User.urlSuffix + "/" + Integer.toString(user.getId()) + ".json";
+        String url = apiURL + User.urlSuffix + "/" + Integer.toString(user.getId());
+        Log.i("OC", "Attempting to edit User info by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
     }
@@ -126,9 +127,15 @@ public class WebAPI {
     }
 
     public void saveProfile(com.example.ucrinstagram.Models.Profile profile) {
+        String url = apiURL + com.example.ucrinstagram.Models.Profile.urlSuffix
+                + "/" + Integer.toString(profile.getId());
+        Log.i("OC", "Attempting to edit Profile info: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
+        getJSONFromServer(new HTTPParams(requestMethod, url, profile.getNameValuePairs()));
     }
 
     public void saveProfileFromUser(com.example.ucrinstagram.Models.Profile profile, User user) {
+        saveProfile(profile);
     }
 
     // -------------------------
