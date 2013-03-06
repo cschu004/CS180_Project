@@ -20,12 +20,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.Toast;
 
 public class Filter extends Activity {
 	String filePath;
 	ImageView myImage2;
-	//Bitmap bmp;
 	Bitmap beforeBmp;
 	Bitmap afterBmp;
 	
@@ -42,6 +40,7 @@ public class Filter extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_filter);
+		
 	    filePath = getIntent().getExtras().getString("picture");
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = 5;
