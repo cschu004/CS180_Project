@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 public class WebAPI {
 
     private Gson gson = new Gson();
-//    private String apiURL = "http://mgx-dev.com/";
+    //private String apiURL = "http://mgx-dev.com/";
     private String apiURL = "http://www.mgx-dev.sparkscene.com/";
 
     public WebAPI() {
