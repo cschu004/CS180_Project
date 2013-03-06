@@ -24,7 +24,7 @@ public class Profile {
 
     private int id;
     private int user_id;
-    private Date created_at;
+    public Date created_at;
 
 
     //  this.getClass().getSimpleName().toLowerCase();
