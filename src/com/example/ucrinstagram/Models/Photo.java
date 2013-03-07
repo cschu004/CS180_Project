@@ -93,7 +93,7 @@ public class Photo {
     public Comment[] getComments(){
         return new WebAPI().getCommentsFromPhoto(this);
     }
-
+    
     public void addComment(Comment comment){
         new WebAPI().addCommentToPhoto(this, comment);
     }
