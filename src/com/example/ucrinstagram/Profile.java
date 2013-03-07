@@ -1,21 +1,8 @@
 package com.example.ucrinstagram;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,12 +11,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.ucrinstagram.Models.Photo;
+import com.example.ucrinstagram.Models.User;
 
 public class Profile extends Activity {
     //final int TAKE_PICTURE = 1;
@@ -37,7 +28,10 @@ public class Profile extends Activity {
 //    private String selectedImagePath;
 //    private ImageView img;
 
-	String username=HomeScreen.username;
+	public static String username = HomeScreen.username;
+	ArrayList<String> image_links = new ArrayList<String>();
+    ImageView[] image;
+	
 	InputStream is; 
     ArrayList<String> image_links2 = new ArrayList<String>();
 
@@ -46,23 +40,71 @@ public class Profile extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         
+//        SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
+//        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        String usern = sharedPrefs.getString(username, "username");
+//        String nickname = defSharedPrefs.getString("nickname", "nickname");
+//        String gender = defSharedPrefs.getString("listpref", "gender");
+//        String bio = defSharedPrefs.getString("aboutme", "About Me");
+        
         TextView usernametv = (TextView) findViewById(R.id.username);
         TextView nicknametv = (TextView) findViewById(R.id.nickname);
         TextView gendertv = (TextView) findViewById(R.id.gender);
         TextView biotv = (TextView) findViewById(R.id.aboutme);
-        SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
-        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = sharedPrefs.getString("username", "username");
-        String nickname = defSharedPrefs.getString("nickname", "nickname");
-        String gender = defSharedPrefs.getString("listpref", "gender");
-        String bio = defSharedPrefs.getString("aboutme", "About Me");
+        TextView followerstv = (TextView) findViewById(R.id.followers);
+        TextView datetv = (TextView) findViewById(R.id.profile_creation);
+        TextView phototv = (TextView) findViewById(R.id.photos);
+        TextView bdaytv = (TextView) findViewById(R.id.bday);
         
-        usernametv.setText(username);
+        User user1 = new User(username);
+        String un = user1.username;
+        String nickname = user1.getProfile().nickname;
+        String gender = user1.getProfile().gender;
+        String bio = user1.getProfile().bio;
+        
+        Date birthdate = user1.getProfile().birthday;
+        String bday = "Birthday: " + birthdate;
+        
+        Date created = user1.getProfile().created_at;
+        String prof_created = "Profile Created On:\n" + created;
+        		
+        User[] friends = user1.getFriends();
+        int fCount = friends.length;
+        String friendCount = fCount + " Friends";
+        
+        Photo[] userphotos = user1.getPhotos();
+        int pCount = userphotos.length;
+        String photoCount = pCount + " Photos";
+        
+        usernametv.setText(un);
         nicknametv.setText(nickname);
         gendertv.setText(gender);
         biotv.setText(bio);
+        followerstv.setText(friendCount);
+        datetv.setText(prof_created);
+        phototv.setText(photoCount);
+        bdaytv.setText(bday);
         
 
+        //display user photos
+//        for(int i = userphotos.length - 1; i >= 0; i--){
+//        	System.out.println(userphotos[i].path + '/' + userphotos[i].filename);
+//        	image_links.add(userphotos[i].path + '/' + userphotos[i].filename);
+//        }
+
+		image = new ImageView[userphotos.length];
+    	for (int i = userphotos.length-1; i >=0; i --){
+    		image[i] = new ImageView(this);
+    		image[i].setImageResource(R.drawable.ic_launcher);
+    		image[i].setAdjustViewBounds(true);
+    		LayoutParams lp = new LayoutParams(400,400);
+    		image[i].setLayoutParams(lp);
+    		LinearLayout linlay = (LinearLayout) findViewById(R.id.linearPictures);
+    		linlay.addView(image[i]);
+
+//        	System.out.println(userphotos[i].path + '/' + userphotos[i].filename);
+        	new DownloadImageTask(image[i]).execute(userphotos[i].path + '/' + userphotos[i].filename);
+    	}
 
         // Loader image - will be shown before loading image
         int loader = R.drawable.loader;
@@ -85,7 +127,7 @@ public class Profile extends Activity {
 
 //		WebView myWebView = (WebView) findViewById(R.id.webview);                   
 //		myWebView.loadUrl("http://img191.imageshack.us/img191/7379/tronlegacys7i7wsjf.jpg");
-        new getAllImages().execute();
+        //new getAllImages().execute();
 //        new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute("http://api.androidhive.info/images/sample.jpg");
         
 	}
@@ -94,21 +136,43 @@ public class Profile extends Activity {
 	public void onResume(){
 		super.onResume();
 
-		TextView usernametv = (TextView) findViewById(R.id.username);
+        TextView usernametv = (TextView) findViewById(R.id.username);
         TextView nicknametv = (TextView) findViewById(R.id.nickname);
         TextView gendertv = (TextView) findViewById(R.id.gender);
         TextView biotv = (TextView) findViewById(R.id.aboutme);
-        SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
-        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = sharedPrefs.getString("username", "username");
-        String nickname = defSharedPrefs.getString("nickname", "nickname");
-        String gender = defSharedPrefs.getString("listpref", "gender");
-        String bio = defSharedPrefs.getString("aboutme", "About Me");
+        TextView followerstv = (TextView) findViewById(R.id.followers);
+        TextView datetv = (TextView) findViewById(R.id.profile_creation);
+        TextView phototv = (TextView) findViewById(R.id.photos);
+        TextView bdaytv = (TextView) findViewById(R.id.bday);
         
-        usernametv.setText(username);
+        User user1 = new User(username);
+        String un = user1.username;
+        String nickname = user1.getProfile().nickname;
+        String gender = user1.getProfile().gender;
+        String bio = user1.getProfile().bio;
+        
+        Date birthdate = user1.getProfile().birthday;
+        String bday = "Birthday: " + birthdate;
+        
+        Date created = user1.getProfile().created_at;
+        String prof_created = "Profile Created On:\n" + created;
+        		
+        User[] friends = user1.getFriends();
+        int fCount = friends.length;
+        String friendCount = fCount + " Friends";
+        
+        Photo[] userphotos = user1.getPhotos();
+        int pCount = userphotos.length;
+        String photoCount = pCount + " Photos";
+        
+        usernametv.setText(un);
         nicknametv.setText(nickname);
         gendertv.setText(gender);
         biotv.setText(bio);
+        followerstv.setText(friendCount);
+        datetv.setText(prof_created);
+        phototv.setText(photoCount);
+        bdaytv.setText(bday);
 	}
 
 	@Override
@@ -225,110 +289,31 @@ public class Profile extends Activity {
    }
 
 }
-    
-	private class getAllImages extends AsyncTask<Void,Void,Void>{
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			String result = "";
-
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("user",username));
-
-			//http post
-			try{
-			        HttpClient httpclient = new DefaultHttpClient();
-			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/getAllImages.php");
-			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			        HttpResponse response = httpclient.execute(httppost);
-			        HttpEntity entity = response.getEntity();
-			        is = entity.getContent();
-
-			}
-			catch(Exception e){
-			        Log.e("log_tag", "Error in http connection "+e.toString());
-			}
-			//convert response to string
-			try{
-
-			        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-			        StringBuilder sb = new StringBuilder();
-			        String line = null;
-			        while ((line = reader.readLine()) != null) {
-			                sb.append(line + "\n");
-			        }
-			        is.close();
-
-			        result=sb.toString();
-			}catch(Exception e){
-			        Log.e("log_tag", "Error converting result "+e.toString());
-			}
-
-			//parse json data
-			try{
-			        JSONArray jArray = new JSONArray(result);
-			        for(int i=0;i<jArray.length();i++){
-			                JSONObject json_data = jArray.getJSONObject(i);
-			               /* Log.i("log_tag","id: "+json_data.getInt("id")+
-			                        ", name: "+json_data.getString("user")+
-			                        ", sex: "+json_data.getInt("sex")+
-			                        ", birthyear: "+json_data.getInt("birthyear")
-			                );*/
-			                image_links2.add(json_data.getString("image_url"));
-			        }
-	                System.out.println(image_links2.get(0));
-
-			}
-			catch(JSONException e){
-			        Log.e("log_tag", "Error parsing data "+e.toString());
-			}
-        	System.out.print("RETURN");
-        	
-			return null;
-
-		}
-		protected void onPostExecute(Void Result){
-			new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-			.execute(image_links2.get(0));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
-			.execute(image_links2.get(1));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView02))
-			.execute(image_links2.get(2));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView03))
-			.execute(image_links2.get(3));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView04))
-			.execute(image_links2.get(4));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
-			.execute(image_links2.get(5));
-			//TextView textView = (TextView)findViewById(R.id.textView1);
-			//textView.setText(caption);
-		}
-
-	}
 
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-		  ImageView bmImage;
+		ImageView bmImage;
 
-		  public DownloadImageTask(ImageView bmImage) {
-		      this.bmImage = bmImage;
-		  }
+		public DownloadImageTask(ImageView bmImage) {
+			this.bmImage = bmImage;
+		}
 
-		  protected Bitmap doInBackground(String... urls) {
-		      String urldisplay = urls[0];
-		      Bitmap mIcon11 = null;
-		      try {
-		  		BitmapFactory.Options options = new BitmapFactory.Options();
+		protected Bitmap doInBackground(String... urls) {
+			String urldisplay = urls[0];
+			Bitmap mIcon11 = null;
+			try {
+				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inSampleSize = 5;
-		        InputStream in = new java.net.URL(urldisplay).openStream();
-		        mIcon11 = BitmapFactory.decodeStream(in,null,options);
-		      } catch (Exception e) {
-		          Log.e("Error", e.getMessage());
-		          e.printStackTrace();
-		      }
-		      return mIcon11;
-		  }
+				InputStream in = new java.net.URL(urldisplay).openStream();
+				mIcon11 = BitmapFactory.decodeStream(in,null,options);
+			} catch (Exception e) {
+				Log.e("Error", e.getMessage());
+				e.printStackTrace();
+			}
+				return mIcon11;
+		}
 
-		  protected void onPostExecute(Bitmap result) {
-		      bmImage.setImageBitmap(result);
-		  }
+		protected void onPostExecute(Bitmap result) {
+			bmImage.setImageBitmap(result);
+		}
 	}
 }
