@@ -35,7 +35,7 @@ public class Login extends Activity {
         if (loginUser == null){ // check username exists
             Toast.makeText(this.getApplicationContext(), "Incorrect Username/Password", Toast.LENGTH_LONG).show();
         } else if (loginUser.checkPassword(password)){ // check is password is correct
-            HomeScreen.username = username;
+            Login.username = username;
             Intent intent = new Intent(this, HomeScreen.class);
             intent.putExtra("caption", "");
             startActivity(intent);

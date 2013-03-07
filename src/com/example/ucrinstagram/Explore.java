@@ -1,20 +1,6 @@
 package com.example.ucrinstagram;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,18 +13,46 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.ucrinstagram.Models.Photo;
+
 
 public class Explore extends Activity {
 
 	String username=Login.username;
-	InputStream is; 
-    ArrayList<String> image_links2 = new ArrayList<String>();
+	//InputStream is; 
+    //ArrayList<String> image_links2 = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_explore);
-        new getRandomImages().execute();
+        WebAPI api = new WebAPI();
+		Photo[] allPhoto = api.getAllPhotos();
+		String [] allLinks = new String [allPhoto.length];
+		for (int i = 0; i < allPhoto.length; i ++){
+			System.out.println(allPhoto[i].path+'/'+allPhoto[i].filename);
+			allLinks[i]=allPhoto[i].path+'/'+allPhoto[i].filename;
+		}
+		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+        .execute(allLinks[0]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
+        .execute(allLinks[1]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView02))
+        .execute(allLinks[2]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView03))
+        .execute(allLinks[3]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView04))
+        .execute(allLinks[4]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView06))
+        .execute(allLinks[5]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView08))
+        .execute(allLinks[6]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView07))
+        .execute(allLinks[7]);
+		new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
+        .execute(allLinks[8]);	
+		
+        //new getRandomImages().execute();
 	}
 
     
@@ -63,7 +77,7 @@ public class Explore extends Activity {
     	Intent intent = new Intent(this, Profile.class);
     	startActivity(intent);    	
     }
-    
+    /*
     public void imageClick1(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(0);
@@ -132,7 +146,7 @@ public class Explore extends Activity {
 		startActivity(getIntent());
 	}
 	
-	
+	/*
 	private class getRandomImages extends AsyncTask<Void,Void,Void>{
 		@Override
 		protected Void doInBackground(Void... arg0) {
@@ -178,7 +192,7 @@ public class Explore extends Activity {
 			                        ", name: "+json_data.getString("user")+
 			                        ", sex: "+json_data.getInt("sex")+
 			                        ", birthyear: "+json_data.getInt("birthyear")
-			                );*/
+			                );
 			                image_links2.add(json_data.getString("image_url"));
 			                System.out.println(json_data.getString("image_url"));
 			        }
@@ -213,7 +227,7 @@ public class Explore extends Activity {
 	        .execute(image_links2.get(8));
 		}
 
-	}
+	}*/
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		  ImageView bmImage;
 
@@ -227,7 +241,7 @@ public class Explore extends Activity {
 		      try {
 		        InputStream in = new java.net.URL(urldisplay).openStream();
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 2;
+				options.inSampleSize = 5;
 		        mIcon11 = BitmapFactory.decodeStream(in,null,options);
 		      } catch (Exception e) {
 		          Log.e("Error", e.getMessage());
