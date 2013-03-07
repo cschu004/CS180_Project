@@ -29,7 +29,7 @@ public class Profile extends Activity {
 //    private String selectedImagePath;
 //    private ImageView img;
 
-	public static String username = HomeScreen.username;
+	public static String username = Login.username.toLowerCase().replaceAll("\\s","");
 	ArrayList<String> image_links = new ArrayList<String>();
     ImageView[] image;
 	

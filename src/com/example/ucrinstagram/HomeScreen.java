@@ -23,8 +23,7 @@ public class HomeScreen extends Activity {
 	String caption=null;
 	String link1="";
 	String link2="";
-	public static String username= Login.username.toLowerCase().replaceAll("\\s","");
-	InputStream is;
+	public String username= Login.username.toLowerCase().replaceAll("\\s","");
     User user1;
 
     ImageView[] image;
@@ -39,17 +38,17 @@ public class HomeScreen extends Activity {
 		for (int i = allThisUserPhotos.length-1; i >=0;  i --){
 			image[i] = new ImageView(this);
 	        image[i].setImageResource(R.drawable.ic_launcher);
-	        //image[i].setAdjustViewBounds(true);
-			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,600); 
+	        image[i].setAdjustViewBounds(true);
+			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,500); 
 			image[i].setLayoutParams(lp);
 			/*LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(600, LinearLayout.LayoutParams.MATCH_PARENT);
 			lp2.setMargins(0, 200, 0, 0);
 			image[i].setLayoutParams(lp2);*/
 			
 	        LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
-	        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) linlay.getLayoutParams();
+	        //ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) linlay.getLayoutParams();
 
-	        mlp.setMargins(0,100*allThisUserPhotos.length, 0,100);
+	        //mlp.setMargins(0,100*allThisUserPhotos.length, 0,100);
 	        
 	        linlay.addView(image[i]);
 	        

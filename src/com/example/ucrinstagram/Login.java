@@ -37,7 +37,6 @@ public class Login extends Activity {
         } else if (loginUser.checkPassword(password)){ // check is password is correct
             Login.username = username;
             Intent intent = new Intent(this, HomeScreen.class);
-            intent.putExtra("caption", "");
             startActivity(intent);
         } else{
             Toast.makeText(this.getApplicationContext(), "Incorrect Username/Password", Toast.LENGTH_LONG).show();

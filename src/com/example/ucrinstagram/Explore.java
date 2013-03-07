@@ -19,7 +19,7 @@ import com.example.ucrinstagram.Models.Photo;
 
 public class Explore extends Activity {
 
-	String username=Login.username;
+	String username=Login.username.toLowerCase().replaceAll("\\s","");
 	String [] allLinks;
 	Photo[] allPhoto;
 

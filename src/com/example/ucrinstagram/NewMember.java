@@ -32,7 +32,7 @@ public class NewMember extends Activity {
         if (!User.exists(username)){ // check username doesn't exist
             User loginUser = new User(username, password);
             loginUser.create();
-            HomeScreen.username = loginUser.username;
+            Login.username = loginUser.username;
 
             Toast.makeText(this.getApplicationContext(), "Created a new user account!", Toast.LENGTH_LONG).show();
 
