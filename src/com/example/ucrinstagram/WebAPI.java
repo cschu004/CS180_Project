@@ -53,10 +53,23 @@ public class WebAPI {
         return gson.fromJson(json, User.class);
     }
 
+    public Boolean userExists(String username){
+        String url = apiURL + User.urlSuffix + "/user_exists/" + username;
+        Log.i("OC", "Attempting to check if username exists: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String exists = getJSONFromServer(new HTTPParams(requestMethod, url));
+        if (exists.equals("exists")){
+            return true;
+        } else {                   // "does not exist"
+            return false;
+        }
+    }
+
     // TODO: create some kind of ack, whether the save was successful or not
     // TODO: boolean return value, or create a set of exceptions/error codes?
     public void createUser(User user) {
         String url = apiURL + User.urlSuffix;
+        Log.i("OC", "Attempting to create a new User: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
     }

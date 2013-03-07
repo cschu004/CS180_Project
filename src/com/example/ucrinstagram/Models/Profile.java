@@ -24,7 +24,7 @@ public class Profile {
 
     private int id;
     private int user_id;
-    public Date created_at;
+    private Date created_at;
 
 
     //  this.getClass().getSimpleName().toLowerCase();
@@ -54,6 +54,7 @@ public class Profile {
         WebAPI api = new WebAPI();
         com.example.ucrinstagram.Models.Profile tempProfile = api.getProfile(user_id);
 
+        this.id = tempProfile.id;
         this.user_id = tempProfile.user_id;
         this.age = tempProfile.age;
         this.gender = tempProfile.gender;
@@ -108,6 +109,10 @@ public class Profile {
 
     public int getUserId() {
         return this.user_id;
+    }
+
+    public Date getCreatedAt(){
+        return this.created_at;
     }
 
 

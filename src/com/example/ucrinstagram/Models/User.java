@@ -37,23 +37,33 @@ public class User {
     }
 
     // TODO: write validations before saving to enforce that a new user account has a password
+    public User(String username, String password_hash){
+        this.firstname = "";
+        this.lastname = "";
+        this.display_name = username;
+        this.username = username;
+        this.password_hash = password_hash;
+        this.email = "";
+    }
+
     public User(String firstname, String lastname, String email,
                 String display_name, String username) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.email = email;
         this.display_name = display_name;
         this.username = username;
+        this.password_hash = "";
+        this.email = email;
     }
 
     public User(String firstname, String lastname, String email,
                 String display_name, String username, String password_hash) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.email = email;
         this.display_name = display_name;
         this.username = username;
         this.password_hash = password_hash;
+        this.email = email;
     }
 
     // TODO: double check if when saving back as  PUT request that we need the value?
@@ -108,6 +118,14 @@ public class User {
             return true;
         else
             return false;
+    }
+
+    public static Boolean exists(String username){
+        return new WebAPI().userExists(username);
+    }
+
+    public Boolean exists(){
+        return new WebAPI().userExists(this.username);
     }
 
     public Profile getProfile() {

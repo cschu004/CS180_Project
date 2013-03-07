@@ -1,6 +1,7 @@
 package com.example.ucrinstagram;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -58,15 +59,18 @@ public class Profile extends Activity {
         
         User user1 = new User(username);
         String un = user1.username;
-        String nickname = user1.getProfile().nickname;
-        String gender = user1.getProfile().gender;
-        String bio = user1.getProfile().bio;
+
+        com.example.ucrinstagram.Models.Profile user1profile = user1.getProfile();
+        String nickname = user1profile.nickname;
+        String gender = user1profile.gender;
+        String bio = user1profile.bio;
         
-        Date birthdate = user1.getProfile().birthday;
-        String bday = "Birthday: " + birthdate;
-        
-        Date created = user1.getProfile().created_at;
-        String prof_created = "Profile Created On:\n" + created;
+        Date birthdate = user1profile.birthday;
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yy");
+        String bday = "Birthday: " + dateFormatter.format(birthdate);
+
+        Date created = user1profile.getCreatedAt();
+        String prof_created = "Profile Created On:\n" + dateFormatter.format(created);
         		
         User[] friends = user1.getFriends();
         int fCount = friends.length;
@@ -147,24 +151,27 @@ public class Profile extends Activity {
         
         User user1 = new User(username);
         String un = user1.username;
-        String nickname = user1.getProfile().nickname;
-        String gender = user1.getProfile().gender;
-        String bio = user1.getProfile().bio;
+
+        com.example.ucrinstagram.Models.Profile user1profile = user1.getProfile();
+        String nickname = user1profile.nickname;
+        String gender = user1profile.gender;
+        String bio = user1profile.bio;
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yy");
+        Date birthdate = user1profile.birthday;
+        String bday = "Birthday: " + dateFormatter.format(birthdate);
         
-        Date birthdate = user1.getProfile().birthday;
-        String bday = "Birthday: " + birthdate;
-        
-        Date created = user1.getProfile().created_at;
-        String prof_created = "Profile Created On:\n" + created;
-        		
+        Date created = user1profile.getCreatedAt();
+        String prof_created = "Profile Created On:\n" + dateFormatter.format(created);
+
         User[] friends = user1.getFriends();
         int fCount = friends.length;
         String friendCount = fCount + " Friends";
-        
+
         Photo[] userphotos = user1.getPhotos();
         int pCount = userphotos.length;
         String photoCount = pCount + " Photos";
-        
+
         usernametv.setText(un);
         nicknametv.setText(nickname);
         gendertv.setText(gender);
@@ -186,66 +193,66 @@ public class Profile extends Activity {
 
     public void home(View view){
     	Intent intent = new Intent(this, HomeScreen.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
 
     public void explore(View view){
     	Intent intent = new Intent(this, Explore.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
     public void camera(View view){
     	Intent intent = new Intent(this, Camera.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
     public void settings(View view){
     	Intent intent = new Intent(this, PrefsActivity.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
     public void imageClick1(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(0);
     	intent.putExtra("link", link1);
     	startActivity(intent);
     }
-    
+
     public void imageClick2(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(1);
     	intent.putExtra("link", link1);
     	startActivity(intent);
     }
-    
+
     public void imageClick3(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(2);
     	intent.putExtra("link", link1);
     	startActivity(intent);
     }
-    
+
     public void imageClick4(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(3);
     	intent.putExtra("link", link1);
     	startActivity(intent);
     }
-    
+
     public void imageClick5(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(4);
     	intent.putExtra("link", link1);
     	startActivity(intent);
     }
-    
+
     public void imageClick6(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = image_links2.get(5);
     	intent.putExtra("link", link1);
     	startActivity(intent);
     }
-    
+
     public void logout(){
         // Clearing all data from Shared Preferences
         SharedPreferences settings = getSharedPreferences("DB_NAME", 0);
@@ -254,11 +261,11 @@ public class Profile extends Activity {
         editor.remove("pass");
         editor.clear();
         editor.commit();
-        
+
     	Intent intent = new Intent(this, Login.class);
-    	startActivity(intent);    	
+    	startActivity(intent);
     }
-    
+
     public void startGallery(View view){
     	Intent intent = new Intent();
 		intent.setType("image/*");
@@ -266,7 +273,7 @@ public class Profile extends Activity {
 		startActivityForResult(Intent.createChooser(intent, "Select Picture for UCRinstagram"),ACTIVITY_SELECT_IMAGE);
 		//done();
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -276,9 +283,9 @@ public class Profile extends Activity {
 
         	//reload the profile page
         	Intent intent = new Intent(this, Profile.class);
-        	startActivity(intent);  
-        	
-        	
+        	startActivity(intent);
+
+
 //            Uri selectedImageUri = data.getData();
 //            selectedImagePath = getPath(selectedImageUri);
 //            System.out.println("Image Path : " + selectedImagePath);
