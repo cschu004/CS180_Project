@@ -60,7 +60,7 @@ public class WebAPI {
         String exists = getJSONFromServer(new HTTPParams(requestMethod, url));
         if (exists.equals("exists")){
             return true;
-        } else {                   // "does not exist"
+        } else { // "does not exist"
             return false;
         }
     }
@@ -203,7 +203,6 @@ public class WebAPI {
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
         return gson.fromJson(json, Comment[].class);
     }
-    
 
     public void addCommentToPhoto(Photo photo, Comment comment){
         String url = apiURL + Photo.urlSuffix + "/add_comment/" + Integer.toString(photo.getId());
@@ -211,8 +210,7 @@ public class WebAPI {
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
         getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
     }
-        
-    
+
     public void savePhoto(Photo photo) {
         String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(photo.getId());
         Log.i("OC", "Attempting to edit Photo info: " + url);
@@ -278,47 +276,7 @@ public class WebAPI {
         getJSONFromServer(new HTTPParams(requestMethod, url));
     }
 
-    // ----------------------------
-    // ----- Favorite Methods -----
-    // ----------------------------
 
-    public Photo[] getFavorites(int user_id){
-        String url = apiURL + User.urlSuffix + "/get_favorites/" + Integer.toString(user_id);
-        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
-        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
-        return gson.fromJson(json, Photo[].class);
-    }
-
-    public Photo[] getFavorites(User user){
-        return getFavorites(user.getId());
-    }
-
-    public void addFavorite(int user_id, int photo_id){
-        String url = apiURL + User.urlSuffix + "/add_favorite";
-        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
-        nameValuePairs.add(new BasicNameValuePair("photo_id", Integer.toString(photo_id)));
-        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
-    }
-    
-    public void addFavorite(User user, Photo photo){
-    	addFavorite(user.getId(), photo.getId());
-    }
-    
-    public void removeFavorite(int user_id, int favorite_id){
-        String url = apiURL + User.urlSuffix + "/remove_favorite";
-        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
-        nameValuePairs.add(new BasicNameValuePair("favorite_id", Integer.toString(favorite_id)));
-        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
-    }
-
-    public void removeFavorite(User user, Photo photo){
-        removeFavorite(user.getId(), photo.getId());
-    }
-    
     // HELPER METHODS
     private String getJSONFromServer(HTTPParams params) {
         String json = null;
@@ -332,12 +290,12 @@ public class WebAPI {
         return "{}";
     }
 
-//    TODO: Refactor and use reflection when you have the time
-//    private User[] getObjectsFromJSON(Class c) {
-//        Gson gson = new Gson();
-//        String json = getJSONFromServer(apiURL.concat(c.urlSuffixJson));
-//        return gson.fromJson(json, c[].class);
-//    }
+// TODO: Refactor and use reflection when you have the time
+// private User[] getObjectsFromJSON(Class c) {
+// Gson gson = new Gson();
+// String json = getJSONFromServer(apiURL.concat(c.urlSuffixJson));
+// return gson.fromJson(json, c[].class);
+// }
 
 }
 
@@ -432,31 +390,31 @@ class getJSONFromServer extends AsyncTask<HTTPParams, Void, String> {
     }
 
 
-//    protected String getJSONFromServer(String modelURL) {
-//        HttpURLConnection connection = null;
-//        try {
-//            URL url = new URL(modelURL);
-//            connection = (HttpURLConnection) url.openConnection();
+// protected String getJSONFromServer(String modelURL) {
+// HttpURLConnection connection = null;
+// try {
+// URL url = new URL(modelURL);
+// connection = (HttpURLConnection) url.openConnection();
 //
-//            Log.i("OC: JSON", "opened http connection");
+// Log.i("OC: JSON", "opened http connection");
 //
-//            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//                Log.i("OC: Open Con", "preparing to get input stream");
-//                InputStream in = new BufferedInputStream(connection.getInputStream());
-//                return readStream(in);
-//            } else {
-//                // Server returned HTTP error code.
-//                return "{}"; //TODO: create error codes
-//            }
+// if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+// Log.i("OC: Open Con", "preparing to get input stream");
+// InputStream in = new BufferedInputStream(connection.getInputStream());
+// return readStream(in);
+// } else {
+// // Server returned HTTP error code.
+// return "{}"; //TODO: create error codes
+// }
 //
-//        } catch (MalformedURLException e) {
-//        } catch (IOException e) {
-//        } finally {
-//            if (connection != null)
-//                connection.disconnect();
-//        }
-//        return "{}"; //TODO: create a connection error code
-//    }
+// } catch (MalformedURLException e) {
+// } catch (IOException e) {
+// } finally {
+// if (connection != null)
+// connection.disconnect();
+// }
+// return "{}"; //TODO: create a connection error code
+// }
 
     // --------------------------
     // ----- Helper Methods -----

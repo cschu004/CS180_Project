@@ -26,7 +26,7 @@ public class Photo {
     private Date updated_at;
     private Date deleted_at;
 
-    //  this.getClass().getSimpleName().toLowerCase();
+    // this.getClass().getSimpleName().toLowerCase();
     public static String urlSuffix = "photos";
 
     // ------------------------
@@ -74,7 +74,7 @@ public class Photo {
         Photo tempPhoto = api.getPhoto(id);
 
         this.id = tempPhoto.id;
-        this.path    = tempPhoto.path;
+        this.path = tempPhoto.path;
         this.filename = tempPhoto.filename;
         this.caption = tempPhoto.caption;
         this.gps = tempPhoto.gps;
@@ -93,7 +93,7 @@ public class Photo {
     public Comment[] getComments(){
         return new WebAPI().getCommentsFromPhoto(this);
     }
-    
+
     public void addComment(Comment comment){
         new WebAPI().addCommentToPhoto(this, comment);
     }
@@ -124,5 +124,3 @@ public class Photo {
     }
 
 }
-
-

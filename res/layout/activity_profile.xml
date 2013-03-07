@@ -119,25 +119,11 @@
         android:textSize="12sp"
         android:text="@string/settings" />
     
-<!--     <ImageView -->
-<!-- 		android:id="@+id/imageView1" -->
-<!-- 		android:layout_width="120dp" -->
-<!-- 		android:layout_height="120dp" -->
-<!-- 		android:layout_below="@id/bday" -->
-<!-- 		android:adjustViewBounds="true" -->
-<!-- 		android:clickable="true" -->
-<!-- 		android:scaleType="fitXY" -->
-<!-- 		android:onClick="imageClick1" -->
-<!-- 		android:src="@drawable/ic_launcher" /> -->
-    
-<!-- 	<WebView  xmlns:android="http://schemas.android.com/apk/res/android" -->
-<!--     	android:id="@+id/webview" -->
-<!--     	android:layout_width="wrap_content" -->
-<!--     	android:layout_height="wrap_content" /> -->
+
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/linearButtons"
         android:layout_below="@id/bday"
@@ -146,10 +132,9 @@
 		<LinearLayout 
 		android:id="@+id/linearPictures"
     	android:orientation="vertical"
-    	android:layout_gravity="center"
+    	android:layout_gravity="center|top"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-    	android:layout_marginTop="150dp"
  	 	  >
     
 		</LinearLayout>
@@ -207,64 +192,4 @@
 
     </LinearLayout>
     
-<!--     <ImageView -->
-<!--         android:id="@+id/ImageView01" -->
-<!--         android:layout_width="120dp" -->
-<!--         android:layout_height="120dp" -->
-<!--         android:layout_below="@+id/bday" -->
-<!--         android:layout_toRightOf="@+id/imageView1" -->
-<!--         android:adjustViewBounds="true" -->
-<!--         android:clickable="true" -->
-<!--         android:scaleType="fitXY" -->
-<!--         android:onClick="imageClick2" -->
-<!--         android:src="@drawable/ic_launcher" /> -->
-
-<!--     <ImageView -->
-<!--         android:id="@+id/ImageView02" -->
-<!--         android:layout_width="120dp" -->
-<!--         android:layout_height="120dp" -->
-<!--         android:layout_below="@+id/bday" -->
-<!--         android:layout_toRightOf="@+id/ImageView01" -->
-<!--         android:adjustViewBounds="true" -->
-<!--         android:clickable="true" -->
-<!--         android:scaleType="fitXY" -->
-<!--         android:onClick="imageClick3" -->
-<!--         android:src="@drawable/ic_launcher" /> -->
-
-<!--     <ImageView -->
-<!--         android:id="@+id/ImageView03" -->
-<!--         android:layout_width="120dp" -->
-<!--         android:layout_height="120dp" -->
-<!--         android:layout_alignParentLeft="true" -->
-<!--         android:layout_below="@+id/imageView1" -->
-<!--         android:adjustViewBounds="true" -->
-<!--         android:clickable="true" -->
-<!--         android:scaleType="fitXY" -->
-<!--         android:onClick="imageClick4" -->
-<!--         android:src="@drawable/ic_launcher" /> -->
-
-<!--     <ImageView -->
-<!--         android:id="@+id/ImageView04" -->
-<!--         android:layout_width="120dp" -->
-<!--         android:layout_height="120dp" -->
-<!--         android:layout_below="@+id/imageView1" -->
-<!--         android:layout_toRightOf="@+id/imageView1" -->
-<!--         android:adjustViewBounds="true" -->
-<!--         android:clickable="true" -->
-<!--         android:scaleType="fitXY" -->
-<!--         android:onClick="imageClick5" -->
-<!--         android:src="@drawable/ic_launcher" /> -->
-
-<!--     <ImageView -->
-<!--         android:id="@+id/ImageView05" -->
-<!--         android:layout_width="120dp" -->
-<!--         android:layout_height="120dp" -->
-<!--         android:layout_below="@+id/ImageView01" -->
-<!--         android:layout_toRightOf="@+id/ImageView01" -->
-<!--         android:adjustViewBounds="true" -->
-<!--         android:clickable="true" -->
-<!--         android:scaleType="fitXY" -->
-<!--         android:onClick="imageClick6" -->
-<!--         android:src="@drawable/ic_launcher" /> -->
-
 </RelativeLayout>

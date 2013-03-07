@@ -24,7 +24,7 @@ public class Comment {
 
 
 
-    //  this.getClass().getSimpleName().toLowerCase();
+    // this.getClass().getSimpleName().toLowerCase();
     public static String urlSuffix = "comments";
 
     // ------------------------
