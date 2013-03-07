@@ -35,9 +35,8 @@ public class NewMember extends Activity {
             Login.username = loginUser.username;
 
             Toast.makeText(this.getApplicationContext(), "Created a new user account!", Toast.LENGTH_LONG).show();
-
-            Intent intent = new Intent(this, HomeScreen.class);
-            intent.putExtra("caption", "");
+            
+            Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         } else {
             Toast.makeText(this.getApplicationContext(), "Username already in use.", Toast.LENGTH_LONG).show();

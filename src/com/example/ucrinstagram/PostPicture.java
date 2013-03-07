@@ -42,13 +42,12 @@ public class PostPicture extends Activity {
 	String filePath;
 	EditText et;
 
-	public String username = Login.username.toLowerCase().replaceAll(
-			"\\s", "");
+	public String username = Login.username.toLowerCase().replaceAll("\\s", "");
 	final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
 	String caption;
 	String link;
 	String fileName;
-	String gps_city="";
+	String gps_city = "";
 	User user1;
 
 	private TextView latituteField;
