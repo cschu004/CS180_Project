@@ -36,6 +36,28 @@ public class Photo {
     public Photo() {
     }
 
+    public Photo(String path, String filename) {
+        this.id = new Random().nextInt();
+        this.path = path;
+        this.filename = filename;
+        this.caption = "";
+        this.gps = "";
+        this.created_at = new Date();
+        this.updated_at = new Date();
+        this.deleted_at = new Date(0);
+    }
+
+    public Photo(String path, String filename, String caption) {
+        this.id = new Random().nextInt();
+        this.path = path;
+        this.filename = filename;
+        this.caption = caption;
+        this.gps = "";
+        this.created_at = new Date();
+        this.updated_at = new Date();
+        this.deleted_at = new Date(0);
+    }
+
     public Photo(String path, String filename, String caption, String gps) {
         this.id = new Random().nextInt();
         this.path = path;
