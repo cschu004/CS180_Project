@@ -69,6 +69,10 @@ public class Comment {
         }
     }
 
+    public void deleteComment(){
+        new WebAPI().removeComment(this);
+    }
+
     public List<NameValuePair> getNameValuePairs() {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         // TODO: currently rails is creating the ID numbers, need to return ID number or let Java set it

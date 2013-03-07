@@ -218,6 +218,13 @@ public class WebAPI {
         getJSONFromServer(new HTTPParams(requestMethod, url, photo.getNameValuePairs()));
     }
 
+    public void removePhoto(Photo photo){
+        String url = apiURL + Photo.urlSuffix + "/delete/" + Integer.toString(photo.getId()) + ".json";
+        Log.i("OC", "Attempting to delete photo: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET; //TODO: rewrite to POST
+        getJSONFromServer(new HTTPParams(requestMethod, url));
+    }
+
     // -------------------------
     // ----- Topic Methods -----
     // -------------------------
@@ -260,6 +267,13 @@ public class WebAPI {
         Log.i("OC", "Attempting to edit comment: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
         getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
+    }
+
+    public void removeComment(Comment comment){
+        String url = apiURL + Comment.urlSuffix + "/delete/" + Integer.toString(comment.getId()) + ".json";
+        Log.i("OC", "Attempting to delete comment: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET; //TODO: rewrite to POST
+        getJSONFromServer(new HTTPParams(requestMethod, url));
     }
 
 
