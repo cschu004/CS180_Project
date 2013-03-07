@@ -203,6 +203,7 @@ public class WebAPI {
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
         return gson.fromJson(json, Comment[].class);
     }
+    
 
     public void addCommentToPhoto(Photo photo, Comment comment){
         String url = apiURL + Photo.urlSuffix + "/add_comment/" + Integer.toString(photo.getId());
@@ -210,7 +211,8 @@ public class WebAPI {
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
         getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
     }
-
+        
+    
     public void savePhoto(Photo photo) {
         String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(photo.getId());
         Log.i("OC", "Attempting to edit Photo info: " + url);
@@ -269,6 +271,7 @@ public class WebAPI {
         getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
     }
 
+<<<<<<< Updated upstream
     public void removeComment(Comment comment){
         String url = apiURL + Comment.urlSuffix + "/delete/" + Integer.toString(comment.getId()) + ".json";
         Log.i("OC", "Attempting to delete comment: " + url);
@@ -276,6 +279,41 @@ public class WebAPI {
         getJSONFromServer(new HTTPParams(requestMethod, url));
     }
 
+=======
+    
+    // ---------------------------
+    // ----- Favorite Methods -----
+    // ---------------------------
+    
+    //NEWCODE!!
+    public void addFavorite(int user_id, int favorite_id){
+        String url = apiURL + User.urlSuffix + "/add_favorite";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("favorite_id", Integer.toString(favorite_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+    
+    public void addFavorite(User user, Photo photo){
+    	addFavorite(photo.getId(), user.getId());
+    }
+    
+    public void removeFavorite(int friend_id, int user_id){
+        String url = apiURL + User.urlSuffix + "/remove_favorite";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("favorite_id", Integer.toString(friend_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+
+    public void removeFavorite(User user, Photo photo){
+        removeFavorite(photo.getId(), user.getId());
+    }
+    
+    
+>>>>>>> Stashed changes
 
     // HELPER METHODS
     private String getJSONFromServer(HTTPParams params) {

@@ -143,7 +143,12 @@ public class User {
     public User[] getFriendedBy(){
         return new WebAPI().getFriendedBy(this);
     }
-
+    
+    public User[] getFavorites(){
+    	return new WebAPI().getFavorites(this);
+    }
+     
+    
     // SAVE
     public void saveProfile(Profile profile) {
         new WebAPI().saveProfileFromUser(profile, this);
@@ -163,6 +168,11 @@ public class User {
     public void addFriends(User[] friends) {
     }
 
+    public void addFavorite(Photo favorite){
+        new WebAPI().addFavorite(this, favorite);
+    }
+    
+    
     // DELETE
     public void removePhoto(Photo photo){
 
@@ -179,7 +189,11 @@ public class User {
     public void removeFriends(User[] friends){
 
     }
-
+    
+    public void removeFavorite(Photo favorite){
+    	new WebAPI().removeFavorite(this, favorite);	
+    }
+    
     // ----------------------------
     // ----- Accessor METHODS -----
     // ----------------------------
