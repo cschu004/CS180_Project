@@ -98,6 +98,14 @@ public class Photo {
         new WebAPI().addCommentToPhoto(this, comment);
     }
 
+    public void addPhotoToUser(User user){
+        new WebAPI().addPhotoToUser(this, user);
+    }
+
+    public void deletePhoto(){
+        new WebAPI().removePhoto(this);
+    }
+
     // ----------------------------
     // ----- Accessor METHODS -----
     // ----------------------------
