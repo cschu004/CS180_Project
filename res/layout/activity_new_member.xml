@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="82dp"
         android:ems="10"
-        android:text="@string/new_member_username" />
+        android:hint="@string/new_member_username" />
 
     <EditText
         android:id="@+id/new_member_password"
@@ -25,7 +25,7 @@
         android:layout_marginTop="22dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/new_member_password" />
+        android:hint="@string/new_member_password" />
 
     <Button
         android:id="@+id/button_new_member_test"

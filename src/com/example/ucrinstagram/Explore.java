@@ -1,6 +1,7 @@
 package com.example.ucrinstagram;
 
 import java.io.InputStream;
+import java.util.concurrent.Executor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,20 +20,21 @@ import com.example.ucrinstagram.Models.Photo;
 public class Explore extends Activity {
 
 	String username=Login.username;
-	//InputStream is; 
-    //ArrayList<String> image_links2 = new ArrayList<String>();
+	String [] allLinks;
+	Photo[] allPhoto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_explore);
         WebAPI api = new WebAPI();
-		Photo[] allPhoto = api.getAllPhotos();
-		String [] allLinks = new String [allPhoto.length];
+        allPhoto = api.getAllPhotos();
+		allLinks = new String [allPhoto.length];
 		for (int i = 0; i < allPhoto.length; i ++){
 			System.out.println(allPhoto[i].path+'/'+allPhoto[i].filename);
 			allLinks[i]=allPhoto[i].path+'/'+allPhoto[i].filename;
 		}
+		
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
         .execute(allLinks[0]);
 		new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
@@ -51,8 +53,6 @@ public class Explore extends Activity {
         .execute(allLinks[7]);
 		new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
         .execute(allLinks[8]);	
-		
-        //new getRandomImages().execute();
 	}
 
     
@@ -77,67 +77,87 @@ public class Explore extends Activity {
     	Intent intent = new Intent(this, Profile.class);
     	startActivity(intent);    	
     }
-    /*
+    
     public void imageClick1(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(0);
+    	String link1 = allLinks[0];
+    	String cap	= allPhoto[0].caption;
+    	int photoid = allPhoto[0].getId();
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
+    	intent.putExtra("photoid", photoid);
     	startActivity(intent);    	
     }
     
     public void imageClick2(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(1);
+       	String link1 = allLinks[1];
+    	String cap	= allPhoto[1].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick3(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(2);
+       	String link1 = allLinks[2];
+    	String cap	= allPhoto[2].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick4(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(3);
+       	String link1 = allLinks[3];
+    	String cap	= allPhoto[3].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick5(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(4);
+       	String link1 = allLinks[4];
+    	String cap	= allPhoto[4].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick6(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(8);
+       	String link1 = allLinks[8];
+    	String cap	= allPhoto[8].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick7(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(5);
+       	String link1 = allLinks[5];
+    	String cap	= allPhoto[5].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick8(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(7);
+       	String link1 = allLinks[7];
+    	String cap	= allPhoto[7].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
     
     public void imageClick9(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
-       	String link1 = image_links2.get(6);
+       	String link1 = allLinks[6];
+    	String cap	= allPhoto[6].caption;
     	intent.putExtra("link", link1);
+    	intent.putExtra("caption", cap);
     	startActivity(intent);    	
     }
 	
@@ -146,88 +166,6 @@ public class Explore extends Activity {
 		startActivity(getIntent());
 	}
 	
-	/*
-	private class getRandomImages extends AsyncTask<Void,Void,Void>{
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			String result = "";
-
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-			//http post
-			try{
-			        HttpClient httpclient = new DefaultHttpClient();
-			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/getRandomImages.php");
-			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			        HttpResponse response = httpclient.execute(httppost);
-			        HttpEntity entity = response.getEntity();
-			        is = entity.getContent();
-
-			}
-			catch(Exception e){
-			        Log.e("log_tag", "Error in http connection "+e.toString());
-			}
-			//convert response to string
-			try{
-
-			        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-			        StringBuilder sb = new StringBuilder();
-			        String line = null;
-			        while ((line = reader.readLine()) != null) {
-			                sb.append(line + "\n");
-			        }
-			        is.close();
-			 
-			        result=sb.toString();
-			}catch(Exception e){
-			        Log.e("log_tag", "Error converting result "+e.toString());
-			}
-			 
-			//parse json data
-			try{
-			        JSONArray jArray = new JSONArray(result);
-			        for(int i=0;i<jArray.length();i++){
-			                JSONObject json_data = jArray.getJSONObject(i);
-			               /* Log.i("log_tag","id: "+json_data.getInt("id")+
-			                        ", name: "+json_data.getString("user")+
-			                        ", sex: "+json_data.getInt("sex")+
-			                        ", birthyear: "+json_data.getInt("birthyear")
-			                );
-			                image_links2.add(json_data.getString("image_url"));
-			                System.out.println(json_data.getString("image_url"));
-			        }
-
-			}
-			catch(JSONException e){
-			        Log.e("log_tag", "Error parsing data "+e.toString());
-			}
-        	
-			return null;
-
-		}
-		protected void onPostExecute(Void Result){
-			
-			new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-	        .execute(image_links2.get(0));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
-	        .execute(image_links2.get(1));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView02))
-	        .execute(image_links2.get(2));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView03))
-	        .execute(image_links2.get(3));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView04))
-	        .execute(image_links2.get(4));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView06))
-	        .execute(image_links2.get(5));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView08))
-	        .execute(image_links2.get(6));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView07))
-	        .execute(image_links2.get(7));
-			new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
-	        .execute(image_links2.get(8));
-		}
-
-	}*/
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		  ImageView bmImage;
 
@@ -252,6 +190,7 @@ public class Explore extends Activity {
 
 		  protected void onPostExecute(Bitmap result) {
 		      bmImage.setImageBitmap(result);
+
 		  }
 		}
 }

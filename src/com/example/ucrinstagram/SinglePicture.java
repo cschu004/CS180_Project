@@ -1,21 +1,6 @@
 package com.example.ucrinstagram;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -27,11 +12,16 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.ucrinstagram.Models.Photo;
 
 public class SinglePicture extends Activity {
-	String username=Login.username;
+	String username=Login.username.toLowerCase().replaceAll("\\s","");
 	InputStream is; 
 	String link;
+	String caption;
+	int photoId;
 	String [] tokens;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +29,8 @@ public class SinglePicture extends Activity {
 		setContentView(R.layout.activity_single_picture);
 		
 	    link = getIntent().getExtras().getString("link");
+	    caption = getIntent().getExtras().getString("caption");
+	    photoId = getIntent().getExtras().getInt("photoid");
 	    
 	    String prefix = "https://s3.amazonaws.com/";
 	    String noPrefixStr = link.substring(link.indexOf(prefix)+ prefix.length());
@@ -47,9 +39,8 @@ public class SinglePicture extends Activity {
 		TextView textView = (TextView)findViewById(R.id.textView1);
 		textView.setText(tokens[1]);
 		
-
 		TextView textView2 = (TextView)findViewById(R.id.textView2);
-		textView2.setText(tokens[2]);
+		textView2.setText(caption);
 		
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
         .execute(link);
@@ -66,69 +57,17 @@ public class SinglePicture extends Activity {
 		System.out.println(username);
 		System.out.println(tokens[1]);
 		if (username.equals(tokens[1])){
+	        WebAPI api = new WebAPI();
+	        Photo tempPhoto = api.getPhoto(photoId);
 			System.out.println("IN");
-			new deleteImage().execute();
+			tempPhoto.deletePhoto();
+            Toast.makeText(this.getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
+		}
+		else{
+            Toast.makeText(this.getApplicationContext(), "You don't own this picture", Toast.LENGTH_LONG).show();
 		}
 	}
-	private class deleteImage extends AsyncTask<Void,Void,Void>{
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			String result = "";
 
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			System.out.println(link);
-			nameValuePairs.add(new BasicNameValuePair("image_url",link));
-
-			//http post
-			try{
-			        HttpClient httpclient = new DefaultHttpClient();
-			        HttpPost httppost = new HttpPost("http://www.kevingouw.com/cs180/deleteImage.php");
-			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			        HttpResponse response = httpclient.execute(httppost);
-			        HttpEntity entity = response.getEntity();
-			        is = entity.getContent();
-
-			}
-			catch(Exception e){
-			        Log.e("log_tag", "Error in http connection "+e.toString());
-			}
-			//convert response to string
-			try{
-
-			        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-			        StringBuilder sb = new StringBuilder();
-			        String line = null;
-			        while ((line = reader.readLine()) != null) {
-			                sb.append(line + "\n");
-			        }
-			        is.close();
-			 
-			        result=sb.toString();
-			}catch(Exception e){
-			        Log.e("log_tag", "Error converting result "+e.toString());
-			}
-			 
-			//parse json data
-			try{
-			        JSONArray jArray = new JSONArray(result);
-			        for(int i=0;i<jArray.length();i++){
-			                JSONObject json_data = jArray.getJSONObject(i);
-			               /* Log.i("log_tag","id: "+json_data.getInt("id")+
-			                        ", name: "+json_data.getString("user")+
-			                        ", sex: "+json_data.getInt("sex")+
-			                        ", birthyear: "+json_data.getInt("birthyear")
-			                );*/
-			        }
-
-			}
-			catch(JSONException e){
-			        Log.e("log_tag", "Error parsing data "+e.toString());
-			}
-        	
-			return null;
-
-		}
-	}
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		  ImageView bmImage;
