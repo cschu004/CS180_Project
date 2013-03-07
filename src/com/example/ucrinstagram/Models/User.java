@@ -144,7 +144,7 @@ public class User {
         return new WebAPI().getFriendedBy(this);
     }
     
-    public User[] getFavorites(){
+    public Photo[] getFavorites(){
     	return new WebAPI().getFavorites(this);
     }
      

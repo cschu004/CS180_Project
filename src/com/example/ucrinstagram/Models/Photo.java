@@ -97,7 +97,6 @@ public class Photo {
     public void addComment(Comment comment){
         new WebAPI().addCommentToPhoto(this, comment);
     }
-<<<<<<< Updated upstream
 
     public void addPhotoToUser(User user){
         new WebAPI().addPhotoToUser(this, user);
@@ -107,10 +106,6 @@ public class Photo {
         new WebAPI().removePhoto(this);
     }
 
-=======
-    
-    
->>>>>>> Stashed changes
     // ----------------------------
     // ----- Accessor METHODS -----
     // ----------------------------
