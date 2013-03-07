@@ -82,6 +82,13 @@ public class WebAPI {
         return gson.fromJson(json, User[].class);
     }
 
+    public User[] getFriendedBy(User user){
+        String url = apiURL + User.urlSuffix + "/get_friends_of/" + Integer.toString(user.getId());
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, User[].class);
+    }
+
     public void addFriend(int user_id, int friend_id){
         String url = apiURL + User.urlSuffix + "/add_friend";
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;

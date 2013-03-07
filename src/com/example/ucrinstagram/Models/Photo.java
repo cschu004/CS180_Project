@@ -19,6 +19,7 @@ public class Photo {
     public String path;
     public String filename;
     public String caption;
+    public String gps;
 
     private int id;
     private Date created_at;
@@ -35,11 +36,12 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(String path, String filename, String caption) {
+    public Photo(String path, String filename, String caption, String gps) {
         this.id = new Random().nextInt();
         this.path = path;
         this.filename = filename;
         this.caption = caption;
+        this.gps = gps;
         this.created_at = new Date();
         this.updated_at = new Date();
         this.deleted_at = new Date(0);
@@ -53,6 +55,7 @@ public class Photo {
         this.path    = tempPhoto.path;
         this.filename = tempPhoto.filename;
         this.caption = tempPhoto.caption;
+        this.gps = tempPhoto.gps;
         this.created_at = tempPhoto.created_at;
         this.updated_at = tempPhoto.updated_at;
         this.deleted_at = tempPhoto.deleted_at;
@@ -82,6 +85,7 @@ public class Photo {
         nameValuePairs.add(new BasicNameValuePair("photo[path]", this.path));
         nameValuePairs.add(new BasicNameValuePair("photo[filename]", this.filename));
         nameValuePairs.add(new BasicNameValuePair("photo[caption]", this.caption));
+        nameValuePairs.add(new BasicNameValuePair("photo[gps]", this.gps));
         return nameValuePairs;
     }
 

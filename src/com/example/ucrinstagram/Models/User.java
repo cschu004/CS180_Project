@@ -1,5 +1,6 @@
 package com.example.ucrinstagram.Models;
 
+import com.example.ucrinstagram.Models.*;
 import android.util.Log;
 import com.amazonaws.services.elasticloadbalancing.model.SetLoadBalancerPoliciesForBackendServerRequest;
 import com.example.ucrinstagram.WebAPI;
@@ -119,6 +120,10 @@ public class User {
 
     public User[] getFriends() {
         return new WebAPI().getFriends(this);
+    }
+
+    public User[] getFriendedBy(){
+        return new WebAPI().getFriendedBy(this);
     }
 
     // SAVE
