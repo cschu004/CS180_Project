@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,10 +39,18 @@ public class HomeScreen extends Activity {
 		for (int i = allThisUserPhotos.length-1; i >=0;  i --){
 			image[i] = new ImageView(this);
 	        image[i].setImageResource(R.drawable.ic_launcher);
-	        image[i].setAdjustViewBounds(true);
+	        //image[i].setAdjustViewBounds(true);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,600); 
-	        image[i].setLayoutParams(lp);
+			image[i].setLayoutParams(lp);
+			/*LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(600, LinearLayout.LayoutParams.MATCH_PARENT);
+			lp2.setMargins(0, 200, 0, 0);
+			image[i].setLayoutParams(lp2);*/
+			
 	        LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
+	        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) linlay.getLayoutParams();
+
+	        mlp.setMargins(0,100*allThisUserPhotos.length, 0,100);
+	        
 	        linlay.addView(image[i]);
 	        
 			System.out.println(allThisUserPhotos[i].path+'/'+allThisUserPhotos[i].filename);
