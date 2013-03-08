@@ -8,31 +8,48 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
 
-public class Profile extends Activity {
+public class Profile extends Activity implements OnClickListener {
     //final int TAKE_PICTURE = 1;
 	private static final int ACTIVITY_SELECT_IMAGE = 1234;
 //    private String selectedImagePath;
 //    private ImageView img;
 
-	public static String username = Login.username.toLowerCase().replaceAll("\\s","");
+	String username = Login.username;
 	ArrayList<String> image_links = new ArrayList<String>();
     ImageView[] image;
+    User user1;
 	
+    private AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( "AKIAIXJNZGVAMLT2STLA", "rU+D7RRGi1FVlYW7rx8nh+nETkYJ3Km/KIA+jE5+" ) );
+    final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
+	String filePath;
+    String fileName;
+    String link;
+    
 	InputStream is; 
     ArrayList<String> image_links2 = new ArrayList<String>();
 
@@ -41,66 +58,138 @@ public class Profile extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         
-//        SharedPreferences sharedPrefs = getSharedPreferences("tempUsername", 0);
-//        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        String usern = sharedPrefs.getString(username, "username");
-//        String nickname = defSharedPrefs.getString("nickname", "nickname");
-//        String gender = defSharedPrefs.getString("listpref", "gender");
-//        String bio = defSharedPrefs.getString("aboutme", "About Me");
+        username = Login.username;
+        loadInfo();
+        loadPics();
+
         
+        user1 = new User(Login.username);
+        
+        WebAPI api = new WebAPI();
+        Photo profilePic = api.getPhoto(user1.getProfile().profile_photo);
+        
+//        Photo profilePic = user1.getProfile().getProfilePhoto();
+        // Loader image - will be shown before loading image
+        int loader = R.drawable.loader;
+        // Imageview to show
+        ImageView image = (ImageView) findViewById(R.id.image);
+        // Image url
+        String image_url = profilePic.path + "/" + profilePic.filename;
+        System.out.println(image_url);
+//        String image_url = "http://api.androidhive.info/images/sample.jpg"; 
+        // ImageLoader class instance
+        ImageLoader imgLoader = new ImageLoader(getApplicationContext());
+        imgLoader.DisplayImage(image_url, loader, image);
+        
+	}
+
+	@Override
+	public void onResume(){
+		super.onResume();
+        username = Login.username;
+		loadInfo();
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        settings.edit().clear().commit();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		return true;
+	}
+	
+	public void loadInfo(){
+		//Using the data from the sharedPreference and updating it to the server
+		user1 = new User(Login.username);
+        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        com.example.ucrinstagram.Models.Profile tempProfile = user1.getProfile();
+        String tempNick = tempProfile.nickname;
+        String tempGender = tempProfile.gender;
+        String tempBio = tempProfile.bio;
+        String tempMail = user1.email;
+        
+        tempProfile.nickname = defSharedPrefs.getString("nickPref", tempNick);
+        tempProfile.gender = defSharedPrefs.getString("listpref", tempGender);
+        tempProfile.bio = defSharedPrefs.getString("bioPref", tempBio);
+        user1.email = defSharedPrefs.getString("emailPref", tempMail);
+        
+        tempProfile.save();
+        user1.save();
+        
+        //setting data to SharedPrefs
+        Editor editor = defSharedPrefs.edit();
+        editor.putString("nickPref", user1.getProfile().nickname);
+        editor.putString("listPref", user1.getProfile().gender);
+      	editor.putString("bioPref", user1.getProfile().bio);
+      	editor.putString("emailPref", user1.email);
+      	editor.commit();
+		
         TextView usernametv = (TextView) findViewById(R.id.username);
         TextView nicknametv = (TextView) findViewById(R.id.nickname);
         TextView gendertv = (TextView) findViewById(R.id.gender);
         TextView biotv = (TextView) findViewById(R.id.aboutme);
         TextView followerstv = (TextView) findViewById(R.id.followers);
+        TextView followingtv = (TextView) findViewById(R.id.following);
         TextView datetv = (TextView) findViewById(R.id.profile_creation);
         TextView phototv = (TextView) findViewById(R.id.photos);
         TextView bdaytv = (TextView) findViewById(R.id.bday);
         
-        User user1 = new User(username);
         String un = user1.username;
 
         com.example.ucrinstagram.Models.Profile user1profile = user1.getProfile();
         String nickname = user1profile.nickname;
         String gender = user1profile.gender;
         String bio = user1profile.bio;
-        
-        Date birthdate = user1profile.birthday;
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yy");
-        String bday = "Birthday: " + dateFormatter.format(birthdate);
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yy");
+        Date birthdate = user1profile.birthday;
+        String bday = "Birthday: " + dateFormatter.format(birthdate);
+        
         Date created = user1profile.getCreatedAt();
         String prof_created = "Profile Created On:\n" + dateFormatter.format(created);
-        		
-        User[] friends = user1.getFriends();
-        int fCount = friends.length;
-        String friendCount = fCount + " Friends";
+
+        //following
+        User[] following = user1.getFriends();
+        int fCount1 = following.length;
+        String followingCount = fCount1 + " Following";
         
+        //followers
+        User[] follower = user1.getFriendedBy();
+        int fCount2 = follower.length;
+        String followerCount = fCount2 + " Followers";
+
         Photo[] userphotos = user1.getPhotos();
         int pCount = userphotos.length;
         String photoCount = pCount + " Photos";
-        
+
         usernametv.setText(un);
         nicknametv.setText(nickname);
         gendertv.setText(gender);
         biotv.setText(bio);
-        followerstv.setText(friendCount);
+        followingtv.setText(followingCount);
+        followerstv.setText(followerCount);
         datetv.setText(prof_created);
         phototv.setText(photoCount);
         bdaytv.setText(bday);
+	}
+	
+	public void loadPics(){
+		User user1 = new User(username);
+        Photo[] userphotos = user1.getPhotos();
         
-
-        //display user photos
-//        for(int i = userphotos.length - 1; i >= 0; i--){
-//        	System.out.println(userphotos[i].path + '/' + userphotos[i].filename);
-//        	image_links.add(userphotos[i].path + '/' + userphotos[i].filename);
-//        }
-
 		image = new ImageView[userphotos.length];
     	for (int i = userphotos.length-1; i >=0; i --){
     		image[i] = new ImageView(this);
     		image[i].setImageResource(R.drawable.ic_launcher);
     		image[i].setAdjustViewBounds(true);
+    		image[i].setOnClickListener(this);
     		LayoutParams lp = new LayoutParams(400,400);
     		image[i].setLayoutParams(lp);
     		LinearLayout linlay = (LinearLayout) findViewById(R.id.linearPictures);
@@ -109,84 +198,25 @@ public class Profile extends Activity {
 //        	System.out.println(userphotos[i].path + '/' + userphotos[i].filename);
         	new DownloadImageTask(image[i]).execute(userphotos[i].path + '/' + userphotos[i].filename);
     	}
-
-        // Loader image - will be shown before loading image
-        int loader = R.drawable.loader;
- 
-        // Imageview to show
-        ImageView image = (ImageView) findViewById(R.id.image);
- 
-        // Image url
-        String image_url = "http://api.androidhive.info/images/sample.jpg";
- 
-        // ImageLoader class instance
-        ImageLoader imgLoader = new ImageLoader(getApplicationContext());
- 
-        // whenever you want to load an image from url
-        // call DisplayImage function
-        // url - image url to load
-        // loader - loader image, will be displayed before getting image
-        // image - ImageView
-        imgLoader.DisplayImage(image_url, loader, image);
-
-//		WebView myWebView = (WebView) findViewById(R.id.webview);                   
-//		myWebView.loadUrl("http://img191.imageshack.us/img191/7379/tronlegacys7i7wsjf.jpg");
-        //new getAllImages().execute();
-//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute("http://api.androidhive.info/images/sample.jpg");
-        
 	}
-
-	@Override
-	public void onResume(){
-		super.onResume();
-
-        TextView usernametv = (TextView) findViewById(R.id.username);
-        TextView nicknametv = (TextView) findViewById(R.id.nickname);
-        TextView gendertv = (TextView) findViewById(R.id.gender);
-        TextView biotv = (TextView) findViewById(R.id.aboutme);
-        TextView followerstv = (TextView) findViewById(R.id.followers);
-        TextView datetv = (TextView) findViewById(R.id.profile_creation);
-        TextView phototv = (TextView) findViewById(R.id.photos);
-        TextView bdaytv = (TextView) findViewById(R.id.bday);
-        
-        User user1 = new User(username);
-        String un = user1.username;
-
-        com.example.ucrinstagram.Models.Profile user1profile = user1.getProfile();
-        String nickname = user1profile.nickname;
-        String gender = user1profile.gender;
-        String bio = user1profile.bio;
-
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yy");
-        Date birthdate = user1profile.birthday;
-        String bday = "Birthday: " + dateFormatter.format(birthdate);
-        
-        Date created = user1profile.getCreatedAt();
-        String prof_created = "Profile Created On:\n" + dateFormatter.format(created);
-
-        User[] friends = user1.getFriends();
-        int fCount = friends.length;
-        String friendCount = fCount + " Friends";
-
+	
+	public void onClick(View view){
+		User user1 = new User(username);
         Photo[] userphotos = user1.getPhotos();
-        int pCount = userphotos.length;
-        String photoCount = pCount + " Photos";
-
-        usernametv.setText(un);
-        nicknametv.setText(nickname);
-        gendertv.setText(gender);
-        biotv.setText(bio);
-        followerstv.setText(friendCount);
-        datetv.setText(prof_created);
-        phototv.setText(photoCount);
-        bdaytv.setText(bday);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_profile, menu);
-		return true;
+        
+    	Intent intent = new Intent(this, SinglePicture.class);
+    	
+    	for(int i = userphotos.length-1; i >= 0; i--){
+    		if(view == image[i]){
+    	    	String link1 = userphotos[i].path + '/' + userphotos[i].filename;
+    	    	String cap = userphotos[i].caption;
+    	    	int photoid = userphotos[i].getId();
+    	    	intent.putExtra("link", link1);
+    	    	intent.putExtra("caption", cap);
+    	    	intent.putExtra("photoid", photoid);
+    	    	startActivity(intent);
+    		}
+    	}
 	}
 
 
@@ -210,92 +240,92 @@ public class Profile extends Activity {
     	Intent intent = new Intent(this, PrefsActivity.class);
     	startActivity(intent);
     }
+    
+//    public void followers(View view){
+//    	Intent intent = new Intent(this, followers.class);
+//    	startActivity(intent);
+//    }
+//    
+//    public void following(View view){
+//    	Intent intent = new Intent(this, following.class);
+//    	startActivity(intent);
+//    }
 
-    public void imageClick1(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(0);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);
-    }
-
-    public void imageClick2(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(1);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);
-    }
-
-    public void imageClick3(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(2);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);
-    }
-
-    public void imageClick4(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(3);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);
-    }
-
-    public void imageClick5(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(4);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);
-    }
-
-    public void imageClick6(View view){
-    	Intent intent = new Intent(this, SinglePicture.class);
-    	String link1 = image_links2.get(5);
-    	intent.putExtra("link", link1);
-    	startActivity(intent);
-    }
-
-    public void logout(){
+    public void logout(View view){
         // Clearing all data from Shared Preferences
-        SharedPreferences settings = getSharedPreferences("DB_NAME", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.remove("user");
-        editor.remove("pass");
-        editor.clear();
-        editor.commit();
 
-    	Intent intent = new Intent(this, Login.class);
-    	startActivity(intent);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        settings.edit().clear().commit();
+    	Intent intent = new Intent(this, Signup_Login.class);
+    	startActivity(intent);    	
+    	finish();
     }
 
     public void startGallery(View view){
     	Intent intent = new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
-		startActivityForResult(Intent.createChooser(intent, "Select Picture for UCRinstagram"),ACTIVITY_SELECT_IMAGE);
-		//done();
+		startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"),ACTIVITY_SELECT_IMAGE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
-     //Bitmap bmp = null;
+
+    	filePath = null;
+        super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == ACTIVITY_SELECT_IMAGE){
-        	//Upload the picture and associate it with the proper account
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-        	//reload the profile page
-        	Intent intent = new Intent(this, Profile.class);
-        	startActivity(intent);
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
 
-
-//            Uri selectedImageUri = data.getData();
-//            selectedImagePath = getPath(selectedImageUri);
-//            System.out.println("Image Path : " + selectedImagePath);
-//            img.setImageURI(selectedImageUri);
-////        }
-//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1)).execute(selectedImagePath);
-
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            filePath = cursor.getString(columnIndex);
+            System.out.println(filePath);
+            cursor.close();
    }
+        if (filePath!=null){
+        	done(filePath);
+        }
 
 }
+    
+    public void done(String path){
+		String [] tokens = filePath.split("/");
+		fileName = tokens[tokens.length-1];
+    	
+        link = s3Link+username;
+        
+		Photo photo1 = new Photo (link,fileName);
+		
+		System.out.println("photo path before save");
+		System.out.println(	photo1.path + "/" + photo1.filename);
+		
+		user1.getProfile().saveProfilePhoto(photo1);
+		user1.save();
+		
+		System.out.println("photo path after save");
+		System.out.println(	user1.getProfile().getProfilePhoto().path + "/" + user1.getProfile().getProfilePhoto().filename);
+		
+        new S3PutObjectTask().execute();
+    	
+    	Intent intent = new Intent(this, Profile.class);
+    	startActivity(intent);
+    }
+    
+	private class S3PutObjectTask extends AsyncTask<Void,Void,Void>{
+		
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			s3Client.createBucket("ucrinstagram");
+			PutObjectRequest por = new PutObjectRequest("ucrinstagram",username+"/"+fileName,new java.io.File(filePath));
+			por.setCannedAcl(CannedAccessControlList.PublicRead);
+			s3Client.putObject(por);
+			return null;
+		}
+	}
 
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
