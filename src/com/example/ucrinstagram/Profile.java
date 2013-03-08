@@ -32,6 +32,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
+import com.example.ucrinstagram.Models.UserProfile;
 
 public class Profile extends Activity implements OnClickListener {
 	// final int TAKE_PICTURE = 1;
@@ -65,8 +66,9 @@ public class Profile extends Activity implements OnClickListener {
 
 		user1 = new User(Login.username);
 
-		WebAPI api = new WebAPI();
-		Photo profilePic = api.getPhoto(user1.getProfile().profile_photo);
+		// WebAPI api = new WebAPI();
+		// Photo profilePic = api.getPhoto(user1.getProfile().profile_photo);
+        Photo profilePic = user1.getProfile().getProfilePhoto();
 
 		// Photo profilePic = user1.getProfile().getProfilePhoto();
 		// Loader image - will be shown before loading image
@@ -112,19 +114,19 @@ public class Profile extends Activity implements OnClickListener {
 		user1 = new User(Login.username);
 		SharedPreferences defSharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		com.example.ucrinstagram.Models.Profile tempProfile = user1
+		UserProfile tempUserProfile = user1
 				.getProfile();
-		String tempNick = tempProfile.nickname;
-		String tempGender = tempProfile.gender;
-		String tempBio = tempProfile.bio;
+		String tempNick = tempUserProfile.nickname;
+		String tempGender = tempUserProfile.gender;
+		String tempBio = tempUserProfile.bio;
 		String tempMail = user1.email;
 
-		tempProfile.nickname = defSharedPrefs.getString("nickPref", tempNick);
-		tempProfile.gender = defSharedPrefs.getString("listpref", tempGender);
-		tempProfile.bio = defSharedPrefs.getString("bioPref", tempBio);
+		tempUserProfile.nickname = defSharedPrefs.getString("nickPref", tempNick);
+		tempUserProfile.gender = defSharedPrefs.getString("listpref", tempGender);
+		tempUserProfile.bio = defSharedPrefs.getString("bioPref", tempBio);
 		user1.email = defSharedPrefs.getString("emailPref", tempMail);
 
-		tempProfile.save();
+		tempUserProfile.save();
 		user1.save();
 
 		// setting data to SharedPrefs
@@ -147,8 +149,7 @@ public class Profile extends Activity implements OnClickListener {
 
 		String un = user1.username;
 
-		com.example.ucrinstagram.Models.Profile user1profile = user1
-				.getProfile();
+		UserProfile user1profile = user1.getProfile();
 		String nickname = user1profile.nickname;
 		String gender = user1profile.gender;
 		String bio = user1profile.bio;
