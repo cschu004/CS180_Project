@@ -97,7 +97,6 @@ public class Filter extends Activity {
 		 for(int i = 1; i <= bmWidth_MINUS_2; i++){
 		 for(int j = 1; j <= bmHeight_MINUS_2; j++){
 		 
-		 //get the surround 3*3 pixel of current src[i][j] into a matrix subSrc[][]
 		 int[][] subSrc = new int[KERNAL_WIDTH][KERNAL_HEIGHT];
 		 for(int k = 0; k < KERNAL_WIDTH; k++){
 			 for(int l = 0; l < KERNAL_HEIGHT; l++){
@@ -105,7 +104,6 @@ public class Filter extends Activity {
 			 }
 		 }
 		 
-		 //subSum = subSrc[][] * knl[][]
 		 int subSumA = 0;
 		 int subSumR = 0;
 		 int subSumG = 0;

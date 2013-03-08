@@ -3,6 +3,7 @@ package com.example.ucrinstagram;
 import java.io.InputStream;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ucrinstagram.Models.Comment;
 import com.example.ucrinstagram.Models.Photo;
 
 public class SinglePicture extends Activity {
@@ -46,14 +48,28 @@ public class SinglePicture extends Activity {
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
 		textView2.setText(caption);
 
-		//WebAPI api = new WebAPI();
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText(gps);
-		//System.out.println(api.getPhoto(photoId).caption);
+		/*
+        WebAPI api = new WebAPI();
+        Photo tempPhoto = api.getPhoto(photoId);
+		
+		Comment[] pComments = tempPhoto.getComments();
+		for(int k = 0; k < pComments.length; k++){
+			String tmp = pComments[k].body + "\n";
+			System.out.println(tmp);
+		}*/
+		
+		
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
 				.execute(link);
 	}
 
+	public void profileOther(View view){
+		Intent intent = new Intent(this, ProfileOther.class);
+		intent.putExtra("username",tokens[1]);
+		startActivity(intent);
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
