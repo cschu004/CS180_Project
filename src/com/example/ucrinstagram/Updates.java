@@ -9,6 +9,7 @@ import com.example.ucrinstagram.Models.User;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -95,4 +96,24 @@ public class Updates extends ListActivity {
 			return row;
 		}
 	}
+	
+    public void home(View view){
+    	Intent intent = new Intent(this, HomeScreen.class);
+    	startActivity(intent);
+    }
+
+    public void explore(View view){
+    	Intent intent = new Intent(this, Explore.class);
+    	startActivity(intent);
+    }
+
+    public void camera(View view){
+    	Intent intent = new Intent(this, Camera.class);
+    	startActivity(intent);
+    }
+    
+    public void profile(View view){
+    	Intent intent = new Intent(this, Profile.class);
+    	startActivity(intent);
+    }
 }

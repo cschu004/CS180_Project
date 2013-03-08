@@ -70,6 +70,11 @@ public class Explore extends Activity {
 		Intent intent = new Intent(this, Camera.class);
 		startActivity(intent);
 	}
+	
+	public void updates(View view) {
+		Intent intent = new Intent(this, Updates.class);
+		startActivity(intent);
+	}
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
