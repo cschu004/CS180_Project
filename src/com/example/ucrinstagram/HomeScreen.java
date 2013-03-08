@@ -75,7 +75,7 @@ public class HomeScreen extends Activity {
 	}
 
 	public void profile(View view) {
-		Intent intent = new Intent(this, Followers.class);
+		Intent intent = new Intent(this, Profile.class);
 		startActivity(intent);
 	}
 
