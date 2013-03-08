@@ -36,7 +36,7 @@ import com.example.ucrinstagram.Models.User;
 public class PostPicture extends Activity {
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("", ""));
+			new BasicAWSCredentials("AKIAJB3KLZVK6FK2GKQA", "tBm0eCLqN0gK51zgPEV6OZj52tqQDVrKyvQ3cUih"));
 
 	String filePath;
 	EditText et;

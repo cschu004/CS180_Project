@@ -1,13 +1,14 @@
 package com.example.ucrinstagram.Models;
 
 
-import com.example.ucrinstagram.WebAPI;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.example.ucrinstagram.WebAPI;
 
 public class UserProfile {
 
