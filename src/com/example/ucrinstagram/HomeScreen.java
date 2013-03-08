@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -73,13 +74,14 @@ public class HomeScreen extends Activity {
 				int photoID = friendPhotos[j].getId();
 				String pUser = friends[i].username;
 				String pURL = friendPhotos[j].path + "/" + friendPhotos[j].filename;
+				String pCaption = friendPhotos[j].caption;
 				Comment[] pComments = friendPhotos[j].getComments();
 				String commentsString = "";
 				for(int k = 0; k < pComments.length; k++){
 					String tmp = pComments[k].body + "\n";
 					commentsString += tmp;
 				}
-				hlElements.add(new HomeListElement(pUser, pURL, photoID, commentsString));
+				hlElements.add(new HomeListElement(pUser, pCaption, pURL, photoID, commentsString));
 			}			
 		}
 		HomeListElement[] hleArray = new HomeListElement[hlElements.size()];
@@ -90,12 +92,13 @@ public class HomeScreen extends Activity {
 	
 	private class HomeListElement{
 		String user;
+		String caption;
 		String imageURL;
 		int imageID;
 		String comments;
 		boolean commentBoxVisible;
 		
-		HomeListElement(String user, String imageURL, int id, String comments){
+		HomeListElement(String user, String caption, String imageURL, int id, String comments){
 			this.user = user;
 			this.imageURL = imageURL;
 			this.imageID = id;
@@ -149,8 +152,19 @@ public class HomeScreen extends Activity {
 				postButton.setVisibility(View.GONE);
 			}
 			
+			imageView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(HomeScreen.this, SinglePicture.class);
+					intent.putExtra("link", mElement.imageURL);
+					intent.putExtra("caption", mElement.caption);
+					startActivity(intent);
+				}
+			});
+			
 			Button commentButton = (Button) row.findViewById(R.id.homescreen_list_element_button_comment);
-			commentButton.setOnClickListener(new View.OnClickListener() {
+			commentButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -160,7 +174,7 @@ public class HomeScreen extends Activity {
 				}
 			});
 			
-			postButton.setOnClickListener(new View.OnClickListener() {
+			postButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -179,13 +193,12 @@ public class HomeScreen extends Activity {
 			});
 			
 			Button favoriteButton = (Button) findViewById(R.id.homescreen_list_element_button_like);
-			favoriteButton.setOnClickListener(new View.OnClickListener() {
+			favoriteButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Photo photo = new Photo(mElement.imageID);
-					User user = new User(username);
-					user.addFavorite(photo);	
+					new User(Login.username).addFavorite(new Photo(mElement.imageID));
+					String tmp = new Photo(mElement.imageID).filename;
 				}
 			});
 		
