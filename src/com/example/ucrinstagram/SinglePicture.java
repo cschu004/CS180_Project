@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ucrinstagram.Models.Comment;
 import com.example.ucrinstagram.Models.Photo;
+import com.example.ucrinstagram.Models.User;
 
 public class SinglePicture extends Activity {
 	String username = Login.username.toLowerCase().replaceAll("\\s", "");
@@ -50,6 +50,7 @@ public class SinglePicture extends Activity {
 
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText(gps);
+		
 		/*
 		 * WebAPI api = new WebAPI(); Photo tempPhoto = api.getPhoto(photoId);
 		 * 
@@ -68,6 +69,12 @@ public class SinglePicture extends Activity {
 		startActivity(intent);
 	}
 
+	public void addFavorite(View view){
+		new User(Login.username).addFavorite(new Photo(photoId));
+		Toast.makeText(this.getApplicationContext(), "Adding photo: "+ caption, Toast.LENGTH_LONG).show();
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

@@ -54,4 +54,13 @@
         android:layout_marginTop="40dp"
         android:src="@drawable/ic_launcher" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_toLeftOf="@+id/textView3"
+        android:onClick="addFavorite"
+        android:text="@string/add_favorite" />
+
 </RelativeLayout>

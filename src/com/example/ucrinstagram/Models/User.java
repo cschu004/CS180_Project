@@ -1,12 +1,15 @@
 package com.example.ucrinstagram.Models;
 
+import com.example.ucrinstagram.Models.*;
 import android.util.Log;
+import com.amazonaws.services.elasticloadbalancing.model.SetLoadBalancerPoliciesForBackendServerRequest;
 import com.example.ucrinstagram.WebAPI;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class User {
 
@@ -126,7 +129,7 @@ public class User {
         return new WebAPI().userExists(this.username);
     }
 
-    public UserProfile getProfile() {
+    public Profile getProfile() {
         return new WebAPI().getProfile(this);
     }
 
@@ -152,8 +155,8 @@ public class User {
      
     
     // SAVE
-    public void saveProfile(UserProfile userProfile) {
-        new WebAPI().saveProfileFromUser(userProfile, this);
+    public void saveProfile(Profile profile) {
+        new WebAPI().saveProfileFromUser(profile, this);
     }
 
     public void addPhoto(Photo photo) {
