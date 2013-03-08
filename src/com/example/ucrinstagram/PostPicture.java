@@ -36,13 +36,12 @@ import com.example.ucrinstagram.Models.User;
 public class PostPicture extends Activity {
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("",
-					""));
+			new BasicAWSCredentials("", ""));
 
 	String filePath;
 	EditText et;
 
-	public String username = Login.username.toLowerCase().replaceAll("\\s", "");
+	String username = Login.username.toLowerCase().replaceAll("\\s", "");
 	final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
 	String caption;
 	String link;

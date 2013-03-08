@@ -70,12 +70,12 @@ public class Explore extends Activity {
 		Intent intent = new Intent(this, Camera.class);
 		startActivity(intent);
 	}
-	
+
 	public void updates(View view) {
 		Intent intent = new Intent(this, Updates.class);
 		startActivity(intent);
 	}
-
+	
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
 		startActivity(intent);
@@ -85,6 +85,8 @@ public class Explore extends Activity {
 		Intent intent = new Intent(this, SinglePicture.class);
 		String link1 = allLinks[0];
 		String cap = allPhoto[0].caption;
+		String gps = allPhoto[0].gps;
+		intent.putExtra("gps", gps);
 		int photoid = allPhoto[0].getId();
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
@@ -98,6 +100,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[1].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[1].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
@@ -106,6 +110,8 @@ public class Explore extends Activity {
 		String link1 = allLinks[2];
 		String cap = allPhoto[2].caption;
 		intent.putExtra("link", link1);
+		String gps = allPhoto[2].gps;
+		intent.putExtra("gps", gps);
 		intent.putExtra("caption", cap);
 		startActivity(intent);
 	}
@@ -116,6 +122,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[3].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[3].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
@@ -125,6 +133,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[4].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[4].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
@@ -134,6 +144,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[8].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[8].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
@@ -143,6 +155,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[5].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[5].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
@@ -152,6 +166,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[7].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[7].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
@@ -161,6 +177,8 @@ public class Explore extends Activity {
 		String cap = allPhoto[6].caption;
 		intent.putExtra("link", link1);
 		intent.putExtra("caption", cap);
+		String gps = allPhoto[6].gps;
+		intent.putExtra("gps", gps);
 		startActivity(intent);
 	}
 
