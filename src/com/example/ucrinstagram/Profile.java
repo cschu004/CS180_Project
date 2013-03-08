@@ -210,6 +210,8 @@ public class Profile extends Activity implements OnClickListener {
     		if(view == image[i]){
     	    	String link1 = userphotos[i].path + '/' + userphotos[i].filename;
     	    	String cap = userphotos[i].caption;
+    			String gps = userphotos[i].gps;
+    			intent.putExtra("gps", gps);
     	    	int photoid = userphotos[i].getId();
     	    	intent.putExtra("link", link1);
     	    	intent.putExtra("caption", cap);
