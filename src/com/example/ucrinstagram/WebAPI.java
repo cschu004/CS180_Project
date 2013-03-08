@@ -252,7 +252,7 @@ public class WebAPI {
 
 	public Photo savePhoto(Photo photo) {
 		String url = apiURL + Photo.urlSuffix + "/"
-				+ Integer.toString(photo.getId());
+				+ Integer.toString(photo.getId()) + ".json";
 		Log.i("OC", "Attempting to edit Photo info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
