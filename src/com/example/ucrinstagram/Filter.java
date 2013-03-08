@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
 public class Filter extends Activity {
-	String filePath;
+	String filePath="";
 	ImageView myImage2;
 	Bitmap beforeBmp;
 	Bitmap afterBmp;
