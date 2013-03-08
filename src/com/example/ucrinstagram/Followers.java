@@ -1,5 +1,7 @@
 package com.example.ucrinstagram;
 
+import com.example.ucrinstagram.Models.User;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,29 +11,29 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.ucrinstagram.Models.User;
+public class Followers extends Activity implements OnClickListener {
 
-public class Following extends Activity implements OnClickListener {
 	String username = Login.username.toLowerCase().replaceAll("\\s", "");
-	User[] following;
+	User[] followers;
 	Button[] btn;
 	User user1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_following);
+		setContentView(R.layout.activity_followers);
+
 		user1 = new User(username);
-		following = user1.getFriends();
-		if (following.length >= 1) {
-			btn = new Button[following.length];
-			for (int i = 0; i < following.length; i++) {
-				System.out.println(following[i].username);
+		followers = user1.getFriendedBy();
+		if (followers.length >= 1) {
+			btn = new Button[followers.length];
+			for (int i = 0; i < followers.length; i++) {
+				System.out.println(followers[i].username);
 				TextView f = new TextView(this);
-				f.setText(following[i].username);
+				f.setText(followers[i].username);
 				LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
 				btn[i] = new Button(this);
-				btn[i].setText("Unfollow");
+				btn[i].setText("Follow");
 				btn[i].setOnClickListener(this);
 				linearLayout.addView(f);
 				linearLayout.addView(btn[i]);
@@ -42,15 +44,15 @@ public class Following extends Activity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_following, menu);
+		getMenuInflater().inflate(R.menu.activity_followers, menu);
 		return true;
 	}
 
 	@Override
 	public void onClick(View view) {
-		for (int i = 0; i < following.length; i++) {
+		for (int i = 0; i < followers.length; i++) {
 			if (view == btn[i]) {
-				user1.removeFriend(following[i]);
+				user1.addFriend(followers[i]);
 			}
 		}
 

@@ -52,5 +52,6 @@
     <!-- friendslist -->
     <string name="friend1">friend1</string>
     <string name="title_activity_following">Following</string>
+    <string name="title_activity_followers">Followers</string>
 
 </resources>

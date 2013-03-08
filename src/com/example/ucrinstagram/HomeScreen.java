@@ -87,7 +87,7 @@ public class HomeScreen extends Activity {
 		startActivity(intent);
 	}
 	public void following(View view) {
-		Intent intent = new Intent(this, Following.class);
+		Intent intent = new Intent(this, Followers.class);
 		startActivity(intent);
 	}
 

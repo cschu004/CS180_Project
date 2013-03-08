@@ -91,6 +91,10 @@
             android:name="com.example.ucrinstagram.Following"
             android:label="@string/title_activity_following" >
         </activity>
+        <activity
+            android:name="com.example.ucrinstagram.Followers"
+            android:label="@string/title_activity_followers" >
+        </activity>
     </application>
 
     <!-- Internet Permissions -->
