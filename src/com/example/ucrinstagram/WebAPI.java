@@ -69,7 +69,7 @@ public class WebAPI {
 	// TODO: create some kind of ack, whether the save was successful or not
 	// TODO: boolean return value, or create a set of exceptions/error codes?
 	public User createUser(User user) {
-		String url = apiURL + User.urlSuffix;
+		String url = apiURL + User.urlSuffix + ".json";
 		Log.i("OC", "Attempting to create a new User: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
