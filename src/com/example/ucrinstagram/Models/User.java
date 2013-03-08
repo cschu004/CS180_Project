@@ -104,12 +104,13 @@ public class User {
     // NOTE: applies changes to the database
     // NOTE: call after editing the User object!!!!
     public void save() {
-        new WebAPI().saveUser(this);
+        this.id = new WebAPI().saveUser(this).id;
+        Log.i("OC", Integer.toString(this.id));
     }
 
     public void create() {
         // automatically creates a default profile w/empty values
-        new WebAPI().createUser(this);
+        this.id = new WebAPI().createUser(this).id;
     }
 
     // GET

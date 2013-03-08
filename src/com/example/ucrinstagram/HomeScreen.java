@@ -212,8 +212,8 @@ public class HomeScreen extends Activity {
 
 				@Override
 				public void onClick(View v) {
-					new User(Login.username.toLowerCase().replaceAll("\\s", "")).addFavorite(new Photo(533));
-							//mElement.imageID));
+					new User(Login.username).addFavorite(new Photo(
+							mElement.imageID));
 					String tmp = new Photo(mElement.imageID).filename;
 				}
 			});
