@@ -33,28 +33,20 @@ public class HomeScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
 		user1 = new User(username);
-		Photo[] allThisUserPhotos = user1.getPhotos();
-		
+		Photo[] allThisUserPhotos = user1.getHomeScreenPhotos();
+
 		image = new ImageView[allThisUserPhotos.length];
-		
+
 		for (int i = allThisUserPhotos.length - 1; i >= 0; i--) {
 			image[i] = new ImageView(this);
 			image[i].setImageResource(R.drawable.ic_launcher);
 			image[i].setAdjustViewBounds(true);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 500);
 			image[i].setLayoutParams(lp);
-			/*
-			 * LinearLayout.LayoutParams lp2 = new
-			 * LinearLayout.LayoutParams(600,
-			 * LinearLayout.LayoutParams.MATCH_PARENT); lp2.setMargins(0, 200,
-			 * 0, 0); image[i].setLayoutParams(lp2);
-			 */
+
 
 			LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
-			// ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams)
-			// linlay.getLayoutParams();
 
-			// mlp.setMargins(0,100*allThisUserPhotos.length, 0,100);
 
 			linlay.addView(image[i]);
 
@@ -83,10 +75,9 @@ public class HomeScreen extends Activity {
 	}
 
 	public void profile(View view) {
-		Intent intent = new Intent(this, Profile.class);
+		Intent intent = new Intent(this, Followers.class);
 		startActivity(intent);
 	}
-
 
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
