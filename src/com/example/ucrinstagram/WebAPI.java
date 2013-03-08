@@ -177,6 +177,18 @@ public class WebAPI {
         return gson.fromJson(json, Photo.class);
     }
 
+    public Photo[] getHomeScreenPhotos(int id){
+        String url = apiURL + User.urlSuffix + "/get_home_screen_photos/" + Integer.toString(id);
+        Log.i("OC", "Attempting to get home screen photos by user id: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, Photo[].class);
+    }
+
+    public Photo[] getHomeScreenPhotos(User user){
+        return getHomeScreenPhotos(user.getId());
+    }
+
     public Photo[] getPhotosFromUser(int id) {
         String url = apiURL + User.urlSuffix + "/get_photos/" + Integer.toString(id);
         Log.i("OC", "Attempting to get Photos by user id: " + url);
@@ -204,7 +216,6 @@ public class WebAPI {
         return gson.fromJson(json, Comment[].class);
     }
     
-
     public void addCommentToPhoto(Photo photo, Comment comment){
         String url = apiURL + Photo.urlSuffix + "/add_comment/" + Integer.toString(photo.getId());
         Log.i("OC", "Attempting to add a Comment to Photo: " + url);
@@ -212,7 +223,6 @@ public class WebAPI {
         getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
     }
         
-    
     public void savePhoto(Photo photo) {
         String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(photo.getId());
         Log.i("OC", "Attempting to edit Photo info: " + url);

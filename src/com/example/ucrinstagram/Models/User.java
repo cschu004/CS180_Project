@@ -147,6 +147,10 @@ public class User {
     public Photo[] getFavorites(){
     	return new WebAPI().getFavorites(this);
     }
+
+    public Photo[] getHomeScreenPhotos(){
+        return new WebAPI().getHomeScreenPhotos(this);
+    }
      
     
     // SAVE
