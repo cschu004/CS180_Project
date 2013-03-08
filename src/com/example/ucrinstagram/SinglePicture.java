@@ -35,7 +35,7 @@ public class SinglePicture extends Activity {
 		link = getIntent().getExtras().getString("link");
 		caption = getIntent().getExtras().getString("caption");
 		photoId = getIntent().getExtras().getInt("photoid");
-		gps 	= getIntent().getExtras().getString("gps");
+		gps = getIntent().getExtras().getString("gps");
 
 		String prefix = "https://s3.amazonaws.com/";
 		String noPrefixStr = link.substring(link.indexOf(prefix)
@@ -51,25 +51,23 @@ public class SinglePicture extends Activity {
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText(gps);
 		/*
-        WebAPI api = new WebAPI();
-        Photo tempPhoto = api.getPhoto(photoId);
-		
-		Comment[] pComments = tempPhoto.getComments();
-		for(int k = 0; k < pComments.length; k++){
-			String tmp = pComments[k].body + "\n";
-			System.out.println(tmp);
-		}*/
-		
-		
+		 * WebAPI api = new WebAPI(); Photo tempPhoto = api.getPhoto(photoId);
+		 * 
+		 * Comment[] pComments = tempPhoto.getComments(); for(int k = 0; k <
+		 * pComments.length; k++){ String tmp = pComments[k].body + "\n";
+		 * System.out.println(tmp); }
+		 */
+
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
 				.execute(link);
 	}
 
-	public void profileOther(View view){
+	public void profileOther(View view) {
 		Intent intent = new Intent(this, ProfileOther.class);
-		intent.putExtra("username",tokens[1]);
+		intent.putExtra("username", tokens[1]);
 		startActivity(intent);
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

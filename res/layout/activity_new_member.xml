@@ -24,8 +24,8 @@
         android:layout_below="@+id/new_member_username"
         android:layout_marginTop="22dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/new_member_password" />
+        android:hint="@string/new_member_password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button_new_member_test"

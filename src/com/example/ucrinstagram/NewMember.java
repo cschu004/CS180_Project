@@ -25,21 +25,25 @@ public class NewMember extends Activity {
 		return true;
 	}
 
-    public void HomeScreen(View view){
-        String username = ((EditText)findViewById(R.id.new_member_username)).getText().toString();
-        String password = ((EditText)findViewById(R.id.new_member_password)).getText().toString();
+	public void HomeScreen(View view) {
+		String username = ((EditText) findViewById(R.id.new_member_username))
+				.getText().toString();
+		String password = ((EditText) findViewById(R.id.new_member_password))
+				.getText().toString();
 
-        if (!User.exists(username)){ // check username doesn't exist
-            User loginUser = new User(username, password);
-            loginUser.create();
-            Login.username = loginUser.username;
+		if (!User.exists(username)) { // check username doesn't exist
+			User loginUser = new User(username, password);
+			loginUser.create();
+			Login.username = loginUser.username;
 
-            Toast.makeText(this.getApplicationContext(), "Created a new user account!", Toast.LENGTH_LONG).show();
-            
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this.getApplicationContext(), "Username already in use.", Toast.LENGTH_LONG).show();
-        }
-    }
+			Toast.makeText(this.getApplicationContext(),
+					"Created a new user account!", Toast.LENGTH_LONG).show();
+
+			Intent intent = new Intent(this, Login.class);
+			startActivity(intent);
+		} else {
+			Toast.makeText(this.getApplicationContext(),
+					"Username already in use.", Toast.LENGTH_LONG).show();
+		}
+	}
 }

@@ -38,7 +38,6 @@
             android:layout_weight="1"
             android:text="Post"
             android:textSize="10sp" />
-
     </LinearLayout>
 
     <TextView

@@ -10,10 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/imageView1"
         android:layout_marginLeft="20dp"
-      	 android:layout_marginTop="30dp"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
         android:onClick="profileOther"
-                 android:clickable="true"
-        
         android:text="Username"
         android:textSize="13sp" />
 

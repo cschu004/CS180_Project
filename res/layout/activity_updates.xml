@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/home_button"
-            android:text="@string/explore_tab"
             android:onClick="explore"
+            android:text="@string/explore_tab"
             android:textSize="12sp" />
 
         <Button
@@ -69,4 +69,5 @@
             android:text="@string/profile_tab"
             android:textSize="12sp" />
     </LinearLayout>
+
 </LinearLayout>
