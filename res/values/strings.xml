@@ -48,18 +48,18 @@
     <!-- website address for api calls -->
     <string name="apiURL">http://www.mgx-dev.com/</string>
     <string name="title_activity_filter">Filter</string>
-    
+
     <!-- Preferences -->
-   	<string name="userPref">Usern@me</string>
+    <string name="userPref">Usern@me</string>
     <string name="nickPref">Nickname</string>
     <string name="bioPref">bio</string>
-            
-    <string name="emailPref">email@email.com</string>    
+    <string name="emailPref">email@email.com</string>
     <string name="dob">dob:</string>
-    
-      <!-- friendslist -->
+
+    <!-- friendslist -->
     <string name="friend1">friend1</string>
     <string name="title_activity_following">Following</string>
     <string name="title_activity_followers">Followers</string>
+    <string name="title_activity_profile_other">ProfileOther</string>
 
 </resources>
