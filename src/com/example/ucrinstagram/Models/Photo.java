@@ -37,7 +37,6 @@ public class Photo {
     }
 
     public Photo(String path, String filename) {
-        this.id = new Random().nextInt();
         this.path = path;
         this.filename = filename;
         this.caption = "";
@@ -48,7 +47,6 @@ public class Photo {
     }
 
     public Photo(String path, String filename, String caption) {
-        this.id = new Random().nextInt();
         this.path = path;
         this.filename = filename;
         this.caption = caption;
@@ -59,7 +57,6 @@ public class Photo {
     }
 
     public Photo(String path, String filename, String caption, String gps) {
-        this.id = new Random().nextInt();
         this.path = path;
         this.filename = filename;
         this.caption = caption;
