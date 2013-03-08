@@ -86,10 +86,7 @@ public class HomeScreen extends Activity {
 		Intent intent = new Intent(this, Profile.class);
 		startActivity(intent);
 	}
-	public void following(View view) {
-		Intent intent = new Intent(this, Followers.class);
-		startActivity(intent);
-	}
+
 
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
