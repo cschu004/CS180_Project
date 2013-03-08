@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutThatDoesNotScroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/home_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="home"
+            android:text="@string/home_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/explore_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/home_button"
+            android:text="@string/explore_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/camera_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/explore_button"
+            android:onClick="camera"
+            android:text="@string/camera_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/updates_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/explore_button"
+            android:text="@string/updates_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/updates_button"
+            android:onClick="profile"
+            android:text="@string/profile_tab"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

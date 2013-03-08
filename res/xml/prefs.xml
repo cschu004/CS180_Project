@@ -4,7 +4,7 @@
    android:summary="Public information"
    android:title="Public Information" >
   <EditTextPreference
-     android:key="nickname"
+     android:key="nickPref"
      android:summary="Please enter your nickname"
      android:title="Nickname" />
     <ListPreference
@@ -14,7 +14,7 @@
      android:summary="Gender"
      android:title="Gender" />
    <EditTextPreference
-     android:key="aboutme"
+     android:key="bioPref"
      android:summary="Bio"
      android:title="About Me" />
  </PreferenceCategory>
@@ -23,7 +23,7 @@
    android:summary="Private Information"
    android:title="Private Settings" >
   <EditTextPreference
-     android:key="email"
+     android:key="emailPref"
      android:summary="Enter your e-mail"
      android:title="E-Mail" />
 
