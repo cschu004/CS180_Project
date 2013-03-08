@@ -22,14 +22,14 @@ public final class R {
         public static final int loader=0x7f020004;
     }
     public static final class id {
-        public static final int ImageView01=0x7f090009;
-        public static final int ImageView02=0x7f09000a;
-        public static final int ImageView03=0x7f09000b;
-        public static final int ImageView04=0x7f09000c;
-        public static final int ImageView05=0x7f090010;
-        public static final int ImageView06=0x7f09000d;
-        public static final int ImageView07=0x7f09000f;
-        public static final int ImageView08=0x7f09000e;
+        public static final int ImageView01=0x7f09000a;
+        public static final int ImageView02=0x7f09000b;
+        public static final int ImageView03=0x7f09000c;
+        public static final int ImageView04=0x7f09000d;
+        public static final int ImageView05=0x7f090011;
+        public static final int ImageView06=0x7f09000e;
+        public static final int ImageView07=0x7f090010;
+        public static final int ImageView08=0x7f09000f;
         public static final int Login=0x7f09003a;
         public static final int SignUp=0x7f09003b;
         public static final int aboutme=0x7f090033;
@@ -64,7 +64,7 @@ public final class R {
         public static final int homescreen_refresh=0x7f090043;
         public static final int horizontalScrollView1=0x7f090013;
         public static final int image=0x7f09002e;
-        public static final int imageView1=0x7f090008;
+        public static final int imageView1=0x7f090009;
         public static final int linearButtons=0x7f090037;
         public static final int linearLayout1=0x7f090014;
         public static final int linearLayoutThatDoesNotScroll=0x7f090002;
@@ -79,16 +79,16 @@ public final class R {
         public static final int new_member_username=0x7f090021;
         public static final int nickname=0x7f09002f;
         public static final int photos=0x7f09002d;
-        public static final int profile_button=0x7f090006;
+        public static final int profile_button=0x7f090007;
         public static final int profile_creation=0x7f090030;
         public static final int relativeProfile=0x7f090029;
-        public static final int scrollView1=0x7f090007;
+        public static final int scrollView1=0x7f090008;
         public static final int scrollviewer=0x7f090031;
         public static final int settings_button=0x7f090036;
         public static final int textView1=0x7f090025;
         public static final int textView2=0x7f090026;
         public static final int textView3=0x7f090027;
-        public static final int updates_button=0x7f090011;
+        public static final int updates_button=0x7f090006;
         public static final int username=0x7f09002a;
     }
     public static final class layout {

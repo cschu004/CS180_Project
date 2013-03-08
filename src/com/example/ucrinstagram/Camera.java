@@ -37,10 +37,16 @@ public class Camera extends Activity {
     	startActivity(intent);    	
     }
     
+    public void updates(View view){
+    	Intent intent = new Intent(this, Updates.class);
+    	startActivity(intent);
+    }
+    
     public void profile(View view){
     	Intent intent = new Intent(this, Profile.class);
     	startActivity(intent);    	
     }
+    
     
     public void done(String path){
     	//Intent myIntent = new Intent(this, PostPicture.class);
