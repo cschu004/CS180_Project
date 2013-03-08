@@ -20,6 +20,7 @@
     <string name="explore_tab">Explore</string>
     <string name="camera_tab">Camera</string>
     <string name="profile_tab">Profile</string>
+    <string name= "favorites_tab">Favorite</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_explore">Explore</string>
