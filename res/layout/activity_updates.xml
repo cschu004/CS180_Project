@@ -12,16 +12,16 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutThatDoesNotScroll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="bottom|center"
+        android:layout_gravity="center"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/home_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -31,16 +31,17 @@
 
         <Button
             android:id="@+id/explore_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/home_button"
             android:text="@string/explore_tab"
+            android:onClick="explore"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/camera_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/explore_button"
@@ -50,7 +51,7 @@
 
         <Button
             android:id="@+id/updates_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/explore_button"
@@ -59,7 +60,7 @@
 
         <Button
             android:id="@+id/profile_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
@@ -68,5 +69,4 @@
             android:text="@string/profile_tab"
             android:textSize="12sp" />
     </LinearLayout>
-
 </LinearLayout>
