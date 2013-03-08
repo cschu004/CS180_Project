@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearLayoutThatDoesNotScroll" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutWithLotofContent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"    
+            android:orientation="vertical" >
+
+    
+        </LinearLayout>
+
+    </ScrollView>
+
+    	    <LinearLayout
+        android:id="@+id/linearLayoutThatDoesNotScroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/home_button"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="home"
+            android:text="@string/home_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/explore_button"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/home_button"
+            android:onClick="explore"
+            android:text="@string/explore_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/camera_button"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/explore_button"
+            android:onClick="camera"
+            android:text="@string/camera_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/updates_button"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/explore_button"
+            android:onClick="updates"
+            android:text="@string/updates_tab"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/updates_button"
+            android:onClick="profile"
+            android:text="@string/profile_tab"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>

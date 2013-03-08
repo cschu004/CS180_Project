@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 
 public class Login extends Activity {
-    public static User currentUser;
 	public static String username = "";
 	public static String password = "";
 
@@ -40,7 +39,7 @@ public class Login extends Activity {
 					"Incorrect Username/Password", Toast.LENGTH_LONG).show();
 		} else if (loginUser.checkPassword(password)) { // check is password is
 														// correct
-            currentUser = loginUser;
+			Login.username = username;
 			Intent intent = new Intent(this, HomeScreen.class);
 			startActivity(intent);
 		} else {

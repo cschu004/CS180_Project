@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
-import com.example.ucrinstagram.Models.UserProfile;
 
 public class ProfileOther extends Activity implements OnClickListener {
 
@@ -94,7 +93,8 @@ public class ProfileOther extends Activity implements OnClickListener {
 
 		String un = user1.username;
 
-		UserProfile user1profile = user1.getProfile();
+		com.example.ucrinstagram.Models.Profile user1profile = user1
+				.getProfile();
 		String nickname = user1profile.nickname;
 		String gender = user1profile.gender;
 		String bio = user1profile.bio;

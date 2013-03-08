@@ -101,10 +101,17 @@
             android:name="com.example.ucrinstagram.ProfileOther"
             android:label="@string/title_activity_profile_other" >
         </activity>
+        <activity
+            android:name="com.example.ucrinstagram.Favorites"
+            android:label="@string/title_activity_favorites" >
+        </activity>
     </application>
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Permission to write to external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
