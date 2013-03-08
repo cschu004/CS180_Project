@@ -235,6 +235,11 @@ public class Profile extends Activity implements OnClickListener {
     	Intent intent = new Intent(this, Camera.class);
     	startActivity(intent);
     }
+    
+    public void updates(View view){
+    	Intent intent = new Intent(this, Updates.class);
+    	startActivity(intent);
+    }
 
     public void settings(View view){
     	Intent intent = new Intent(this, PrefsActivity.class);

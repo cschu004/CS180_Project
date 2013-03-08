@@ -74,7 +74,7 @@
         android:id="@+id/profile_creation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/image"
+        android:layout_above="@+id/scrollviewer"
         android:layout_alignParentRight="true"
         android:text="@string/profile_creation_date" />
     
@@ -107,7 +107,7 @@
         android:id="@+id/logout_button"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/settings_button"
+        android:layout_above="@id/profile_creation"
         android:layout_alignParentRight="true"
         android:onClick="logout"
         android:textSize="12sp"
@@ -117,8 +117,8 @@
         android:id="@+id/settings_button"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/logout_button"
         android:layout_above="@id/profile_creation"
-        android:layout_alignParentRight="true"
         android:onClick="settings"
         android:textSize="12sp"
         android:text="@string/settings" />
@@ -126,6 +126,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrollviewer"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true"
@@ -183,6 +184,17 @@
         android:onClick="camera"
         android:textSize="12sp"
         android:text="@string/camera_tab" />
+    
+    <Button
+        android:id="@+id/updates_button"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/explore_button"
+        android:onClick="updates"
+        android:textSize="12sp"
+        android:text="@string/updates_tab" />
+
 
     <Button
         android:id="@+id/profile_button"
@@ -190,7 +202,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/camera_button"
+        android:layout_toRightOf="@+id/updates_button"
         android:textSize="12sp"
         android:text="@string/profile_tab" />
 

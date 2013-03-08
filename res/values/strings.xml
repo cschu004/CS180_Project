@@ -19,6 +19,7 @@
     <string name="home_tab">Home</string>
     <string name="explore_tab">Explore</string>
     <string name="camera_tab">Camera</string>
+    <string name="updates_tab">Updates</string>
     <string name="profile_tab">Profile</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="title_activity_profile">Profile</string>
