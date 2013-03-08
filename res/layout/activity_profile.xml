@@ -20,6 +20,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/username"
         android:layout_marginRight="36dp"
+        android:clickable="true"
         android:onClick="following"
         android:text="@string/following" />
 
@@ -31,6 +32,7 @@
         android:layout_alignBottom="@+id/following"
         android:layout_marginRight="17dp"
         android:layout_toLeftOf="@+id/following"
+        android:clickable="true"
         android:onClick="followers"
         android:text="@string/followers" />
 

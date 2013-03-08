@@ -241,15 +241,15 @@ public class Profile extends Activity implements OnClickListener {
     	startActivity(intent);
     }
     
-//    public void followers(View view){
-//    	Intent intent = new Intent(this, followers.class);
-//    	startActivity(intent);
-//    }
-//    
-//    public void following(View view){
-//    	Intent intent = new Intent(this, following.class);
-//    	startActivity(intent);
-//    }
+    public void followers(View view){
+    	Intent intent = new Intent(this, Followers.class);
+    	startActivity(intent);
+    }
+    
+    public void following(View view){
+    	Intent intent = new Intent(this, Following.class);
+    	startActivity(intent);
+    }
 
     public void logout(View view){
         // Clearing all data from Shared Preferences
