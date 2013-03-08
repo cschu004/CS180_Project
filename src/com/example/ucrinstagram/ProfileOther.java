@@ -7,16 +7,10 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -26,29 +20,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
 
-public class Profile extends Activity implements OnClickListener {
-    //final int TAKE_PICTURE = 1;
-	private static final int ACTIVITY_SELECT_IMAGE = 1234;
-//    private String selectedImagePath;
-//    private ImageView img;
+public class ProfileOther extends Activity implements OnClickListener {
 
-	String username = Login.username;
+	
+	//need to pass in selected user somehow
+	User user2 = new User("george");
+	String username = user2.username;
+	
+//	String username = HomeScreen.username;
 	ArrayList<String> image_links = new ArrayList<String>();
     ImageView[] image;
     User user1;
-	
-    private AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( "", "" ) );
-    final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
-	String filePath;
-    String fileName;
-    String link;
     
 	InputStream is; 
     ArrayList<String> image_links2 = new ArrayList<String>();
@@ -56,14 +41,13 @@ public class Profile extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        
-        username = Login.username;
+        setContentView(R.layout.activity_profile_other);
+
         loadInfo();
         loadPics();
 
         
-        user1 = new User(Login.username);
+        user1 = new User(username);
         
         WebAPI api = new WebAPI();
         Photo profilePic = api.getPhoto(user1.getProfile().profile_photo);
@@ -86,50 +70,19 @@ public class Profile extends Activity implements OnClickListener {
 	@Override
 	public void onResume(){
 		super.onResume();
-        username = Login.username;
 		loadInfo();
-	}
-	
-	@Override
-	public void onDestroy(){
-		super.onDestroy();
-		
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        settings.edit().clear().commit();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_profile, menu);
+		getMenuInflater().inflate(R.menu.activity_profile_other, menu);
 		return true;
 	}
 	
 	public void loadInfo(){
 		//Using the data from the sharedPreference and updating it to the server
-		user1 = new User(Login.username);
-        SharedPreferences defSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        com.example.ucrinstagram.Models.Profile tempProfile = user1.getProfile();
-        String tempNick = tempProfile.nickname;
-        String tempGender = tempProfile.gender;
-        String tempBio = tempProfile.bio;
-        String tempMail = user1.email;
-        
-        tempProfile.nickname = defSharedPrefs.getString("nickPref", tempNick);
-        tempProfile.gender = defSharedPrefs.getString("listpref", tempGender);
-        tempProfile.bio = defSharedPrefs.getString("bioPref", tempBio);
-        user1.email = defSharedPrefs.getString("emailPref", tempMail);
-        
-        tempProfile.save();
-        user1.save();
-        
-        //setting data to SharedPrefs
-        Editor editor = defSharedPrefs.edit();
-        editor.putString("nickPref", user1.getProfile().nickname);
-        editor.putString("listPref", user1.getProfile().gender);
-      	editor.putString("bioPref", user1.getProfile().bio);
-      	editor.putString("emailPref", user1.email);
-      	editor.commit();
+		user1 = new User(username);
 		
         TextView usernametv = (TextView) findViewById(R.id.username);
         TextView nicknametv = (TextView) findViewById(R.id.nickname);
@@ -240,6 +193,11 @@ public class Profile extends Activity implements OnClickListener {
     	Intent intent = new Intent(this, Updates.class);
     	startActivity(intent);
     }
+    
+    public void profile(View view){
+    	Intent intent = new Intent(this, Profile.class);
+    	startActivity(intent);
+    }
 
     public void settings(View view){
     	Intent intent = new Intent(this, PrefsActivity.class);
@@ -256,82 +214,15 @@ public class Profile extends Activity implements OnClickListener {
     	startActivity(intent);
     }
 
-    public void logout(View view){
-        // Clearing all data from Shared Preferences
+    public void follow(View view){
+		User currentUser = new User(Login.username);
+		User chosenUser = new User(username);
+		currentUser.addFriend(chosenUser);
 
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        settings.edit().clear().commit();
-    	Intent intent = new Intent(this, Signup_Login.class);
-    	startActivity(intent);    	
-    	finish();
-    }
-
-    public void startGallery(View view){
-    	Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"),ACTIVITY_SELECT_IMAGE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-
-    	filePath = null;
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == ACTIVITY_SELECT_IMAGE){
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            filePath = cursor.getString(columnIndex);
-            System.out.println(filePath);
-            cursor.close();
-   }
-        if (filePath!=null){
-        	done(filePath);
-        }
-
-}
-    
-    public void done(String path){
-		String [] tokens = filePath.split("/");
-		fileName = tokens[tokens.length-1];
-    	
-        link = s3Link+username;
-        
-		Photo photo1 = new Photo (link,fileName);
-		
-		System.out.println("photo path before save");
-		System.out.println(	photo1.path + "/" + photo1.filename);
-		
-		user1.getProfile().saveProfilePhoto(photo1);
-		user1.save();
-		
-		System.out.println("photo path after save");
-		System.out.println(	user1.getProfile().getProfilePhoto().path + "/" + user1.getProfile().getProfilePhoto().filename);
-		
-        new S3PutObjectTask().execute();
-    	
-    	Intent intent = new Intent(this, Profile.class);
-    	startActivity(intent);
+		finish();
+		startActivity(getIntent());
     }
     
-	private class S3PutObjectTask extends AsyncTask<Void,Void,Void>{
-		
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			s3Client.createBucket("ucrinstagram");
-			PutObjectRequest por = new PutObjectRequest("ucrinstagram",username+"/"+fileName,new java.io.File(filePath));
-			por.setCannedAcl(CannedAccessControlList.PublicRead);
-			s3Client.putObject(por);
-			return null;
-		}
-	}
-
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		ImageView bmImage;
 
@@ -358,4 +249,5 @@ public class Profile extends Activity implements OnClickListener {
 			bmImage.setImageBitmap(result);
 		}
 	}
+
 }

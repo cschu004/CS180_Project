@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -14,23 +15,22 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/Login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="Login"
+        android:text="Sign In" />
+
+    <Button
         android:id="@+id/SignUp"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Login"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:onClick="SignUp"
         android:text="Register" />
-
-    <Button
-        android:id="@+id/Login"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/SignUp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
-        android:onClick="Login"
-        android:text="Sign In" />
 
 </RelativeLayout>

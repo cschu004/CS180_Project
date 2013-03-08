@@ -1,8 +1,12 @@
 package com.example.ucrinstagram.Models;
 
 import com.example.ucrinstagram.WebAPI;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class Comment {
@@ -14,7 +18,6 @@ public class Comment {
     public String body;
 
     private int id;
-    private int user_id;
     private int original_comment_id;
     private Date created_at;
     private Date deleted_at;
@@ -31,13 +34,16 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int user_id, String body, int original_comment_id) {
+    private Comment(String body, int original_comment_id) {
         this.id = new Random().nextInt();
-        this.user_id = user_id;
         this.body = body;
         this.created_at = new Date();
         this.deleted_at = new Date(0);
         this.original_comment_id = original_comment_id;
+    }
+
+    public Comment(String body){
+        this.body = body;
     }
 
     public Comment(int id) {
@@ -45,7 +51,6 @@ public class Comment {
         Comment tempComment = api.getComment(id);
 
         this.id = tempComment.id;
-        this.user_id = tempComment.user_id;
         this.body = tempComment.body;
         this.created_at = tempComment.created_at;
         this.deleted_at = tempComment.deleted_at;
@@ -62,6 +67,20 @@ public class Comment {
         } else {
             return false;
         }
+    }
 
+    public void deleteComment(){
+        new WebAPI().removeComment(this);
+    }
+
+    public List<NameValuePair> getNameValuePairs() {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        // TODO: currently rails is creating the ID numbers, need to return ID number or let Java set it
+        nameValuePairs.add(new BasicNameValuePair("comment[body]", this.body));
+        return nameValuePairs;
+    }
+
+    public int getId(){
+        return this.id;
     }
 }

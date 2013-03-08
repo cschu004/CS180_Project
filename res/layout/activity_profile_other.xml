@@ -104,25 +104,14 @@
         android:text="@string/bday" />
     
     <Button
-        android:id="@+id/logout_button"
+        android:id="@+id/follow_button"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/profile_creation"
         android:layout_alignParentRight="true"
-        android:onClick="logout"
+        android:onClick="follow"
         android:textSize="12sp"
-        android:text="@string/logout" />
-    
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/logout_button"
-        android:layout_above="@id/profile_creation"
-        android:onClick="settings"
-        android:textSize="12sp"
-        android:text="@string/settings" />
-    
+        android:text="Follow" />    
 
 
     <ScrollView
@@ -203,6 +192,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/updates_button"
+        android:onClick="profile"
         android:textSize="12sp"
         android:text="@string/profile_tab" />
 

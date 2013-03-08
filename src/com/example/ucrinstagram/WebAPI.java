@@ -22,7 +22,8 @@ import java.util.concurrent.ExecutionException;
 public class WebAPI {
 
     private Gson gson = new Gson();
-    private String apiURL = "http://mgx-dev.com/";
+    //private String apiURL = "http://mgx-dev.com/";
+    private String apiURL = "http://www.mgx-dev.sparkscene.com/";
 
     public WebAPI() {
     }
@@ -52,9 +53,23 @@ public class WebAPI {
         return gson.fromJson(json, User.class);
     }
 
+    public Boolean userExists(String username){
+        String url = apiURL + User.urlSuffix + "/user_exists/" + username;
+        Log.i("OC", "Attempting to check if username exists: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String exists = getJSONFromServer(new HTTPParams(requestMethod, url));
+        if (exists.equals("exists")){
+            return true;
+        } else {                   // "does not exist"
+            return false;
+        }
+    }
+
     // TODO: create some kind of ack, whether the save was successful or not
+    // TODO: boolean return value, or create a set of exceptions/error codes?
     public void createUser(User user) {
         String url = apiURL + User.urlSuffix;
+        Log.i("OC", "Attempting to create a new User: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
     }
@@ -64,9 +79,53 @@ public class WebAPI {
     }
 
     public void saveUser(User user) {
-        String url = apiURL + User.urlSuffix + "/" + Integer.toString(user.getId()) + ".json";
+        String url = apiURL + User.urlSuffix + "/" + Integer.toString(user.getId());
+        Log.i("OC", "Attempting to edit User info by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
         getJSONFromServer(new HTTPParams(requestMethod, url, user.getNameValuePairs()));
+    }
+
+    // --------------------------
+    // ----- Friend Methods -----
+    // --------------------------
+    public User[] getFriends(User user){
+        String url = apiURL + User.urlSuffix + "/get_friends/" + Integer.toString(user.getId());
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, User[].class);
+    }
+
+    public User[] getFriendedBy(User user){
+        String url = apiURL + User.urlSuffix + "/get_friends_of/" + Integer.toString(user.getId());
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, User[].class);
+    }
+
+    public void addFriend(int user_id, int friend_id){
+        String url = apiURL + User.urlSuffix + "/add_friend";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("friend_id", Integer.toString(friend_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+
+    public void addFriend(User user, User friend){
+        addFriend(user.getId(), friend.getId());
+    }
+
+    public void removeFriend(int user_id, int friend_id){
+        String url = apiURL + User.urlSuffix + "/remove_friend";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("friend_id", Integer.toString(friend_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+
+    public void removeFriend(User user, User friend){
+        removeFriend(user.getId(), friend.getId());
     }
 
     // ---------------------------
@@ -89,9 +148,15 @@ public class WebAPI {
     }
 
     public void saveProfile(com.example.ucrinstagram.Models.Profile profile) {
+        String url = apiURL + com.example.ucrinstagram.Models.Profile.urlSuffix
+                + "/" + Integer.toString(profile.getId());
+        Log.i("OC", "Attempting to edit Profile info: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
+        getJSONFromServer(new HTTPParams(requestMethod, url, profile.getNameValuePairs()));
     }
 
     public void saveProfileFromUser(com.example.ucrinstagram.Models.Profile profile, User user) {
+        saveProfile(profile);
     }
 
     // -------------------------
@@ -105,8 +170,8 @@ public class WebAPI {
     }
 
     public Photo getPhoto(int id) {
-        String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(id);
-        Log.i("OC", "Attempting to get Profile info by user id: " + url);
+        String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(id) + ".json";
+        Log.i("OC", "Attempting to get Photo info by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
         String json = getJSONFromServer(new HTTPParams(requestMethod, url));
         return gson.fromJson(json, Photo.class);
@@ -129,6 +194,37 @@ public class WebAPI {
         Log.i("OC", "Attempting to add Photo by user id: " + url);
         HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
         getJSONFromServer(new HTTPParams(requestMethod, url, photo.getNameValuePairs()));
+    }
+
+    public Comment[] getCommentsFromPhoto(Photo photo){
+        String url = apiURL + Photo.urlSuffix + "/get_comments/" + Integer.toString(photo.getId());
+        Log.i("OC", "Attempting to get comments from photos: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, Comment[].class);
+    }
+    
+
+    public void addCommentToPhoto(Photo photo, Comment comment){
+        String url = apiURL + Photo.urlSuffix + "/add_comment/" + Integer.toString(photo.getId());
+        Log.i("OC", "Attempting to add a Comment to Photo: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
+    }
+        
+    
+    public void savePhoto(Photo photo) {
+        String url = apiURL + Photo.urlSuffix + "/" + Integer.toString(photo.getId());
+        Log.i("OC", "Attempting to edit Photo info: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
+        getJSONFromServer(new HTTPParams(requestMethod, url, photo.getNameValuePairs()));
+    }
+
+    public void removePhoto(Photo photo){
+        String url = apiURL + Photo.urlSuffix + "/delete/" + Integer.toString(photo.getId()) + ".json";
+        Log.i("OC", "Attempting to delete photo: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET; //TODO: rewrite to POST
+        getJSONFromServer(new HTTPParams(requestMethod, url));
     }
 
     // -------------------------
@@ -169,9 +265,60 @@ public class WebAPI {
     }
 
     public void saveComment(Comment comment) {
+        String url = apiURL + Comment.urlSuffix + "/" + Integer.toString(comment.getId());
+        Log.i("OC", "Attempting to edit comment: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
+        getJSONFromServer(new HTTPParams(requestMethod, url, comment.getNameValuePairs()));
     }
 
+    public void removeComment(Comment comment){
+        String url = apiURL + Comment.urlSuffix + "/delete/" + Integer.toString(comment.getId()) + ".json";
+        Log.i("OC", "Attempting to delete comment: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET; //TODO: rewrite to POST
+        getJSONFromServer(new HTTPParams(requestMethod, url));
+    }
 
+    // ----------------------------
+    // ----- Favorite Methods -----
+    // ----------------------------
+
+    public Photo[] getFavorites(int user_id){
+        String url = apiURL + User.urlSuffix + "/get_favorites/" + Integer.toString(user_id);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, Photo[].class);
+    }
+
+    public Photo[] getFavorites(User user){
+        return getFavorites(user.getId());
+    }
+
+    public void addFavorite(int user_id, int photo_id){
+        String url = apiURL + User.urlSuffix + "/add_favorite";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("photo_id", Integer.toString(photo_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+    
+    public void addFavorite(User user, Photo photo){
+    	addFavorite(user.getId(), photo.getId());
+    }
+    
+    public void removeFavorite(int user_id, int favorite_id){
+        String url = apiURL + User.urlSuffix + "/remove_favorite";
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        nameValuePairs.add(new BasicNameValuePair("favorite_id", Integer.toString(favorite_id)));
+        getJSONFromServer(new HTTPParams(requestMethod, url, nameValuePairs));
+    }
+
+    public void removeFavorite(User user, Photo photo){
+        removeFavorite(user.getId(), photo.getId());
+    }
+    
     // HELPER METHODS
     private String getJSONFromServer(HTTPParams params) {
         String json = null;
