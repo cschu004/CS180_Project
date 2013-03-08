@@ -62,8 +62,8 @@ public class SinglePicture extends Activity {
 				.execute(link);
 	}
 
-	public void profileOther(View view) {
-		Intent intent = new Intent(this, ProfileOther.class);
+	public void profile(View view) {
+		Intent intent = new Intent(this, Profile.class);
 		intent.putExtra("username", tokens[1]);
 		startActivity(intent);
 	}

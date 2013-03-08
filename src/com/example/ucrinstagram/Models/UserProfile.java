@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Profile {
+public class UserProfile {
 
     // ----------------------------
     // ----- MEMBER VARIABLES -----
@@ -34,11 +34,11 @@ public class Profile {
     // ----- CONSTRUCTORS -----
     // ------------------------
 
-    public Profile() {
+    public UserProfile() {
     }
 
-    public Profile(int user_id, int age, String gender, String bio,
-                   Date birthday, int profile_photo, String nickname) {
+    public UserProfile(int user_id, int age, String gender, String bio,
+                       Date birthday, int profile_photo, String nickname) {
         this.user_id = user_id;
         this.age = age;
         this.gender = gender;
@@ -50,20 +50,20 @@ public class Profile {
         this.created_at = new Date();
     }
 
-    public Profile(int user_id) {
+    public UserProfile(int user_id) {
         WebAPI api = new WebAPI();
-        com.example.ucrinstagram.Models.Profile tempProfile = api.getProfile(user_id);
+        UserProfile tempUserProfile = api.getProfile(user_id);
 
-        this.id = tempProfile.id;
-        this.user_id = tempProfile.user_id;
-        this.age = tempProfile.age;
-        this.gender = tempProfile.gender;
-        this.bio = tempProfile.bio;
-        this.birthday = tempProfile.birthday;
-        this.profile_photo = tempProfile.profile_photo;
-        this.nickname = tempProfile.nickname;
+        this.id = tempUserProfile.id;
+        this.user_id = tempUserProfile.user_id;
+        this.age = tempUserProfile.age;
+        this.gender = tempUserProfile.gender;
+        this.bio = tempUserProfile.bio;
+        this.birthday = tempUserProfile.birthday;
+        this.profile_photo = tempUserProfile.profile_photo;
+        this.nickname = tempUserProfile.nickname;
 
-        this.created_at = tempProfile.created_at;
+        this.created_at = tempUserProfile.created_at;
     }
 
     // --------------------------

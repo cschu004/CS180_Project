@@ -83,7 +83,7 @@ public class WebAPI {
 
 	public User saveUser(User user) {
 		String url = apiURL + User.urlSuffix + "/"
-				+ Integer.toString(user.getId());
+				+ Integer.toString(user.getId()) + ".json";
 		Log.i("OC", "Attempting to save User info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
         String json = getJSONFromServer(new HTTPParams(requestMethod, url,
@@ -142,39 +142,40 @@ public class WebAPI {
 	}
 
 	// ---------------------------
-	// ----- Profile Methods -----
+	// ----- UserProfile Methods -----
 	// ---------------------------
-	public com.example.ucrinstagram.Models.Profile[] getProfiles() {
+	public UserProfile[] getProfiles() {
 		return null;
 	}
 
-	public com.example.ucrinstagram.Models.Profile getProfile(int user_id) {
+	public UserProfile getProfile(int user_id) {
 		String url = apiURL + User.urlSuffix + "/get_profile/" + user_id;
-		Log.i("OC", "Attempting to get Profile info by user id: " + url);
+		Log.i("OC", "Attempting to get UserProfile info by user id: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url));
 		return gson.fromJson(json,
-				com.example.ucrinstagram.Models.Profile.class);
+				UserProfile.class);
 	}
 
-	public com.example.ucrinstagram.Models.Profile getProfile(User user) {
+	public UserProfile getProfile(User user) {
 		return getProfile(user.getId());
 	}
 
-	public com.example.ucrinstagram.Models.Profile saveProfile(com.example.ucrinstagram.Models.Profile profile) {
-		String url = apiURL + com.example.ucrinstagram.Models.Profile.urlSuffix
-				+ "/" + Integer.toString(profile.getId());
-		Log.i("OC", "Attempting to edit Profile info: " + url);
+	public UserProfile saveProfile(UserProfile userProfile) {
+		String url = apiURL + UserProfile.urlSuffix
+				+ "/" + Integer.toString(userProfile.getId()) + ".json";
+		Log.i("OC", "Attempting to edit UserProfile info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
-				profile.getNameValuePairs()));
+				userProfile.getNameValuePairs()));
+        Log.i("OC", json);
         return gson.fromJson(json,
-                com.example.ucrinstagram.Models.Profile.class);
+                UserProfile.class);
 	}
 
 	public void saveProfileFromUser(
-			com.example.ucrinstagram.Models.Profile profile, User user) {
-		saveProfile(profile);
+			UserProfile userProfile, User user) {
+		saveProfile(userProfile);
 	}
 
 	// -------------------------

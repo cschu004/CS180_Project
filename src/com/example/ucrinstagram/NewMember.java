@@ -35,6 +35,7 @@ public class NewMember extends Activity {
 			User loginUser = new User(username, password);
 			loginUser.create();
 			Login.username = loginUser.username;
+            Login.currentUser = new User(username);
 
 			Toast.makeText(this.getApplicationContext(),
 					"Created a new user account!", Toast.LENGTH_LONG).show();
