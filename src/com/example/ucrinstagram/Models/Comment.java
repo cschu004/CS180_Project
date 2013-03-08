@@ -22,6 +22,8 @@ public class Comment {
     private Date created_at;
     private Date deleted_at;
 
+
+
     //  this.getClass().getSimpleName().toLowerCase();
     public static String urlSuffix = "comments";
 
@@ -33,6 +35,7 @@ public class Comment {
     }
 
     private Comment(String body, int original_comment_id) {
+        this.id = new Random().nextInt();
         this.body = body;
         this.created_at = new Date();
         this.deleted_at = new Date(0);

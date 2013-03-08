@@ -39,7 +39,7 @@ public class Profile extends Activity implements OnClickListener {
 	// private String selectedImagePath;
 	// private ImageView img;
 
-	String username = Login.username;
+	String username = Login.username.toLowerCase().replaceAll("\\s", "");
 	ArrayList<String> image_links = new ArrayList<String>();
 	ImageView[] image;
 	User user1;

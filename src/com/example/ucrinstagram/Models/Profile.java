@@ -75,7 +75,7 @@ public class Profile {
     // NOTE: applies changes to the database
     // NOTE: call after editing the User object!!!!
     public void save() {
-        this.id = new WebAPI().saveProfile(this).id;
+        new WebAPI().saveProfile(this);
     }
 
     public void saveProfilePhoto(Photo photo) {

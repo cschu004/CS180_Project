@@ -68,28 +68,25 @@ public class WebAPI {
 
 	// TODO: create some kind of ack, whether the save was successful or not
 	// TODO: boolean return value, or create a set of exceptions/error codes?
-	public User createUser(User user) {
+	public void createUser(User user) {
 		String url = apiURL + User.urlSuffix;
 		Log.i("OC", "Attempting to create a new User: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
-		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
+		getJSONFromServer(new HTTPParams(requestMethod, url,
 				user.getNameValuePairs()));
-        return gson.fromJson(json, User.class);
 	}
 
 	public void editUser(User user) {
 		saveUser(user);
 	}
 
-	public User saveUser(User user) {
+	public void saveUser(User user) {
 		String url = apiURL + User.urlSuffix + "/"
 				+ Integer.toString(user.getId());
-		Log.i("OC", "Attempting to save User info: " + url);
+		Log.i("OC", "Attempting to edit User info by user id: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
-        String json = getJSONFromServer(new HTTPParams(requestMethod, url,
+		getJSONFromServer(new HTTPParams(requestMethod, url,
 				user.getNameValuePairs()));
-        Log.i("OC", json);
-        return gson.fromJson(json, User.class);
 	}
 
 	// --------------------------
@@ -161,15 +158,13 @@ public class WebAPI {
 		return getProfile(user.getId());
 	}
 
-	public com.example.ucrinstagram.Models.Profile saveProfile(com.example.ucrinstagram.Models.Profile profile) {
+	public void saveProfile(com.example.ucrinstagram.Models.Profile profile) {
 		String url = apiURL + com.example.ucrinstagram.Models.Profile.urlSuffix
 				+ "/" + Integer.toString(profile.getId());
 		Log.i("OC", "Attempting to edit Profile info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
-		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
+		getJSONFromServer(new HTTPParams(requestMethod, url,
 				profile.getNameValuePairs()));
-        return gson.fromJson(json,
-                com.example.ucrinstagram.Models.Profile.class);
 	}
 
 	public void saveProfileFromUser(
@@ -249,14 +244,13 @@ public class WebAPI {
 				comment.getNameValuePairs()));
 	}
 
-	public Photo savePhoto(Photo photo) {
+	public void savePhoto(Photo photo) {
 		String url = apiURL + Photo.urlSuffix + "/"
 				+ Integer.toString(photo.getId());
 		Log.i("OC", "Attempting to edit Photo info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
-		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
+		getJSONFromServer(new HTTPParams(requestMethod, url,
 				photo.getNameValuePairs()));
-        return gson.fromJson(json, Photo.class);
 	}
 
 	public void removePhoto(Photo photo) {
