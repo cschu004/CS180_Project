@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.ucrinstagram.Models.User;
 
 public class Following extends Activity implements OnClickListener {
-	String username = Login.username.toLowerCase().replaceAll("\\s", "");
+	//String username = Login.username.toLowerCase().replaceAll("\\s", "");
 	User[] following;
 	Button[] btn;
 	User user1;
@@ -21,7 +21,7 @@ public class Following extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_following);
-		user1 = new User(username);
+		user1 = new User(getIntent().getExtras().getString("username"));
 		following = user1.getFriends();
 		if (following.length >= 1) {
 			btn = new Button[following.length];

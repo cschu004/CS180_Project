@@ -257,11 +257,15 @@ public class Profile extends Activity implements OnClickListener {
 
 	public void followers(View view) {
 		Intent intent = new Intent(this, Followers.class);
+		intent.putExtra("username",username);
+
 		startActivity(intent);
 	}
 
 	public void following(View view) {
 		Intent intent = new Intent(this, Following.class);
+		intent.putExtra("username",username);
+
 		startActivity(intent);
 	}
 

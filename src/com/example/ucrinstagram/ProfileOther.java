@@ -79,7 +79,7 @@ public class ProfileOther extends Activity implements OnClickListener {
 	public void loadInfo() {
 		// Using the data from the sharedPreference and updating it to the
 		// server
-		user1 = new User(username);
+		user1 = new User(getIntent().getExtras().getString("username"));
 
 		TextView usernametv = (TextView) findViewById(R.id.username);
 		TextView nicknametv = (TextView) findViewById(R.id.nickname);
@@ -206,11 +206,13 @@ public class ProfileOther extends Activity implements OnClickListener {
 
 	public void followers(View view) {
 		Intent intent = new Intent(this, Followers.class);
+		intent.putExtra("username",username);
 		startActivity(intent);
 	}
 
 	public void following(View view) {
 		Intent intent = new Intent(this, Following.class);
+		intent.putExtra("username",username);
 		startActivity(intent);
 	}
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Followers extends Activity implements OnClickListener {
 
-	String username = Login.username.toLowerCase().replaceAll("\\s", "");
+	//String username = Login.username.toLowerCase().replaceAll("\\s", "");
 	User[] followers;
 	Button[] btn;
 	User user1;
@@ -23,7 +23,7 @@ public class Followers extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_followers);
 
-		user1 = new User(username);
+		user1 = new User(getIntent().getExtras().getString("username"));
 		followers = user1.getFriendedBy();
 		if (followers.length >= 1) {
 			btn = new Button[followers.length];
