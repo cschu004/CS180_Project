@@ -74,6 +74,7 @@
     	    android:layout_width="60dp"
     	    android:layout_height="wrap_content"
     	    android:text="@string/favorites_tab"
+    	    android:onClick="favorites"
     	    android:textSize="10sp" />
 
     </LinearLayout>

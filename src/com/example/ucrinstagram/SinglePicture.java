@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ucrinstagram.Models.Photo;
+import com.example.ucrinstagram.Models.User;
 
 public class SinglePicture extends Activity {
 	String username=Login.username.toLowerCase().replaceAll("\\s","");
@@ -68,6 +69,12 @@ public class SinglePicture extends Activity {
 		}
 	}
 
+	public void favorite(View view){
+		User user1 = new User(username);
+		user1.addFavorite(photoId);
+		Toast.makeText(this.getApplicationContext(), "Favorite Added", Toast.LENGTH_LONG).show();
+		
+	}
 	
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 		  ImageView bmImage;

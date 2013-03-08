@@ -25,6 +25,7 @@
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_explore">Explore</string>
     <string name="title_activity_camera">Camera</string>
+	<string name="title_activity_favorites">Favorites</string>
     <string name="title_homescreen_detail">HomeScreen Detail</string>
     <string name="title_homescreen_list">Items</string>
     <string name="camera_string">Take a picture</string>

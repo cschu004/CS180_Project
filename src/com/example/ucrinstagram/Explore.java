@@ -78,6 +78,11 @@ public class Explore extends Activity {
     	startActivity(intent);    	
     }
     
+    public void favorites(View view){
+    	Intent intent = new Intent(this, Favorites.class);
+    	startActivity(intent);
+    }
+    
     public void imageClick1(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
     	String link1 = allLinks[0];

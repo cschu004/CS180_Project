@@ -15,11 +15,13 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
 
-public class HomeScreen extends Activity {
+
+public class Favorites extends Activity {
 	String caption=null;
 	String link1="";
 	String link2="";
@@ -32,29 +34,31 @@ public class HomeScreen extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_screen);
+		setContentView(R.layout.activity_favorites);
 		user1 = new User(username);
-		Photo[] allThisUserPhotos = user1.getPhotos();
-		image = new ImageView[allThisUserPhotos.length];
-		for (int i = allThisUserPhotos.length-1; i >=0;  i --){
-			image[i] = new ImageView(this);
-	        image[i].setImageResource(R.drawable.ic_launcher);
-	        //image[i].setAdjustViewBounds(true);
-			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,600); 
-			image[i].setLayoutParams(lp);
-			/*LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(600, LinearLayout.LayoutParams.MATCH_PARENT);
-			lp2.setMargins(0, 200, 0, 0);
-			image[i].setLayoutParams(lp2);*/
+		Photo[] favoritePhotos = user1.getFavorites();
+		System.out.println(Integer.toString(favoritePhotos.length) + "============" );
+		if(favoritePhotos.length > 1){
+			image = new ImageView[favoritePhotos.length];
+			for (int i = favoritePhotos.length-1; i >=0;  i --){
+				image[i] = new ImageView(this);
+				image[i].setImageResource(R.drawable.ic_launcher);
+				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,600); 
+				image[i].setLayoutParams(lp);
 			
-	        LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
-	        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) linlay.getLayoutParams();
+				LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
+				ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) linlay.getLayoutParams();
 
-	        mlp.setMargins(0,100*allThisUserPhotos.length, 0,100);
+				mlp.setMargins(0,100*favoritePhotos.length, 0,100);
 	        
-	        linlay.addView(image[i]);
+				linlay.addView(image[i]);
 	        
-			System.out.println(allThisUserPhotos[i].path+'/'+allThisUserPhotos[i].filename);
-			new DownloadImageTask(image[i]).execute(allThisUserPhotos[i].path+'/'+allThisUserPhotos[i].filename);
+				System.out.println(favoritePhotos[i].path+'/'+favoritePhotos[i].filename);
+				new DownloadImageTask(image[i]).execute(favoritePhotos[i].path+'/'+favoritePhotos[i].filename);
+			}
+		}
+		else{
+			Toast.makeText(this, "No Favorites added yet", 10).show();
 		}
 	}
 
@@ -80,8 +84,8 @@ public class HomeScreen extends Activity {
     	startActivity(intent);
     }
 
-    public void favorites(View view){
-    	Intent intent = new Intent(this, Favorites.class);
+    public void home(View view){
+    	Intent intent = new Intent(this, HomeScreen.class);
     	startActivity(intent);
     }
  

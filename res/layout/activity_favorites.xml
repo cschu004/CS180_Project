@@ -1,8 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CameraActivity" >
+    android:id="@+id/relative"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearLayoutThatDoesNotScroll" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutWithLotofContent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"    
+            android:orientation="vertical" >
+
+    
+        </LinearLayout>
+
+    </ScrollView>
 
     	<LinearLayout
         android:id="@+id/linearLayoutThatDoesNotScroll"  
@@ -19,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:text="@string/home_tab"
         android:onClick="home"
-        android:text="@string/home_tab" 
         android:textSize="10sp" />
 
     	<Button
@@ -58,6 +78,4 @@
     	    android:textSize="10sp" />
 
     </LinearLayout>
-
 </RelativeLayout>
-

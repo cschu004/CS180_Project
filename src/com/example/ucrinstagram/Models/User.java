@@ -171,7 +171,9 @@ public class User {
     public void addFavorite(Photo favorite){
         new WebAPI().addFavorite(this, favorite);
     }
-    
+    public void addFavorite(int favoriteId){
+        new WebAPI().addFavorite(this.id, favoriteId);
+    }
     
     // DELETE
     public void removePhoto(Photo photo){

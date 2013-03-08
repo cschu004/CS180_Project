@@ -210,6 +210,11 @@ public class Profile extends Activity {
     	Intent intent = new Intent(this, PrefsActivity.class);
     	startActivity(intent);
     }
+    
+    public void favorites(View view){
+    	Intent intent = new Intent(this, Favorites.class);
+    	startActivity(intent);
+    }
 
     public void imageClick1(View view){
     	Intent intent = new Intent(this, SinglePicture.class);
