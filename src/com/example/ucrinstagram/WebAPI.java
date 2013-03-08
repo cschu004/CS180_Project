@@ -177,6 +177,18 @@ public class WebAPI {
         return gson.fromJson(json, Photo.class);
     }
 
+    public Photo[] getHomeScreenPhotos(int id){
+        String url = apiURL + User.urlSuffix + "/" + Integer.toString(id);
+        Log.i("OC", "Attempting to get home screen photos by user id: " + url);
+        HTTPRequestMethod requestMethod = HTTPRequestMethod.GET;
+        String json = getJSONFromServer(new HTTPParams(requestMethod, url));
+        return gson.fromJson(json, Photo[].class);
+    }
+
+    public Photo[] getHomeScreenPhotos(User user){
+        return getHomeScreenPhotos(user.getId());
+    }
+
     public Photo[] getPhotosFromUser(int id) {
         String url = apiURL + User.urlSuffix + "/get_photos/" + Integer.toString(id);
         Log.i("OC", "Attempting to get Photos by user id: " + url);
