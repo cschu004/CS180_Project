@@ -129,7 +129,7 @@ public class User {
         return new WebAPI().userExists(this.username);
     }
 
-    public Profile getProfile() {
+    public UserProfile getProfile() {
         return new WebAPI().getProfile(this);
     }
 
@@ -155,7 +155,7 @@ public class User {
      
     
     // SAVE
-    public void saveProfile(Profile profile) {
+    public void saveProfile(UserProfile profile) {
         new WebAPI().saveProfileFromUser(profile, this);
     }
 

@@ -32,6 +32,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
+import com.example.ucrinstagram.Models.UserProfile;
 
 public class Profile extends Activity implements OnClickListener {
 	// final int TAKE_PICTURE = 1;
@@ -112,8 +113,7 @@ public class Profile extends Activity implements OnClickListener {
 		user1 = new User(Login.username);
 		SharedPreferences defSharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		com.example.ucrinstagram.Models.Profile tempProfile = user1
-				.getProfile();
+		UserProfile tempProfile = user1.getProfile();
 		String tempNick = tempProfile.nickname;
 		String tempGender = tempProfile.gender;
 		String tempBio = tempProfile.bio;
@@ -147,8 +147,7 @@ public class Profile extends Activity implements OnClickListener {
 
 		String un = user1.username;
 
-		com.example.ucrinstagram.Models.Profile user1profile = user1
-				.getProfile();
+		UserProfile user1profile = user1.getProfile();
 		String nickname = user1profile.nickname;
 		String gender = user1profile.gender;
 		String bio = user1profile.bio;
