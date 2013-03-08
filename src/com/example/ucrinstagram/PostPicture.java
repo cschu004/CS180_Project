@@ -58,11 +58,7 @@ public class PostPicture extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_picture);
-		// Show the Up button in the action bar.
-		// getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		// Toast.makeText(this.getApplicationContext(),username,
-		// Toast.LENGTH_LONG).show();
 		user1 = new User(username);
 		Toast.makeText(this.getApplicationContext(), username,
 				Toast.LENGTH_LONG).show();

@@ -27,14 +27,13 @@ public class ProfileOther extends Activity implements OnClickListener {
 
 	
 	//need to pass in selected user somehow
-	User user2 = new User("george");
-	String username = user2.username;
+
 	
 //	String username = HomeScreen.username;
 	ArrayList<String> image_links = new ArrayList<String>();
     ImageView[] image;
     User user1;
-    
+    String username;
 	InputStream is; 
     ArrayList<String> image_links2 = new ArrayList<String>();
 
@@ -43,6 +42,9 @@ public class ProfileOther extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_other);
 
+    	User user2 = new User(getIntent().getExtras().getString("username"));
+     username = user2.username;
+    	
         loadInfo();
         loadPics();
 
