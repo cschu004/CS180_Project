@@ -4,14 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import com.example.ucrinstagram.Models.Comment;
 import com.example.ucrinstagram.Models.Photo;
 import com.example.ucrinstagram.Models.User;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,9 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,12 +38,30 @@ public class HomeScreen extends Activity {
 	Bitmap[] bitmapList = null;
 	HomeListElement[] hElements = null;
 	InputStream is;
-
+	
+	private LruCache<String, Bitmap> mMemoryCache;
+	private ListView mListView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
 		username = Login.username;
+		
+		buildHomescreen();
+        }
+	
+	public void buildHomescreen(){
+		//Used for image cache
+		final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+		final int cacheSize = maxMemory / 8;
+		mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
+	        @Override
+	        protected int sizeOf(String key, Bitmap bitmap) {
+	            // The cache size will be measured in kilobytes rather than
+	            // number of items.
+	            return (bitmap.getRowBytes() * bitmap.getHeight()) / 1024;
+	        }
+	    };
 		
 		final User user = new User(username);
 		User[] friends = user.getFriends();
@@ -65,47 +79,35 @@ public class HomeScreen extends Activity {
 					String tmp = pComments[k].body + "\n";
 					commentsString += tmp;
 				}
-				Bitmap pBitmap = null;
-				try {
-					pBitmap = new DownloadPhotoTask(pURL).execute().get();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				hlElements.add(new HomeListElement(pUser, pBitmap, photoID, commentsString));
+				hlElements.add(new HomeListElement(pUser, pURL, photoID, commentsString));
 			}			
 		}
 		HomeListElement[] hleArray = new HomeListElement[hlElements.size()];
 		hlElements.toArray(hleArray);
         inflateHomescreenList(hleArray);
-        }
+        
+	}
 	
 	private class HomeListElement{
 		String user;
-		Bitmap image;
+		String imageURL;
 		int imageID;
 		String comments;
 		boolean commentBoxVisible;
 		
-		HomeListElement(String user, Bitmap image, int id, String comments){
+		HomeListElement(String user, String imageURL, int id, String comments){
 			this.user = user;
-			this.image = image;
+			this.imageURL = imageURL;
 			this.imageID = id;
 			this.comments = comments;
 			this.commentBoxVisible = false;
 		}
-		
-		public String getUser(){ return this.user; }
-		public Bitmap getImage(){ return this.image; }
-		public String getComments(){ return this.comments; }
 	}
 	
 	private void inflateHomescreenList(HomeListElement[] hElements){
-		ListView lv = (ListView) findViewById(R.id.homescreen_data_list);
-		lv.setAdapter(new HomeListAdapter(this, R.layout.home_screen_list_item, hElements));
+		mListView = (ListView) findViewById(R.id.homescreen_data_list);
+		HomeListAdapter hla = new HomeListAdapter(this, R.layout.home_screen_list_item, hElements);
+		mListView.setAdapter(hla);
 	}
 	
 	private class HomeListAdapter extends ArrayAdapter<HomeListElement>{
@@ -122,6 +124,7 @@ public class HomeScreen extends Activity {
 			this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 		
+		
 		@Override
 		public View getView(int position, View convertview, ViewGroup parent){
 			
@@ -137,16 +140,14 @@ public class HomeScreen extends Activity {
 			final EditText editComment = (EditText) row.findViewById(R.id.homescreen_list_element_editComment);
 			final Button postButton = (Button)	row.findViewById(R.id.homescreen_post_comment);
 			final TextView commentsTextView = (TextView) row.findViewById(R.id.homescreen_list_element_comments);
-			userTextView.setText(mElement.getUser());
-			imageView.setImageBitmap(mElement.getImage());
-			commentsTextView.setText(mElement.getComments());
+			userTextView.setText(mElement.user);
+			loadBitmap(mElement.imageURL, imageView, position);
+			commentsTextView.setText(mElement.comments);
 			
-			//TODO Hide till comment button click
 			if(!mElement.commentBoxVisible){
 				editComment.setVisibility(View.GONE);
 				postButton.setVisibility(View.GONE);
 			}
-			
 			
 			Button commentButton = (Button) row.findViewById(R.id.homescreen_list_element_button_comment);
 			commentButton.setOnClickListener(new View.OnClickListener() {
@@ -200,38 +201,7 @@ public class HomeScreen extends Activity {
 	}
 	
 	public void onClickRefresh(MenuItem item){
-		User user = new User(username);
-		User[] friends = user.getFriends();
-		List<HomeListElement> hlElements = new ArrayList<HomeListElement>();
-		for(int i = 0; i < friends.length; i++){
-			Photo[] friendPhotos = friends[i].getPhotos();
-			
-			for(int j = 0; j < friendPhotos.length; j++){
-				int photoID = friendPhotos[j].getId();
-				String pUser = friends[i].username;
-				String pURL = friendPhotos[j].path + "/" + friendPhotos[j].filename;
-				Comment[] pComments = friendPhotos[j].getComments();
-				String commentsString = "";
-				for(int k = 0; k < pComments.length; k++){
-					String tmp = pComments[k].body + "\n";
-					commentsString += tmp;
-				}
-				Bitmap pBitmap = null;
-				try {
-					pBitmap = new DownloadPhotoTask(pURL).execute().get();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				hlElements.add(new HomeListElement(pUser, pBitmap, photoID, commentsString));
-			}			
-		}
-		HomeListElement[] hleArray = new HomeListElement[hlElements.size()];
-		hlElements.toArray(hleArray);
-        inflateHomescreenList(hleArray);
+		buildHomescreen();
 	}
 
     public void explore(View view){
@@ -256,8 +226,11 @@ public class HomeScreen extends Activity {
 
 	private class DownloadPhotoTask extends AsyncTask<Void, Void, Bitmap>{
 		String url;
-		DownloadPhotoTask(String url){
+		int hlaIndex;
+		
+		DownloadPhotoTask(String url, int index){
 			this.url = url;
+			this.hlaIndex = index;
 		}
 		@Override
 		protected Bitmap doInBackground(Void...arg0){
@@ -275,5 +248,36 @@ public class HomeScreen extends Activity {
 		      }
 		      return image;
 		}
+		
+		protected void onPostExecute(Bitmap result){
+			addBitmapToMemoryCache(url, result);
+			ListView list = (ListView) mListView.findViewById(R.id.homescreen_data_list);
+			int start = list.getFirstVisiblePosition();
+			for(int i=start, j=list.getLastVisiblePosition();i<=j;i++)
+			    if(hlaIndex == i){
+			        View view = list.getChildAt(i-start);
+			        ((ImageView) view.findViewById(R.id.homescreen_list_element_image)).setImageBitmap(result);
+			        break;
+			    }
+		}
+	}
+	
+	public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+	    if (getBitmapFromMemCache(key) == null) {
+	        mMemoryCache.put(key, bitmap);
+	    }
+	}
+	
+	public Bitmap getBitmapFromMemCache(String key) {
+	    return mMemoryCache.get(key);
+	}
+	public void loadBitmap(String key, ImageView mImageView, int index) {
+	    final Bitmap bitmap = getBitmapFromMemCache(key);
+	    if (bitmap != null) {
+	        mImageView.setImageBitmap(bitmap);
+	    } else {
+	        mImageView.setImageResource(R.drawable.loader);
+	        new DownloadPhotoTask(key, index).execute();
+	    }
 	}
 }
