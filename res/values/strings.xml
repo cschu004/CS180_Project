@@ -4,9 +4,9 @@
     <string name="app_name">UCRInstagram</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_signup__login">UCRInstagram</string>
-    <string name="title_activity_new_member">Register a new account!</string>
-    <string name="new_member_username">Username</string>
-    <string name="new_member_password">Password</string>
+    <string name="title_activity_new_member">Register for a new account!</string>
+    <string name="new_member_username">Create a username</string>
+    <string name="new_member_password">Create a password</string>
     <string name="error_taken_username">This username has already been used, try again.</string>
     <string name="error_short_password">A password must be at least four characters</string>
     <string name="button_new_member_test">Check Username</string>
@@ -19,7 +19,6 @@
     <string name="home_tab">Home</string>
     <string name="explore_tab">Explore</string>
     <string name="camera_tab">Camera</string>
-    <string name="updates_tab">Updates</string>
     <string name="profile_tab">Profile</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="title_activity_profile">Profile</string>
@@ -42,6 +41,7 @@
     <string name="photos">Photos</string>
     <string name="about_me">About Me</string>
     <string name="bday">Birthday:</string>
+    <string name="dob">dob:</string>
     <string name="settings">Settings</string>
     <string name="logout">Log Out</string>
 
@@ -49,17 +49,9 @@
     <string name="apiURL">http://www.mgx-dev.com/</string>
     <string name="title_activity_filter">Filter</string>
 
-    <!-- Preferences -->
-    <string name="userPref">Usern@me</string>
-    <string name="nickPref">Nickname</string>
-    <string name="bioPref">bio</string>
-    <string name="emailPref">email@email.com</string>
-    <string name="dob">dob:</string>
-
     <!-- friendslist -->
     <string name="friend1">friend1</string>
     <string name="title_activity_following">Following</string>
     <string name="title_activity_followers">Followers</string>
-    <string name="title_activity_profile_other">ProfileOther</string>
 
 </resources>

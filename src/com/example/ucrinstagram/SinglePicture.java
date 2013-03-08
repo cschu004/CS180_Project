@@ -21,6 +21,7 @@ public class SinglePicture extends Activity {
 	InputStream is;
 	String link;
 	String caption;
+	String gps;
 	int photoId;
 	String[] tokens;
 
@@ -32,6 +33,7 @@ public class SinglePicture extends Activity {
 		link = getIntent().getExtras().getString("link");
 		caption = getIntent().getExtras().getString("caption");
 		photoId = getIntent().getExtras().getInt("photoid");
+		gps 	= getIntent().getExtras().getString("gps");
 
 		String prefix = "https://s3.amazonaws.com/";
 		String noPrefixStr = link.substring(link.indexOf(prefix)
@@ -44,6 +46,10 @@ public class SinglePicture extends Activity {
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
 		textView2.setText(caption);
 
+		//WebAPI api = new WebAPI();
+		TextView textView3 = (TextView) findViewById(R.id.textView3);
+		textView3.setText(gps);
+		//System.out.println(api.getPhoto(photoId).caption);
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
 				.execute(link);
 	}

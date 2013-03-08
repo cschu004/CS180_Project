@@ -95,12 +95,6 @@
             android:name="com.example.ucrinstagram.Followers"
             android:label="@string/title_activity_followers" >
         </activity>
-        <activity android:name="com.example.ucrinstagram.Updates" >
-        </activity>
-        <activity
-            android:name="com.example.ucrinstagram.ProfileOther"
-            android:label="@string/title_activity_profile_other" >
-        </activity>
     </application>
 
     <!-- Internet Permissions -->
