@@ -37,8 +37,8 @@
                 android:layout_toRightOf="@+id/imageView1"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick2"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
 
             <ImageView
@@ -49,8 +49,8 @@
                 android:layout_toRightOf="@+id/ImageView01"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick3"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
 
             <ImageView
@@ -73,8 +73,8 @@
                 android:layout_toLeftOf="@+id/ImageView02"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick5"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
 
             <ImageView
@@ -85,8 +85,8 @@
                 android:layout_below="@+id/ImageView03"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick7"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
 
             <ImageView
@@ -97,8 +97,8 @@
                 android:layout_toRightOf="@+id/ImageView04"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick9"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
 
             <ImageView
@@ -109,8 +109,8 @@
                 android:layout_toLeftOf="@+id/ImageView08"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick8"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
 
             <ImageView
@@ -121,8 +121,8 @@
                 android:layout_toRightOf="@+id/ImageView04"
                 android:adjustViewBounds="true"
                 android:clickable="true"
-                android:scaleType="fitXY"
                 android:onClick="imageClick6"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher" />
         </RelativeLayout>
     </ScrollView>
@@ -138,7 +138,7 @@
 
         <Button
             android:id="@+id/home_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -148,7 +148,7 @@
 
         <Button
             android:id="@+id/explore_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/home_button"
@@ -157,17 +157,17 @@
 
         <Button
             android:id="@+id/camera_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/explore_button"
             android:onClick="camera"
             android:text="@string/camera_tab"
             android:textSize="12sp" />
-        
+
         <Button
             android:id="@+id/updates_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/explore_button"
@@ -177,7 +177,7 @@
 
         <Button
             android:id="@+id/profile_button"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
