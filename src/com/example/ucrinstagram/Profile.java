@@ -321,6 +321,7 @@ public class Profile extends Activity implements OnClickListener {
 		link = s3Link + username;
 
 		Photo photo1 = new Photo(link, fileName);
+        photo1.save();
 
 		System.out.println("photo path before save");
 		System.out.println(photo1.path + "/" + photo1.filename);
