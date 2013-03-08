@@ -1,67 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/homescreen_data_list"
-        android:layout_width="match_parent"
-        android:layout_height="337dp"
-        android:layout_weight="0.76" >
-    </ListView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="match_parent"
+    <ScrollView 
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.24" >
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearLayoutThatDoesNotScroll" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
+            android:id="@+id/linearLayoutWithLotofContent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"    
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/homescreen_list_element_button_like"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:text="Home"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/homescreen_list_element_button_comment"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:onClick="explore"
-                android:text="Explore"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:onClick="camera"
-                android:text="Camera"
-                android:textSize="9sp" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:onClick="updates"
-                android:text="Updates"
-                android:textSize="9sp" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:onClick="profile"
-                android:text="Profile"
-                android:textSize="9sp" />
+    
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayoutThatDoesNotScroll"  
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_gravity="center"            
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+        
+        <Button
+        android:id="@+id/home_button"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/home_tab" 
+        android:textSize="12sp" />
+
+    	<Button
+        android:id="@+id/explore_button"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/home_button"
+        android:onClick="explore"
+        android:text="@string/explore_tab"
+        android:textSize="12sp"  />
+
+    	<Button
+        android:id="@+id/camera_button"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/explore_button"
+        android:onClick="camera"
+        android:text="@string/camera_tab"
+        android:textSize="12sp"  />
+
+   		 <Button
+        android:id="@+id/profile_button"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/camera_button"
+        android:onClick="profile"
+        android:text="@string/profile_tab"
+        android:textSize="12sp"  />
+    </LinearLayout>
+
+</RelativeLayout>
