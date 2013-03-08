@@ -48,8 +48,9 @@
     <!-- website address for api calls -->
     <string name="apiURL">http://www.mgx-dev.com/</string>
     <string name="title_activity_filter">Filter</string>
-    
-      <!-- friendslist -->
+
+    <!-- friendslist -->
     <string name="friend1">friend1</string>
+    <string name="title_activity_following">Following</string>
 
 </resources>

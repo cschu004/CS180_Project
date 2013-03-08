@@ -23,7 +23,7 @@ public class HomeScreen extends Activity {
 	String caption = null;
 	String link1 = "";
 	String link2 = "";
-	public static String username = Login.username.toLowerCase().replaceAll("\\s", "");
+	String username = Login.username.toLowerCase().replaceAll("\\s", "");
 	User user1;
 
 	ImageView[] image;
@@ -34,7 +34,9 @@ public class HomeScreen extends Activity {
 		setContentView(R.layout.activity_home_screen);
 		user1 = new User(username);
 		Photo[] allThisUserPhotos = user1.getPhotos();
+		
 		image = new ImageView[allThisUserPhotos.length];
+		
 		for (int i = allThisUserPhotos.length - 1; i >= 0; i--) {
 			image[i] = new ImageView(this);
 			image[i].setImageResource(R.drawable.ic_launcher);
@@ -82,6 +84,10 @@ public class HomeScreen extends Activity {
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
+		startActivity(intent);
+	}
+	public void following(View view) {
+		Intent intent = new Intent(this, Following.class);
 		startActivity(intent);
 	}
 

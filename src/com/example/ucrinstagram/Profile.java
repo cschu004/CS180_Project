@@ -45,7 +45,8 @@ public class Profile extends Activity implements OnClickListener {
 	User user1;
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("", ""));
+			new BasicAWSCredentials("",
+					""));
 	final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
 	String filePath;
 	String fileName;
@@ -63,12 +64,20 @@ public class Profile extends Activity implements OnClickListener {
 		loadInfo();
 		loadPics();
 
+		user1 = new User(Login.username);
+
+		WebAPI api = new WebAPI();
+		Photo profilePic = api.getPhoto(user1.getProfile().profile_photo);
+
+		// Photo profilePic = user1.getProfile().getProfilePhoto();
 		// Loader image - will be shown before loading image
 		int loader = R.drawable.loader;
 		// Imageview to show
 		ImageView image = (ImageView) findViewById(R.id.image);
 		// Image url
-		String image_url = "http://api.androidhive.info/images/sample.jpg";
+		String image_url = profilePic.path + "/" + profilePic.filename;
+		System.out.println(image_url);
+		// String image_url = "http://api.androidhive.info/images/sample.jpg";
 		// ImageLoader class instance
 		ImageLoader imgLoader = new ImageLoader(getApplicationContext());
 		imgLoader.DisplayImage(image_url, loader, image);
@@ -302,7 +311,16 @@ public class Profile extends Activity implements OnClickListener {
 		link = s3Link + username;
 
 		Photo photo1 = new Photo(link, fileName);
-		user1.addPhoto(photo1);
+
+		System.out.println("photo path before save");
+		System.out.println(photo1.path + "/" + photo1.filename);
+
+		user1.getProfile().saveProfilePhoto(photo1);
+		user1.save();
+
+		System.out.println("photo path after save");
+		System.out.println(user1.getProfile().getProfilePhoto().path + "/"
+				+ user1.getProfile().getProfilePhoto().filename);
 
 		new S3PutObjectTask().execute();
 
