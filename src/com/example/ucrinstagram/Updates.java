@@ -22,7 +22,6 @@ import android.widget.TextView;
 public class Updates extends ListActivity {
 
 	private List<String> updatesArray;
-	String username = Login.username.toLowerCase().replaceAll("\\s", "");
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,6 @@ public class Updates extends ListActivity {
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
-		intent.putExtra("username", username);
 		startActivity(intent);
 	}
 }

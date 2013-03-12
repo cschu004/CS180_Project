@@ -12,7 +12,6 @@ import android.view.View;
 public class Camera extends Activity {
 	final int TAKE_PICTURE = 1;
 	final int ACTIVITY_SELECT_IMAGE = 1234;
-	String username = Login.username.toLowerCase().replaceAll("\\s", "");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class Camera extends Activity {
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
-		intent.putExtra("username", username);
 		startActivity(intent);
 	}
 

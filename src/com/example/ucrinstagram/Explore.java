@@ -78,7 +78,6 @@ public class Explore extends Activity {
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
-		intent.putExtra("username", username);
 		startActivity(intent);
 	}
 	
