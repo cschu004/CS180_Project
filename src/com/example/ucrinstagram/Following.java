@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import com.example.ucrinstagram.Models.User;
 
 public class Following extends Activity implements OnClickListener {
-	//String username = Login.username.toLowerCase().replaceAll("\\s", "");
+	String Logineduser = Login.username.toLowerCase().replaceAll("\\s", "");
 	User[] following;
 	Button[] btn;
 	User user1;
@@ -28,13 +29,16 @@ public class Following extends Activity implements OnClickListener {
 			for (int i = 0; i < following.length; i++) {
 				System.out.println(following[i].username);
 				TextView f = new TextView(this);
-				f.setText(following[i].username);
+		        f.setText(following[i].username);
+		        f.setTextSize(14);
 				LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
-				btn[i] = new Button(this);
-				btn[i].setText("Unfollow");
-				btn[i].setOnClickListener(this);
 				linearLayout.addView(f);
-				linearLayout.addView(btn[i]);
+				if(Logineduser == user1.username){
+					btn[i] = new Button(this);
+					btn[i].setText("Unfollow");
+					btn[i].setOnClickListener(this);
+					linearLayout.addView(btn[i]);
+				}
 			}
 		}
 	}

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Followers extends Activity implements OnClickListener {
 
-	//String username = Login.username.toLowerCase().replaceAll("\\s", "");
+	String Logineduser = Login.username.toLowerCase().replaceAll("\\s", "");
 	User[] followers;
 	Button[] btn;
 	User user1;
@@ -31,12 +31,16 @@ public class Followers extends Activity implements OnClickListener {
 				System.out.println(followers[i].username);
 				TextView f = new TextView(this);
 				f.setText(followers[i].username);
+		        f.setTextSize(14);
 				LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
-				btn[i] = new Button(this);
-				btn[i].setText("Follow");
-				btn[i].setOnClickListener(this);
+
 				linearLayout.addView(f);
-				linearLayout.addView(btn[i]);
+				if (Logineduser == user1.username){
+					btn[i] = new Button(this);
+					btn[i].setText("Follow");
+					btn[i].setOnClickListener(this);
+					linearLayout.addView(btn[i]);
+				}
 			}
 		}
 	}
