@@ -3,15 +3,12 @@ package com.example.ucrinstagram;
 import java.io.InputStream;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +47,8 @@ public class Favorites extends Activity {
 				linlay.addView(image[i]);
 	        
 				System.out.println(favoritePhotos[i].path+'/'+favoritePhotos[i].filename);
-				new DownloadImageTask(image[i]).execute(favoritePhotos[i].path+'/'+favoritePhotos[i].filename);
+				DownloadImageTask task = new DownloadImageTask(image[i]);
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,favoritePhotos[i].path+'/'+favoritePhotos[i].filename);				
 			}
 		}
 		else{

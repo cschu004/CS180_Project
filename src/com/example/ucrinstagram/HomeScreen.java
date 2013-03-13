@@ -5,10 +5,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.ucrinstagram.Models.Comment;
-import com.example.ucrinstagram.Models.Photo;
-import com.example.ucrinstagram.Models.User;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +25,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.ucrinstagram.Models.Comment;
+import com.example.ucrinstagram.Models.Photo;
+import com.example.ucrinstagram.Models.User;
 
 public class HomeScreen extends Activity {
 
@@ -311,7 +311,9 @@ public class HomeScreen extends Activity {
 			mImageView.setImageBitmap(bitmap);
 		} else {
 			mImageView.setImageResource(R.drawable.loader);
-			new DownloadPhotoTask(key, index).execute();
+			DownloadPhotoTask task = new DownloadPhotoTask(key, index);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);	
+			//new DownloadPhotoTask(key, index).execute();
 		}
 	}
 }
