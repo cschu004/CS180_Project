@@ -33,25 +33,25 @@ public class Explore extends Activity {
 			System.out.println(allPhoto[i].path + '/' + allPhoto[i].filename);
 			allLinks[i] = allPhoto[i].path + '/' + allPhoto[i].filename;
 		}
+		DownloadImageTask task = new DownloadImageTask((ImageView) findViewById(R.id.imageView1));
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[0]);
+		DownloadImageTask task1 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView01));
+		task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[1]);
+		DownloadImageTask task2 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView02));
+		task2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[2]);
+		DownloadImageTask task3 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView03));
+		task3.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[3]);
+		DownloadImageTask task4 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView04));
+		task4.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[4]);
+		DownloadImageTask task5 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView06));
+		task5.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[5]);
+		DownloadImageTask task6 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView08));
+		task6.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[6]);
+		DownloadImageTask task7 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView07));
+		task7.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[7]);
+		DownloadImageTask task8 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView05));
+		task8.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[8]);
 
-		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-				.execute(allLinks[0]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView01))
-				.execute(allLinks[1]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView02))
-				.execute(allLinks[2]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView03))
-				.execute(allLinks[3]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView04))
-				.execute(allLinks[4]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView06))
-				.execute(allLinks[5]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView08))
-				.execute(allLinks[6]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView07))
-				.execute(allLinks[7]);
-		new DownloadImageTask((ImageView) findViewById(R.id.ImageView05))
-				.execute(allLinks[8]);
 	}
 
 	@Override
