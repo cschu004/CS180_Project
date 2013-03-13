@@ -46,9 +46,6 @@ public class Favorites extends Activity {
 				image[i].setLayoutParams(lp);
 			
 				LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
-				ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) linlay.getLayoutParams();
-
-				mlp.setMargins(0,100*favoritePhotos.length, 0,100);
 	        
 				linlay.addView(image[i]);
 	        
@@ -67,26 +64,6 @@ public class Favorites extends Activity {
 		//getMenuInflater().inflate(R.menu.activity_home_screen, menu);
 		return true;
 	}
-
-    public void explore(View view){
-    	Intent intent = new Intent(this, Explore.class);
-    	startActivity(intent);
-    }
-
-    public void camera(View view){
-    	Intent intent = new Intent(this, Camera.class);
-    	startActivity(intent);
-    }
-
-    public void profile(View view){
-    	Intent intent = new Intent(this, Profile.class);
-    	startActivity(intent);
-    }
-
-    public void home(View view){
-    	Intent intent = new Intent(this, HomeScreen.class);
-    	startActivity(intent);
-    }
  
 
 	private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
