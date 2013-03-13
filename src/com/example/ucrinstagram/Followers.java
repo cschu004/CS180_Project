@@ -31,11 +31,11 @@ public class Followers extends Activity implements OnClickListener {
 				System.out.println(followers[i].username);
 				TextView f = new TextView(this);
 				f.setText(followers[i].username);
-		        f.setTextSize(14);
+		        f.setTextSize(18);
 				LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
 
 				linearLayout.addView(f);
-				if (Logineduser == user1.username){
+				if (Logineduser.equals(user1.username)){
 					btn[i] = new Button(this);
 					btn[i].setText("Follow");
 					btn[i].setOnClickListener(this);

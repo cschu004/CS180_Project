@@ -30,10 +30,11 @@ public class Following extends Activity implements OnClickListener {
 				System.out.println(following[i].username);
 				TextView f = new TextView(this);
 		        f.setText(following[i].username);
-		        f.setTextSize(14);
+		        f.setTextSize(18);
 				LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
 				linearLayout.addView(f);
-				if(Logineduser == user1.username){
+				//System.out.println("Logineduser");
+				if(Logineduser.equals(getIntent().getExtras().getString("username"))){
 					btn[i] = new Button(this);
 					btn[i].setText("Unfollow");
 					btn[i].setOnClickListener(this);

@@ -60,7 +60,7 @@ public class Profile extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 
-		username = Login.username;
+		username = Login.username.toLowerCase().replaceAll("\\s", "");;
 		loadInfo();
 		loadPics();
 
@@ -87,7 +87,7 @@ public class Profile extends Activity implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		username = Login.username;
+		username = Login.username.toLowerCase().replaceAll("\\s", "");;
 		loadInfo();
 	}
 
@@ -110,7 +110,7 @@ public class Profile extends Activity implements OnClickListener {
 	public void loadInfo() {
 		// Using the data from the sharedPreference and updating it to the
 		// server
-		user1 = new User(Login.username);
+		user1 = new User(username);
 		SharedPreferences defSharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		UserProfile tempProfile = user1.getProfile();
