@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +28,7 @@ public class SinglePicture extends Activity {
 	String gps;
 	int photoId;
 	String[] tokens;
+	ImageView view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,28 @@ public class SinglePicture extends Activity {
 
 		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
 				.execute(link);
-	}
+		ImageView i = (ImageView) findViewById(R.id.imageView1);
+		i.setOnLongClickListener(new myLongListener());
+	    view = new ImageView(this);
 
+		
+	}
+	private class myLongListener implements View.OnLongClickListener{
+
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+
+		    Toast toast = new Toast(getApplicationContext());
+		    view.setImageResource(R.drawable.heart);
+		    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+		    toast.setDuration(Toast.LENGTH_LONG);
+		    toast.setView(view);
+		    toast.show();
+			return true;
+		}
+
+	}
 	public void profileOther(View view) {
 		Intent intent = new Intent(this, ProfileOther.class);
 		intent.putExtra("username", tokens[1]);

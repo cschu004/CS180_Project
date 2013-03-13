@@ -52,7 +52,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/loader" />
 
     <Button
         android:id="@+id/button2"
