@@ -39,7 +39,7 @@ public class Login extends Activity {
 					"Incorrect Username/Password", Toast.LENGTH_LONG).show();
 		} else if (loginUser.checkPassword(password)) { // check is password is
 														// correct
-			Login.username = username;
+			Login.username = username.toLowerCase().replaceAll("\\s", "");
 			Intent intent = new Intent(this, HomeScreen.class);
 			startActivity(intent);
 		} else {

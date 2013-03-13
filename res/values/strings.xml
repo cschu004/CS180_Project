@@ -22,7 +22,7 @@
     <string name="updates_tab">Updates</string>
     <string name="profile_tab">Profile</string>
     <string name="favorites_tab">Favorites</string>
-    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_home_screen">UCRInstagram</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_explore">Explore</string>
     <string name="title_activity_camera">Camera</string>

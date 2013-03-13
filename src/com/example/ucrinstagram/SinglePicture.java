@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +46,8 @@ public class SinglePicture extends Activity {
 
 		TextView textView = (TextView) findViewById(R.id.textView1);
 		textView.setText(tokens[1]);
+		textView.setTextSize(18);
+		textView.setTextColor(Color.BLUE);
 
 		TextView textView2 = (TextView) findViewById(R.id.textView2);
 		textView2.setText(caption);

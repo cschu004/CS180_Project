@@ -27,7 +27,7 @@
                 android:clickable="true"
                 android:onClick="imageClick1"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView01"
@@ -39,7 +39,7 @@
                 android:clickable="true"
                 android:onClick="imageClick2"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView02"
@@ -51,7 +51,7 @@
                 android:clickable="true"
                 android:onClick="imageClick3"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView03"
@@ -63,7 +63,7 @@
                 android:clickable="true"
                 android:onClick="imageClick4"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView04"
@@ -75,7 +75,7 @@
                 android:clickable="true"
                 android:onClick="imageClick5"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView06"
@@ -87,7 +87,7 @@
                 android:clickable="true"
                 android:onClick="imageClick7"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView08"
@@ -99,7 +99,7 @@
                 android:clickable="true"
                 android:onClick="imageClick9"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView07"
@@ -111,7 +111,7 @@
                 android:clickable="true"
                 android:onClick="imageClick8"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
 
             <ImageView
                 android:id="@+id/ImageView05"
@@ -123,7 +123,7 @@
                 android:clickable="true"
                 android:onClick="imageClick6"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/loader" />
         </RelativeLayout>
     </ScrollView>
 

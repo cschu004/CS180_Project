@@ -36,7 +36,7 @@ import com.example.ucrinstagram.Models.User;
 public class PostPicture extends Activity {
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("AKIAJB3KLZVK6FK2GKQA", "tBm0eCLqN0gK51zgPEV6OZj52tqQDVrKyvQ3cUih"));
+			new BasicAWSCredentials("", ""));
 
 	String filePath;
 	EditText et;
@@ -60,8 +60,8 @@ public class PostPicture extends Activity {
 		setContentView(R.layout.activity_post_picture);
 
 		user1 = new User(username);
-		Toast.makeText(this.getApplicationContext(), username,
-				Toast.LENGTH_LONG).show();
+		//Toast.makeText(this.getApplicationContext(), username,
+			//	Toast.LENGTH_LONG).show();
 
 		filePath = getIntent().getExtras().getString("picture");
 
