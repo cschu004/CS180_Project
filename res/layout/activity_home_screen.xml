@@ -31,6 +31,7 @@
                 android:id="@+id/homescreen_list_element_button_like"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
+        		android:drawableTop="@drawable/home"
                 android:text="Home"
                 android:textSize="12sp" />
 
@@ -39,6 +40,8 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:onClick="explore"
+                        		android:drawableTop="@drawable/explore"
+                
                 android:text="Explore"
                 android:textSize="12sp" />
 
@@ -47,6 +50,8 @@
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:onClick="camera"
+                        		android:drawableTop="@drawable/camera"
+                
                 android:text="Camera"
                 android:textSize="12sp" />
 
@@ -55,6 +60,8 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:onClick="updates"
+                        		android:drawableTop="@drawable/update"
+                
                 android:text="Updates"
                 android:textSize="12sp" />
 
@@ -63,6 +70,8 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:onClick="profile"
+                        		android:drawableTop="@drawable/profile"
+                
                 android:text="Profile"
                 android:textSize="12sp" />
         </LinearLayout>

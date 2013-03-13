@@ -25,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+                    		android:drawableTop="@drawable/home"
+            
             android:onClick="home"
             android:text="@string/home_tab"
             android:textSize="12sp" />
@@ -35,6 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/home_button"
+                    		android:drawableTop="@drawable/explore"
+            
             android:onClick="explore"
             android:text="@string/explore_tab"
             android:textSize="12sp" />
@@ -45,6 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/explore_button"
+                    		android:drawableTop="@drawable/camera"
+            
             android:onClick="camera"
             android:text="@string/camera_tab"
             android:textSize="12sp" />
@@ -55,6 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/explore_button"
+                    		android:drawableTop="@drawable/update"
+            
             android:text="@string/updates_tab"
             android:textSize="12sp" />
 
@@ -65,6 +73,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/updates_button"
+                    		android:drawableTop="@drawable/profile"
+            
             android:onClick="profile"
             android:text="@string/profile_tab"
             android:textSize="12sp" />
