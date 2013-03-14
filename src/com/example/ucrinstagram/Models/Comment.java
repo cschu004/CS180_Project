@@ -34,15 +34,20 @@ public class Comment {
     public Comment() {
     }
 
-    private Comment(String body, int original_comment_id, String username) {
+    public Comment(String body, int original_comment_id, String username) {
         this.body = body;
         this.username = username;
         this.original_comment_id = original_comment_id;
     }
 
-    private Comment(String body, int original_comment_id) {
+    public Comment(String body, int original_comment_id) {
         this.body = body;
         this.original_comment_id = original_comment_id;
+    }
+
+    public Comment(String body, String username) {
+        this.body = body;
+        this.username = username;
     }
 
     public Comment(String body){
