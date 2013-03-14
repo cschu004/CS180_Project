@@ -3,6 +3,7 @@ package com.example.ucrinstagram;
 import java.io.InputStream;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -79,7 +80,11 @@ public class Favorites extends Activity {
 			    new User(username).removeFavorite(new Photo(favoritePhotos[i].getId()));
 			}
 			finish();
-			startActivity(getIntent());
+			//onCreate(null);
+		    Intent intent = getIntent();
+		    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		    startActivity(intent);
+			//startActivity(getIntent());
 			
 		}
 		    return true;
