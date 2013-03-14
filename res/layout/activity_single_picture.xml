@@ -3,14 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SinglePicture"
-    android:background="@drawable/boarder" >
+    android:background="@drawable/border1" >
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="Location" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_below="@+id/textView2"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_toLeftOf="@+id/button1"
         android:onClick="addFavorite"
         android:text="@string/add_favorite" />
 
@@ -19,19 +28,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/imageView1"
-        android:layout_below="@+id/textView2"
-        android:layout_marginRight="16dp"
+        android:layout_alignTop="@+id/textView2"
         android:onClick="delete"
         android:text="DELETE" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="73dp"
+        android:text="Caption"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignLeft="@+id/textView2"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="58dp"
         android:clickable="true"
         android:onClick="profileOther"
         android:text="Username"
@@ -43,23 +62,7 @@
         android:layout_height="300dp"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
         android:src="@drawable/loader" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView1"
-        android:layout_toLeftOf="@+id/button1"
-        android:text="Location" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/imageView1"
-        android:text="Caption"
-        android:textSize="16sp" />
 
 </RelativeLayout>
