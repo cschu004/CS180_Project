@@ -78,6 +78,8 @@ public class Favorites extends Activity {
 			    toast.show();
 			    new User(username).removeFavorite(new Photo(favoritePhotos[i].getId()));
 			}
+			finish();
+			startActivity(getIntent());
 			
 		}
 		    return true;
