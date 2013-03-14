@@ -28,11 +28,15 @@ public class Camera extends Activity {
 
 	public void home(View view) {
 		Intent intent = new Intent(this, HomeScreen.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void explore(View view) {
 		Intent intent = new Intent(this, Explore.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
@@ -43,6 +47,8 @@ public class Camera extends Activity {
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
