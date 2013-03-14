@@ -3,6 +3,7 @@ package com.example.ucrinstagram;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -78,15 +79,35 @@ public class HomeScreen extends Activity {
 						+ friendPhotos[j].filename;
 				String pCaption = friendPhotos[j].caption;
 				Comment[] pComments = friendPhotos[j].getComments();
-				String commentsString = "";
+				Date[] pCommentTime = new Date[pComments.length];
+				String[] pCommentsString = new String[pComments.length];
 				for (int k = 0; k < pComments.length; k++) {
-					String tmp = pComments[k].body + "\n";
-					commentsString += tmp;
+					pCommentTime[k] = pComments[k].getCreated_at();
+					pCommentsString[k] = pComments[k].body;
 				}
-				hlElements.add(new HomeListElement(pUser, pCaption, pURL,
-						photoID, commentsString));
+				if(friendPhotos[j].public_perm == null || friendPhotos[j].public_perm)
+					hlElements.add(new HomeListElement(pUser, pCaption, pURL,
+						photoID, pCommentsString, pCommentTime));
 			}
 		}
+		/*
+		Photo[] friendPhotos = user.getHomeScreenPhotos();
+		for (int j = 0; j < friendPhotos.length; j++) {
+			int photoID = friendPhotos[j].getId();
+			String pURL = friendPhotos[j].path + "/"
+					+ friendPhotos[j].filename;
+			String pCaption = friendPhotos[j].caption;
+			Comment[] pComments = friendPhotos[j].getComments();
+			Date[] pCommentTime = new Date[pComments.length];
+			String[] pCommentsString = new String[pComments.length];
+			for (int k = 0; k < pComments.length; k++) {
+				pCommentTime[k] = pComments[k].getCreated_at();
+				pCommentsString[k] = pComments[k].body;
+			}
+			hlElements.add(new HomeListElement(pUser, pCaption, pURL,
+					photoID, pCommentsString, pCommentTime));
+		}
+		*/
 		HomeListElement[] hleArray = new HomeListElement[hlElements.size()];
 		hlElements.toArray(hleArray);
 		inflateHomescreenList(hleArray);
@@ -98,16 +119,18 @@ public class HomeScreen extends Activity {
 		String caption;
 		String imageURL;
 		int imageID;
-		String comments;
+		String[] comments;
+		Date[] commentTimes;
 		boolean commentBoxVisible;
 
 		HomeListElement(String user, String caption, String imageURL, int id,
-				String comments) {
+				String[] comments, Date[] commentTimes) {
 			this.user = user;
 			this.imageURL = imageURL;
 			this.imageID = id;
 			this.comments = comments;
 			this.commentBoxVisible = false;
+			this.commentTimes = commentTimes;
 		}
 	}
 
@@ -157,7 +180,13 @@ public class HomeScreen extends Activity {
 					.findViewById(R.id.homescreen_list_element_comments);
 			userTextView.setText(mElement.user);
 			loadBitmap(mElement.imageURL, imageView, position);
-			commentsTextView.setText(mElement.comments);
+			String sb = "";
+			for(int i = 0; i < mElement.comments.length; i++){
+				sb += mElement.comments[i];
+				sb += " posted ";
+				sb += mElement.commentTimes[i].toLocaleString() + ".\n";
+			}
+			commentsTextView.setText(sb);
 
 			if (!mElement.commentBoxVisible) {
 				editComment.setVisibility(View.GONE);
