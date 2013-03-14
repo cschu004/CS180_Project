@@ -66,7 +66,7 @@ public class Photo {
         Photo tempPhoto = api.getPhoto(id);
 
         this.id = tempPhoto.id;
-        this.path    = tempPhoto.path;
+        this.path = tempPhoto.path;
         this.filename = tempPhoto.filename;
         this.caption = tempPhoto.caption;
         this.gps = tempPhoto.gps;
@@ -106,7 +106,7 @@ public class Photo {
         nameValuePairs.add(new BasicNameValuePair("photo[filename]", this.filename));
         nameValuePairs.add(new BasicNameValuePair("photo[caption]", this.caption));
         nameValuePairs.add(new BasicNameValuePair("photo[gps]", this.gps));
-        nameValuePairs.add(new BasicNameValuePair("photo[public]", String.valueOf(this.public_perm)));
+        nameValuePairs.add(new BasicNameValuePair("photo[public_perm]", String.valueOf(this.public_perm)));
         return nameValuePairs;
     }
 
