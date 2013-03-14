@@ -85,7 +85,7 @@ public class Comment {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         // TODO: currently rails is creating the ID numbers, need to return ID number or let Java set it
         nameValuePairs.add(new BasicNameValuePair("comment[body]", this.body));
-        nameValuePairs.add(new BasicNameValuePair("comment[username]", this.body));
+        nameValuePairs.add(new BasicNameValuePair("comment[username]", this.username));
         return nameValuePairs;
     }
 
