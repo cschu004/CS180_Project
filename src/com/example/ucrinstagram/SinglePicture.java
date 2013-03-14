@@ -63,9 +63,9 @@ public class SinglePicture extends Activity {
 		 * pComments.length; k++){ String tmp = pComments[k].body + "\n";
 		 * System.out.println(tmp); }
 		 */
-
-		new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-				.execute(link);
+		DownloadImageTask task = new DownloadImageTask((ImageView) findViewById(R.id.imageView1));
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,link);	
+		
 		ImageView i = (ImageView) findViewById(R.id.imageView1);
 		i.setOnLongClickListener(new myLongListener());
 	    view = new ImageView(this);
@@ -84,6 +84,7 @@ public class SinglePicture extends Activity {
 		    toast.setDuration(Toast.LENGTH_LONG);
 		    toast.setView(view);
 		    toast.show();
+			new User(username).addFavorite(new Photo(photoId));
 			return true;
 		}
 

@@ -1,14 +1,13 @@
 package com.example.ucrinstagram;
 
-import android.os.AsyncTask;
-import android.util.Log;
-import com.google.gson.Gson;
-
-import com.example.ucrinstagram.Models.*;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,6 +15,19 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.example.ucrinstagram.Models.Comment;
+import com.example.ucrinstagram.Models.Photo;
+import com.example.ucrinstagram.Models.Topic;
+import com.example.ucrinstagram.Models.User;
+import com.example.ucrinstagram.Models.UserProfile;
+import com.google.gson.Gson;
 
 // TODO: convert to a service when given the chance, and use string resources
 public class WebAPI {
@@ -371,7 +383,10 @@ public class WebAPI {
 	private String getJSONFromServer(HTTPParams params) {
 		String json = null;
 		try {
-			return json = new getJSONFromServer().execute(params).get();
+			getJSONFromServer task = new getJSONFromServer();
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,params);	
+			return json = task.get();
+			//return json = new getJSONFromServer().execute(params).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {

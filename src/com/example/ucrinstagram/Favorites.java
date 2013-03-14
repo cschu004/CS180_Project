@@ -38,7 +38,7 @@ public class Favorites extends Activity {
 			image = new ImageView[favoritePhotos.length];
 			for (int i = favoritePhotos.length-1; i >=0;  i --){
 				image[i] = new ImageView(this);
-				image[i].setImageResource(R.drawable.ic_launcher);
+				image[i].setImageResource(R.drawable.loader);
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,600); 
 				image[i].setLayoutParams(lp);
 			
