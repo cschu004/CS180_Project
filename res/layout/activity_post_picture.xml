@@ -28,16 +28,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="129dp"
-        android:onClick="clickShare"
-        android:text="Share" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -64,14 +54,32 @@
         android:layout_marginBottom="22dp"
         android:text="TextView" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="87dp"
+        android:onClick="clickShare"
+        android:text="Share" />
+
     <CheckBox
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_centerVertical="true"
         android:onClick="clickShareLocation"
         android:text="Add to your Photo Map" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/checkBox1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp"
+        android:text="Friends only " />
 
 </RelativeLayout>

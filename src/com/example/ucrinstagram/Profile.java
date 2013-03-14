@@ -46,7 +46,7 @@ public class Profile extends Activity implements OnClickListener {
 	User user1;
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("AKIAJUMBOFHME5NGZ5KA", "1rd2KZw9Q4QhYejXCVgoFKxbukCSFkQIY6rwGWNq"));
+			new BasicAWSCredentials("", ""));
 	final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
 	String filePath;
 	String fileName;

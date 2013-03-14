@@ -36,7 +36,7 @@ import com.example.ucrinstagram.Models.User;
 public class PostPicture extends Activity {
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("AKIAJUMBOFHME5NGZ5KA", "1rd2KZw9Q4QhYejXCVgoFKxbukCSFkQIY6rwGWNq"));
+			new BasicAWSCredentials("", ""));
 
 	String filePath;
 	EditText et;
@@ -98,6 +98,11 @@ public class PostPicture extends Activity {
 
 		}
 	}
+	
+
+
+		
+
 
 	private void getLocation() {
 		// Get the location manager
@@ -157,6 +162,17 @@ public class PostPicture extends Activity {
 		photo1.gps = gps_city;
 		user1.addPhoto(photo1);
 
+        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox2);
+        if (checkBox.isChecked()) {
+			photo1.public_perm = false;
+			photo1.save();
+        }
+        else{
+			photo1.public_perm = true;
+			photo1.save();
+        }
+
+			
 		new S3PutObjectTask().execute();
 
 		Intent intent = new Intent(this, HomeScreen.class);
