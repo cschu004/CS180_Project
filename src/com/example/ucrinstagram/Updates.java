@@ -50,7 +50,19 @@ public class Updates extends ListActivity {
 				updatesArray.add(updates);
 			}
 			photoIds[i]	= Integer.valueOf(yourPhotos[i].getId());
-		}		
+		}
+		User[] allUsers = new WebAPI().getAllUsers();
+		for(int i = 0; i < allUsers.length; i++){
+			Photo[] photos = allUsers[i].getPhotos();
+			for(int j = 0; j < photos.length; j++){
+				if(Arrays.asList(photoIds).contains(photos[j].getId())){
+					String friendlikes = "Friend: <font color=#3333FF>"
+							+ allUsers[i].username + "</font> favorited your photo <font color=#3333FF>"
+							+ photos[j].caption + "</font>.";
+					updatesArray.add(friendlikes);
+				}
+			}
+		}
 		for (int i = 0; i < friends.length; i++) {
 			Photo[] photos = friends[i].getPhotos();
 			Photo[] favPhotos = friends[i].getFavorites();
@@ -59,6 +71,7 @@ public class Updates extends ListActivity {
 				//		+ friends[i].username + "</font> favorited "
 				//		+ Integer.toString(favPhotos.length) + " photos.";
 				//updatesArray.add(updates);
+				/*
 				for(int j = 0; j < favPhotos.length; j++){
 					if( Arrays.asList(photoIds).contains(favPhotos[j].getId())){
 						String friendlikes = "Friend: <font color=#3333FF>"
@@ -67,6 +80,8 @@ public class Updates extends ListActivity {
 						updatesArray.add(friendlikes);
 					}
 				}
+				*/
+				;
 			}
 			if (photos.length > 0) {
 				String updates = "Friend: <font color=#3333FF>"

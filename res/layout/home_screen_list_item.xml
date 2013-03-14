@@ -55,7 +55,7 @@
             android:id="@+id/homescreen_list_element_button_like"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Like"
+            android:text="Favorite"
             android:textSize="14sp" />
 
         <Button
