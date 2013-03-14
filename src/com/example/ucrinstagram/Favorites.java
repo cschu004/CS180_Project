@@ -8,7 +8,9 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,13 +29,16 @@ public class Favorites extends Activity {
     User user1;
 
     ImageView[] image;
-
+    Photo[] favoritePhotos;
+    ImageView view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_favorites);
 		user1 = new User(username);
-		Photo[] favoritePhotos = user1.getFavorites();
+	    view = new ImageView(this);
+
+		favoritePhotos = user1.getFavorites();
 		if(favoritePhotos.length > 0){
 			image = new ImageView[favoritePhotos.length];
 			for (int i = favoritePhotos.length-1; i >=0;  i --){
@@ -41,7 +46,8 @@ public class Favorites extends Activity {
 				image[i].setImageResource(R.drawable.loader);
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,600); 
 				image[i].setLayoutParams(lp);
-			
+				image[i].setOnLongClickListener(new myLongListener());
+
 				LinearLayout linlay = (LinearLayout) findViewById(R.id.linearLayoutWithLotofContent);
 	        
 				linlay.addView(image[i]);
@@ -50,12 +56,36 @@ public class Favorites extends Activity {
 				DownloadImageTask task = new DownloadImageTask(image[i]);
 				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,favoritePhotos[i].path+'/'+favoritePhotos[i].filename);				
 			}
+			
 		}
 		else{
 			Toast.makeText(this, "No Favorites added yet", 10).show();
 		}
 	}
 
+	private class myLongListener implements View.OnLongClickListener{
+
+		@Override
+		public boolean onLongClick(View v) {
+			// TODO Auto-generated method stub
+			for (int i = favoritePhotos.length - 1; i >= 0; i--) {
+			if (v == image[i]) {
+			    Toast toast = new Toast(getApplicationContext());
+			    view.setImageResource(R.drawable.brokenheart);
+			    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			    toast.setDuration(Toast.LENGTH_LONG);
+			    toast.setView(view);
+			    toast.show();
+			    new User(username).removeFavorite(new Photo(favoritePhotos[i].getId()));
+			}
+			
+		}
+		    return true;
+
+
+	}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
