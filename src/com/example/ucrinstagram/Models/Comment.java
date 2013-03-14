@@ -1,5 +1,6 @@
 package com.example.ucrinstagram.Models;
 
+import com.amazonaws.services.dynamodb.model.transform.CreateTableResultJsonUnmarshaller;
 import com.example.ucrinstagram.WebAPI;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -75,6 +76,10 @@ public class Comment {
         // TODO: currently rails is creating the ID numbers, need to return ID number or let Java set it
         nameValuePairs.add(new BasicNameValuePair("comment[body]", this.body));
         return nameValuePairs;
+    }
+
+    public Date getCreated_at(){
+        return this.created_at;
     }
 
     public int getId(){

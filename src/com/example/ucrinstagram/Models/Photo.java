@@ -20,6 +20,7 @@ public class Photo {
     public String filename;
     public String caption;
     public String gps;
+    public Boolean public_perm;
 
     private int id;
     private Date created_at;
@@ -41,6 +42,7 @@ public class Photo {
         this.filename = filename;
         this.caption = "";
         this.gps = "";
+        this.public_perm = true;
         this.created_at = new Date();
         this.updated_at = new Date();
         this.deleted_at = new Date(0);
@@ -51,6 +53,7 @@ public class Photo {
         this.filename = filename;
         this.caption = caption;
         this.gps = "";
+        this.public_perm = true;
         this.created_at = new Date();
         this.updated_at = new Date();
         this.deleted_at = new Date(0);
@@ -61,6 +64,7 @@ public class Photo {
         this.filename = filename;
         this.caption = caption;
         this.gps = gps;
+        this.public_perm = true;
         this.created_at = new Date();
         this.updated_at = new Date();
         this.deleted_at = new Date(0);
@@ -75,6 +79,7 @@ public class Photo {
         this.filename = tempPhoto.filename;
         this.caption = tempPhoto.caption;
         this.gps = tempPhoto.gps;
+        this.public_perm = tempPhoto.public_perm;
         this.created_at = tempPhoto.created_at;
         this.updated_at = tempPhoto.updated_at;
         this.deleted_at = tempPhoto.deleted_at;
@@ -113,6 +118,7 @@ public class Photo {
         nameValuePairs.add(new BasicNameValuePair("photo[filename]", this.filename));
         nameValuePairs.add(new BasicNameValuePair("photo[caption]", this.caption));
         nameValuePairs.add(new BasicNameValuePair("photo[gps]", this.gps));
+        nameValuePairs.add(new BasicNameValuePair("photo[public]", String.valueOf(this.public_perm)));
         return nameValuePairs;
     }
 
