@@ -190,7 +190,7 @@ public class Profile extends Activity implements OnClickListener {
 		image = new ImageView[userphotos.length];
 		for (int i = userphotos.length - 1; i >= 0; i--) {
 			image[i] = new ImageView(this);
-			image[i].setImageResource(R.drawable.ic_launcher);
+			image[i].setImageResource(R.drawable.loader);
 			image[i].setAdjustViewBounds(true);
 			image[i].setOnClickListener(this);
 			LayoutParams lp = new LayoutParams(400, 400);
