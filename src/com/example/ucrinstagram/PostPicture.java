@@ -160,17 +160,20 @@ public class PostPicture extends Activity {
 
 		Photo photo1 = new Photo(link, fileName, caption);
 		photo1.gps = gps_city;
-		user1.addPhoto(photo1);
 
-        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox2);
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox2);
         if (checkBox.isChecked()) {
+        	System.out.println("Checked");
 			photo1.public_perm = false;
-			photo1.save();
+			//photo1.save();
         }
         else{
+        	System.out.println("Unchecked");
 			photo1.public_perm = true;
-			photo1.save();
+			//photo1.save();
         }
+		user1.addPhoto(photo1);
+		//photo1.save();
 
 			
 		new S3PutObjectTask().execute();
