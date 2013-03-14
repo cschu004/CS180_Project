@@ -234,21 +234,29 @@ public class Profile extends Activity implements OnClickListener {
 
 	public void home(View view) {
 		Intent intent = new Intent(this, HomeScreen.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void explore(View view) {
 		Intent intent = new Intent(this, Explore.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void camera(View view) {
 		Intent intent = new Intent(this, Camera.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void updates(View view) {
 		Intent intent = new Intent(this, Updates.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 

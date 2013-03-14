@@ -235,21 +235,29 @@ public class HomeScreen extends Activity {
 
 	public void explore(View view) {
 		Intent intent = new Intent(this, Explore.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void camera(View view) {
 		Intent intent = new Intent(this, Camera.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void updates(View view) {
 		Intent intent = new Intent(this, Updates.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
 	public void profile(View view) {
 		Intent intent = new Intent(this, Profile.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 		startActivity(intent);
 	}
 
