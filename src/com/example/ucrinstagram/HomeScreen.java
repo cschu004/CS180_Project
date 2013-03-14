@@ -3,6 +3,8 @@ package com.example.ucrinstagram;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +13,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -82,33 +86,19 @@ public class HomeScreen extends Activity {
 				Date[] pCommentTime = new Date[pComments.length];
 				String[] pCommentsString = new String[pComments.length];
 				for (int k = 0; k < pComments.length; k++) {
+					
 					pCommentTime[k] = pComments[k].getCreated_at();
-					pCommentsString[k] = pComments[k].body;
+					pCommentsString[k] = "<font color=#3333FF>" + pComments[k].getUsername()
+										+ "</font> " + pComments[k].body;
 				}
 				if(friendPhotos[j].public_perm == null || friendPhotos[j].public_perm)
 					hlElements.add(new HomeListElement(pUser, pCaption, pURL,
-						photoID, pCommentsString, pCommentTime));
+						photoID, pCommentsString, pCommentTime, new Date().getTime() - friendPhotos[j].created_at.getTime()));
 			}
 		}
-		/*
-		Photo[] friendPhotos = user.getHomeScreenPhotos();
-		for (int j = 0; j < friendPhotos.length; j++) {
-			int photoID = friendPhotos[j].getId();
-			String pURL = friendPhotos[j].path + "/"
-					+ friendPhotos[j].filename;
-			String pCaption = friendPhotos[j].caption;
-			Comment[] pComments = friendPhotos[j].getComments();
-			Date[] pCommentTime = new Date[pComments.length];
-			String[] pCommentsString = new String[pComments.length];
-			for (int k = 0; k < pComments.length; k++) {
-				pCommentTime[k] = pComments[k].getCreated_at();
-				pCommentsString[k] = pComments[k].body;
-			}
-			hlElements.add(new HomeListElement(pUser, pCaption, pURL,
-					photoID, pCommentsString, pCommentTime));
-		}
-		*/
+		Collections.sort(hlElements, new hlComparator());
 		HomeListElement[] hleArray = new HomeListElement[hlElements.size()];
+		
 		hlElements.toArray(hleArray);
 		inflateHomescreenList(hleArray);
 
@@ -122,15 +112,17 @@ public class HomeScreen extends Activity {
 		String[] comments;
 		Date[] commentTimes;
 		boolean commentBoxVisible;
+		long elapsedTime;
 
 		HomeListElement(String user, String caption, String imageURL, int id,
-				String[] comments, Date[] commentTimes) {
+				String[] comments, Date[] commentTimes, long elapsedTime) {
 			this.user = user;
 			this.imageURL = imageURL;
 			this.imageID = id;
 			this.comments = comments;
 			this.commentBoxVisible = false;
 			this.commentTimes = commentTimes;
+			this.elapsedTime = elapsedTime;
 		}
 	}
 
@@ -170,6 +162,8 @@ public class HomeScreen extends Activity {
 
 			TextView userTextView = (TextView) row
 					.findViewById(R.id.homescreen_list_element_user);
+			TextView dateTextView = (TextView) row
+					.findViewById(R.id.postTime);
 			ImageView imageView = (ImageView) row
 					.findViewById(R.id.homescreen_list_element_image);
 			final EditText editComment = (EditText) row
@@ -179,14 +173,26 @@ public class HomeScreen extends Activity {
 			final TextView commentsTextView = (TextView) row
 					.findViewById(R.id.homescreen_list_element_comments);
 			userTextView.setText(mElement.user);
+			userTextView.setTextColor(Color.parseColor("#3333FF"));
+			String date = "";
+			int days = getTimeSince(mElement.elapsedTime)[0];
+			int hours = getTimeSince(mElement.elapsedTime)[1];
+			int minutes = getTimeSince(mElement.elapsedTime)[2];
+			if(days > 0)
+				date += Integer.toString(days) + " days ";
+			else if(hours > 0)
+				date += Integer.toString(hours) + " hours ";
+			else
+				date += Integer.toString(minutes) + " minutes";
+			date += " ago";
+			dateTextView.setText(date);
 			loadBitmap(mElement.imageURL, imageView, position);
 			String sb = "";
 			for(int i = 0; i < mElement.comments.length; i++){
 				sb += mElement.comments[i];
-				sb += " posted ";
-				sb += mElement.commentTimes[i].toLocaleString() + ".\n";
+				sb += ".<br>";
 			}
-			commentsTextView.setText(sb);
+			commentsTextView.setText(Html.fromHtml(sb));
 
 			if (!mElement.commentBoxVisible) {
 				editComment.setVisibility(View.GONE);
@@ -353,4 +359,23 @@ public class HomeScreen extends Activity {
 			//new DownloadPhotoTask(key, index).execute();
 		}
 	}
+	public int[] getTimeSince(long elapsed){
+		int days = (int) (elapsed / (1000 * 60 * 60 * 24));
+		int hours = (int) (elapsed - (days * 1000 * 60 * 60 * 24))/(1000 * 60 * 60);
+		int minutes = (int) (elapsed -(days * 1000 * 60 * 60 * 24) - (hours * 1000 * 60 * 60))/(1000*60);
+		int[] eta = new int[3];
+		eta[0] = days; eta[1] = hours; eta[2] = minutes;
+		return eta;
+	}
+	
+	public class hlComparator implements Comparator<HomeListElement>{
+
+		@Override
+		public int compare(HomeListElement arg0, HomeListElement arg1) {
+			// TODO Auto-generated method stub
+			return (arg0.elapsedTime < arg1.elapsedTime) ? -1: 1;
+		}
+		
+	}
+	
 }

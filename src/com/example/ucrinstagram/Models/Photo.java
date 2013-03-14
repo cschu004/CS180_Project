@@ -23,7 +23,7 @@ public class Photo {
     public Boolean public_perm;
 
     private int id;
-    private Date created_at;
+    public Date created_at;
     private Date updated_at;
     private Date deleted_at;
 
