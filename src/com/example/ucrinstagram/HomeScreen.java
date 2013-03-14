@@ -229,7 +229,7 @@ public class HomeScreen extends Activity {
 				public void onClick(View v) {
 					String comment = editComment.getText().toString();
 					Photo photo = new Photo(mElement.imageID);
-					Comment mComment = new Comment(comment, username);
+					Comment mComment = new Comment(comment, Login.username);
 					photo.addComment(mComment);
 					String previousComment = commentsTextView.getText()
 							.toString();
