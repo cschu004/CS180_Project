@@ -65,9 +65,7 @@ public class Profile extends Activity implements OnClickListener {
 		loadPics();
 
 		user1 = new User(Login.username);
-
-		WebAPI api = new WebAPI();
-		Photo profilePic = api.getPhoto(user1.getProfile().profile_photo);
+		Photo profilePic = user1.getProfile().getProfilePhoto();
 
 		// Photo profilePic = user1.getProfile().getProfilePhoto();
 		// Loader image - will be shown before loading image
@@ -129,9 +127,9 @@ public class Profile extends Activity implements OnClickListener {
 
 		// setting data to SharedPrefs
 		Editor editor = defSharedPrefs.edit();
-		editor.putString("nickPref", user1.getProfile().nickname);
-		editor.putString("listPref", user1.getProfile().gender);
-		editor.putString("bioPref", user1.getProfile().bio);
+		editor.putString("nickPref", tempProfile.nickname);
+		editor.putString("listPref", tempProfile.gender);
+		editor.putString("bioPref", tempProfile.bio);
 		editor.putString("emailPref", user1.email);
 		editor.commit();
 

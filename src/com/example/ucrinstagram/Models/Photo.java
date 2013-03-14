@@ -43,9 +43,6 @@ public class Photo {
         this.caption = "";
         this.gps = "";
         this.public_perm = true;
-        this.created_at = new Date();
-        this.updated_at = new Date();
-        this.deleted_at = new Date(0);
     }
 
     public Photo(String path, String filename, String caption) {
@@ -54,9 +51,6 @@ public class Photo {
         this.caption = caption;
         this.gps = "";
         this.public_perm = true;
-        this.created_at = new Date();
-        this.updated_at = new Date();
-        this.deleted_at = new Date(0);
     }
 
     public Photo(String path, String filename, String caption, String gps) {
@@ -65,9 +59,6 @@ public class Photo {
         this.caption = caption;
         this.gps = gps;
         this.public_perm = true;
-        this.created_at = new Date();
-        this.updated_at = new Date();
-        this.deleted_at = new Date(0);
     }
 
     public Photo(int id) {
@@ -80,16 +71,13 @@ public class Photo {
         this.caption = tempPhoto.caption;
         this.gps = tempPhoto.gps;
         this.public_perm = tempPhoto.public_perm;
-        this.created_at = tempPhoto.created_at;
-        this.updated_at = tempPhoto.updated_at;
-        this.deleted_at = tempPhoto.deleted_at;
     }
 
     // --------------------------
     // ----- PUBLIC METHODS -----
     // --------------------------
     public void save() {
-        new WebAPI().savePhoto(this);
+        this.id = new WebAPI().savePhoto(this).getId();
     }
 
     public Comment[] getComments(){
