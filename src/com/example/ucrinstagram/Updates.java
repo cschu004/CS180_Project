@@ -53,7 +53,7 @@ public class Updates extends ListActivity {
 		}
 		User[] allUsers = new WebAPI().getAllUsers();
 		for(int i = 0; i < allUsers.length; i++){
-			Photo[] photos = allUsers[i].getPhotos();
+			Photo[] photos = allUsers[i].getFavorites();
 			for(int j = 0; j < photos.length; j++){
 				if(Arrays.asList(photoIds).contains(photos[j].getId())){
 					String friendlikes = "Friend: <font color=#3333FF>"
