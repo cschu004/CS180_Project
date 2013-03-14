@@ -1,6 +1,7 @@
 package com.example.ucrinstagram;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.example.ucrinstagram.Models.Photo;
@@ -36,10 +37,37 @@ public class Updates extends ListActivity {
 	private void buildUpdateContent() {
 		String username = Login.username;
 		User user = new User(username);
+		Photo[] yourPhotos = user.getPhotos();
 		Photo[] favorites = user.getFavorites();
 		User[] friends = user.getFriends();
+		Integer[] photoIds = new Integer[yourPhotos.length];
+		for( int i = 0; i < yourPhotos.length; i++){
+			int numComments = yourPhotos[i].getComments().length;
+			if(numComments > 0){
+				String updates = "Your photo: <font color=#3333FF>"
+						+ yourPhotos[i].caption + "</font> has "
+						+ Integer.toString(numComments) + " new comments.";
+				updatesArray.add(updates);
+			}
+			photoIds[i]	= Integer.valueOf(yourPhotos[i].getId());
+		}		
 		for (int i = 0; i < friends.length; i++) {
-			Photo[] photos = friends[i].getFavorites();
+			Photo[] photos = friends[i].getPhotos();
+			Photo[] favPhotos = friends[i].getFavorites();
+			if(favPhotos.length > 0){
+				//String updates = "Friend: <font color=#3333FF>"
+				//		+ friends[i].username + "</font> favorited "
+				//		+ Integer.toString(favPhotos.length) + " photos.";
+				//updatesArray.add(updates);
+				for(int j = 0; j < favPhotos.length; j++){
+					if( Arrays.asList(photoIds).contains(favPhotos[j].getId())){
+						String friendlikes = "Friend: <font color=#3333FF>"
+								+ friends[i].username + "</font> favorited your photo <font color=#3333FF>"
+								+ favPhotos[j].caption + "</font>.";
+						updatesArray.add(friendlikes);
+					}
+				}
+			}
 			if (photos.length > 0) {
 				String updates = "Friend: <font color=#3333FF>"
 						+ friends[i].username + "</font> uploaded "
