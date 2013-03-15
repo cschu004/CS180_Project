@@ -55,7 +55,7 @@ public class SinglePicture extends Activity {
 
 		TextView textView3 = (TextView) findViewById(R.id.textView3);
 		textView3.setText(gps);
-		
+
 		/*
 		 * WebAPI api = new WebAPI(); Photo tempPhoto = api.getPhoto(photoId);
 		 * 
@@ -63,44 +63,48 @@ public class SinglePicture extends Activity {
 		 * pComments.length; k++){ String tmp = pComments[k].body + "\n";
 		 * System.out.println(tmp); }
 		 */
-		DownloadImageTask task = new DownloadImageTask((ImageView) findViewById(R.id.imageView1));
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,link);	
-		
+		DownloadImageTask task = new DownloadImageTask(
+				(ImageView) findViewById(R.id.imageView1));
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, link);
+		// new DownloadImageTask((ImageView)
+		// findViewById(R.id.imageView1)).execute(link);
 		ImageView i = (ImageView) findViewById(R.id.imageView1);
 		i.setOnLongClickListener(new myLongListener());
-	    view = new ImageView(this);
+		view = new ImageView(this);
 
-		
 	}
-	private class myLongListener implements View.OnLongClickListener{
+
+	private class myLongListener implements View.OnLongClickListener {
 
 		@Override
 		public boolean onLongClick(View v) {
 			// TODO Auto-generated method stub
 
-		    Toast toast = new Toast(getApplicationContext());
-		    view.setImageResource(R.drawable.heart);
-		    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-		    toast.setDuration(Toast.LENGTH_LONG);
-		    toast.setView(view);
-		    toast.show();
+			Toast toast = new Toast(getApplicationContext());
+			view.setImageResource(R.drawable.heart);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.setDuration(Toast.LENGTH_LONG);
+			toast.setView(view);
+			toast.show();
 			new User(username).addFavorite(new Photo(photoId));
 			return true;
 		}
 
 	}
+
 	public void profileOther(View view) {
 		Intent intent = new Intent(this, ProfileOther.class);
 		intent.putExtra("username", tokens[1]);
 		startActivity(intent);
 	}
 
-	public void addFavorite(View view){
+	public void addFavorite(View view) {
 		new User(Login.username).addFavorite(new Photo(photoId));
-		Toast.makeText(this.getApplicationContext(), "Adding photo: "+ caption, Toast.LENGTH_LONG).show();
-		
+		Toast.makeText(this.getApplicationContext(),
+				"Adding photo: " + caption, Toast.LENGTH_LONG).show();
+
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

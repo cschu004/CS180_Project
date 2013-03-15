@@ -86,19 +86,23 @@ public class HomeScreen extends Activity {
 				Date[] pCommentTime = new Date[pComments.length];
 				String[] pCommentsString = new String[pComments.length];
 				for (int k = 0; k < pComments.length; k++) {
-					
+
 					pCommentTime[k] = pComments[k].getCreated_at();
-					pCommentsString[k] = "<font color=#3333FF>" + pComments[k].getUsername()
-										+ "</font> " + pComments[k].body;
+					pCommentsString[k] = "<font color=#3333FF>"
+							+ pComments[k].getUsername() + "</font> "
+							+ pComments[k].body;
 				}
-				if(friendPhotos[j].public_perm == null || friendPhotos[j].public_perm)
+				if (friendPhotos[j].public_perm == null
+						|| friendPhotos[j].public_perm)
 					hlElements.add(new HomeListElement(pUser, pCaption, pURL,
-						photoID, pCommentsString, pCommentTime, new Date().getTime() - friendPhotos[j].created_at.getTime()));
+							photoID, pCommentsString, pCommentTime, new Date()
+									.getTime()
+									- friendPhotos[j].created_at.getTime()));
 			}
 		}
 		Collections.sort(hlElements, new hlComparator());
 		HomeListElement[] hleArray = new HomeListElement[hlElements.size()];
-		
+
 		hlElements.toArray(hleArray);
 		inflateHomescreenList(hleArray);
 
@@ -162,8 +166,7 @@ public class HomeScreen extends Activity {
 
 			TextView userTextView = (TextView) row
 					.findViewById(R.id.homescreen_list_element_user);
-			TextView dateTextView = (TextView) row
-					.findViewById(R.id.postTime);
+			TextView dateTextView = (TextView) row.findViewById(R.id.postTime);
 			ImageView imageView = (ImageView) row
 					.findViewById(R.id.homescreen_list_element_image);
 			final EditText editComment = (EditText) row
@@ -178,9 +181,9 @@ public class HomeScreen extends Activity {
 			int days = getTimeSince(mElement.elapsedTime)[0];
 			int hours = getTimeSince(mElement.elapsedTime)[1];
 			int minutes = getTimeSince(mElement.elapsedTime)[2];
-			if(days > 0)
+			if (days > 0)
 				date += Integer.toString(days) + " days ";
-			else if(hours > 0)
+			else if (hours > 0)
 				date += Integer.toString(hours) + " hours ";
 			else
 				date += Integer.toString(minutes) + " minutes";
@@ -188,7 +191,7 @@ public class HomeScreen extends Activity {
 			dateTextView.setText(date);
 			loadBitmap(mElement.imageURL, imageView, position);
 			String sb = "";
-			for(int i = 0; i < mElement.comments.length; i++){
+			for (int i = 0; i < mElement.comments.length; i++) {
 				sb += mElement.comments[i];
 				sb += ".<br>";
 			}
@@ -355,27 +358,32 @@ public class HomeScreen extends Activity {
 		} else {
 			mImageView.setImageResource(R.drawable.loader);
 			DownloadPhotoTask task = new DownloadPhotoTask(key, index);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);	
-			//new DownloadPhotoTask(key, index).execute();
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			// new DownloadPhotoTask(key, index).execute();
 		}
 	}
-	public int[] getTimeSince(long elapsed){
+
+	public int[] getTimeSince(long elapsed) {
 		int days = (int) (elapsed / (1000 * 60 * 60 * 24));
-		int hours = (int) (elapsed - (days * 1000 * 60 * 60 * 24))/(1000 * 60 * 60);
-		int minutes = (int) (elapsed -(days * 1000 * 60 * 60 * 24) - (hours * 1000 * 60 * 60))/(1000*60);
+		int hours = (int) (elapsed - (days * 1000 * 60 * 60 * 24))
+				/ (1000 * 60 * 60);
+		int minutes = (int) (elapsed - (days * 1000 * 60 * 60 * 24) - (hours * 1000 * 60 * 60))
+				/ (1000 * 60);
 		int[] eta = new int[3];
-		eta[0] = days; eta[1] = hours; eta[2] = minutes;
+		eta[0] = days;
+		eta[1] = hours;
+		eta[2] = minutes;
 		return eta;
 	}
-	
-	public class hlComparator implements Comparator<HomeListElement>{
+
+	public class hlComparator implements Comparator<HomeListElement> {
 
 		@Override
 		public int compare(HomeListElement arg0, HomeListElement arg1) {
 			// TODO Auto-generated method stub
-			return (arg0.elapsedTime < arg1.elapsedTime) ? -1: 1;
+			return (arg0.elapsedTime < arg1.elapsedTime) ? -1 : 1;
 		}
-		
+
 	}
-	
+
 }

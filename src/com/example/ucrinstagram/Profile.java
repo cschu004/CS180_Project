@@ -46,7 +46,8 @@ public class Profile extends Activity implements OnClickListener {
 	User user1;
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("", ""));
+			new BasicAWSCredentials("",
+					""));
 	final String s3Link = "https://s3.amazonaws.com/ucrinstagram/";
 	String filePath;
 	String fileName;
@@ -60,7 +61,8 @@ public class Profile extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 
-		username = Login.username.toLowerCase().replaceAll("\\s", "");;
+		username = Login.username.toLowerCase().replaceAll("\\s", "");
+		;
 		loadInfo();
 		loadPics();
 
@@ -85,7 +87,8 @@ public class Profile extends Activity implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		username = Login.username.toLowerCase().replaceAll("\\s", "");;
+		username = Login.username.toLowerCase().replaceAll("\\s", "");
+		;
 		loadInfo();
 	}
 
@@ -201,10 +204,10 @@ public class Profile extends Activity implements OnClickListener {
 			// System.out.println(userphotos[i].path + '/' +
 			// userphotos[i].filename);
 			DownloadImageTask task = new DownloadImageTask(image[i]);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,userphotos[i].path + '/'
-					+ userphotos[i].filename);	
-			
-			//new DownloadImageTask(image[i]).execute();
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+					userphotos[i].path + '/' + userphotos[i].filename);
+
+			// new DownloadImageTask(image[i]).execute();
 		}
 	}
 
@@ -265,14 +268,14 @@ public class Profile extends Activity implements OnClickListener {
 
 	public void followers(View view) {
 		Intent intent = new Intent(this, Followers.class);
-		intent.putExtra("username",username);
+		intent.putExtra("username", username);
 
 		startActivity(intent);
 	}
 
 	public void following(View view) {
 		Intent intent = new Intent(this, Following.class);
-		intent.putExtra("username",username);
+		intent.putExtra("username", username);
 
 		startActivity(intent);
 	}
@@ -329,7 +332,7 @@ public class Profile extends Activity implements OnClickListener {
 		link = s3Link + username;
 
 		Photo photo1 = new Photo(link, fileName);
-        photo1.save();
+		photo1.save();
 
 		System.out.println("photo path before save");
 		System.out.println(photo1.path + "/" + photo1.filename);

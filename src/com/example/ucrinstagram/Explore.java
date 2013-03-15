@@ -1,7 +1,6 @@
 package com.example.ucrinstagram;
 
 import java.io.InputStream;
-import java.util.concurrent.Executor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,24 +32,33 @@ public class Explore extends Activity {
 			System.out.println(allPhoto[i].path + '/' + allPhoto[i].filename);
 			allLinks[i] = allPhoto[i].path + '/' + allPhoto[i].filename;
 		}
-		DownloadImageTask task = new DownloadImageTask((ImageView) findViewById(R.id.imageView1));
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[0]);
-		DownloadImageTask task1 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView01));
-		task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[1]);
-		DownloadImageTask task2 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView02));
-		task2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[2]);
-		DownloadImageTask task3 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView03));
-		task3.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[3]);
-		DownloadImageTask task4 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView04));
-		task4.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[4]);
-		DownloadImageTask task5 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView06));
-		task5.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[5]);
-		DownloadImageTask task6 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView08));
-		task6.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[6]);
-		DownloadImageTask task7 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView07));
-		task7.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[7]);
-		DownloadImageTask task8 = new DownloadImageTask((ImageView) findViewById(R.id.ImageView05));
-		task8.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,allLinks[8]);
+		DownloadImageTask task = new DownloadImageTask(
+				(ImageView) findViewById(R.id.imageView1));
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[0]);
+		DownloadImageTask task1 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView01));
+		task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[1]);
+		DownloadImageTask task2 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView02));
+		task2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[2]);
+		DownloadImageTask task3 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView03));
+		task3.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[3]);
+		DownloadImageTask task4 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView04));
+		task4.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[4]);
+		DownloadImageTask task5 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView06));
+		task5.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[5]);
+		DownloadImageTask task6 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView08));
+		task6.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[6]);
+		DownloadImageTask task7 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView07));
+		task7.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[7]);
+		DownloadImageTask task8 = new DownloadImageTask(
+				(ImageView) findViewById(R.id.ImageView05));
+		task8.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, allLinks[8]);
 
 	}
 
@@ -86,8 +94,8 @@ public class Explore extends Activity {
 
 		startActivity(intent);
 	}
-	
-	public void favorites(View view){
+
+	public void favorites(View view) {
 		Intent intent = new Intent(this, Favorites.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 

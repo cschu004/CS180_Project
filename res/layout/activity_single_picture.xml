@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SinglePicture"
-    android:background="@drawable/border1" >
+    android:background="@drawable/singleborder"
+    tools:context=".SinglePicture" >
 
     <TextView
         android:id="@+id/textView3"

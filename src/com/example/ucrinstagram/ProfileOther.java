@@ -150,10 +150,10 @@ public class ProfileOther extends Activity implements OnClickListener {
 			// System.out.println(userphotos[i].path + '/' +
 			// userphotos[i].filename);
 			DownloadImageTask task = new DownloadImageTask(image[i]);
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,userphotos[i].path + '/'
-					+ userphotos[i].filename);	
-			//new DownloadImageTask(image[i]).execute(userphotos[i].path + '/'
-				//	+ userphotos[i].filename);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+					userphotos[i].path + '/' + userphotos[i].filename);
+			// new DownloadImageTask(image[i]).execute(userphotos[i].path + '/'
+			// + userphotos[i].filename);
 		}
 	}
 
@@ -209,13 +209,13 @@ public class ProfileOther extends Activity implements OnClickListener {
 
 	public void followers(View view) {
 		Intent intent = new Intent(this, Followers.class);
-		intent.putExtra("username",username);
+		intent.putExtra("username", username);
 		startActivity(intent);
 	}
 
 	public void following(View view) {
 		Intent intent = new Intent(this, Following.class);
-		intent.putExtra("username",username);
+		intent.putExtra("username", username);
 		startActivity(intent);
 	}
 

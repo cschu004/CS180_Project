@@ -86,7 +86,7 @@ public class WebAPI {
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.POST;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
 				user.getNameValuePairs()));
-        return gson.fromJson(json, User.class);
+		return gson.fromJson(json, User.class);
 	}
 
 	public void editUser(User user) {
@@ -94,13 +94,14 @@ public class WebAPI {
 	}
 
 	public User saveUser(User user) {
-		String url = apiURL + User.urlSuffix + "/" + Integer.toString(user.getId()) + ".json";
+		String url = apiURL + User.urlSuffix + "/"
+				+ Integer.toString(user.getId()) + ".json";
 		Log.i("OC", "Attempting to save User info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
-        String json = getJSONFromServer(new HTTPParams(requestMethod, url,
+		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
 				user.getNameValuePairs()));
-        Log.i("OC", json);
-        return gson.fromJson(json, User.class);
+		Log.i("OC", json);
+		return gson.fromJson(json, User.class);
 	}
 
 	// --------------------------
@@ -172,13 +173,13 @@ public class WebAPI {
 	}
 
 	public UserProfile saveProfile(UserProfile profile) {
-		String url = apiURL + UserProfile.urlSuffix
-				+ "/" + Integer.toString(profile.getId()) + ".json";
+		String url = apiURL + UserProfile.urlSuffix + "/"
+				+ Integer.toString(profile.getId()) + ".json";
 		Log.i("OC", "Attempting to edit Profile info: " + url);
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
 				profile.getNameValuePairs()));
-        return gson.fromJson(json, UserProfile.class);
+		return gson.fromJson(json, UserProfile.class);
 	}
 
 	public void saveProfileFromUser(UserProfile profile, User user) {
@@ -264,7 +265,7 @@ public class WebAPI {
 		HTTPRequestMethod requestMethod = HTTPRequestMethod.PUT;
 		String json = getJSONFromServer(new HTTPParams(requestMethod, url,
 				photo.getNameValuePairs()));
-        return gson.fromJson(json, Photo.class);
+		return gson.fromJson(json, Photo.class);
 	}
 
 	public void removePhoto(Photo photo) {
@@ -384,9 +385,9 @@ public class WebAPI {
 		String json = null;
 		try {
 			getJSONFromServer task = new getJSONFromServer();
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,params);	
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 			return json = task.get();
-			//return json = new getJSONFromServer().execute(params).get();
+			// return json = new getJSONFromServer().execute(params).get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {

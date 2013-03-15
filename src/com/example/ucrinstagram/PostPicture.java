@@ -24,8 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -36,7 +34,8 @@ import com.example.ucrinstagram.Models.User;
 public class PostPicture extends Activity {
 
 	private AmazonS3Client s3Client = new AmazonS3Client(
-			new BasicAWSCredentials("", ""));
+			new BasicAWSCredentials("",
+					""));
 
 	String filePath;
 	EditText et;
@@ -60,8 +59,8 @@ public class PostPicture extends Activity {
 		setContentView(R.layout.activity_post_picture);
 
 		user1 = new User(username);
-		//Toast.makeText(this.getApplicationContext(), username,
-			//	Toast.LENGTH_LONG).show();
+		// Toast.makeText(this.getApplicationContext(), username,
+		// Toast.LENGTH_LONG).show();
 
 		filePath = getIntent().getExtras().getString("picture");
 
@@ -98,11 +97,6 @@ public class PostPicture extends Activity {
 
 		}
 	}
-	
-
-
-		
-
 
 	private void getLocation() {
 		// Get the location manager
@@ -161,21 +155,19 @@ public class PostPicture extends Activity {
 		Photo photo1 = new Photo(link, fileName, caption);
 		photo1.gps = gps_city;
 
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox2);
-        if (checkBox.isChecked()) {
-        	System.out.println("Checked");
+		CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox2);
+		if (checkBox.isChecked()) {
+			System.out.println("Checked");
 			photo1.public_perm = false;
-			//photo1.save();
-        }
-        else{
-        	System.out.println("Unchecked");
+			// photo1.save();
+		} else {
+			System.out.println("Unchecked");
 			photo1.public_perm = true;
-			//photo1.save();
-        }
+			// photo1.save();
+		}
 		user1.addPhoto(photo1);
-		//photo1.save();
+		// photo1.save();
 
-			
 		new S3PutObjectTask().execute();
 
 		Intent intent = new Intent(this, HomeScreen.class);
