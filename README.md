@@ -25,3 +25,5 @@ Screenshots:
 <img src="http://dl.dropbox.com/s/jpnh7zmxomk5de5/Screenshot_2013-03-15-09-29-53%20%281%29.png" width="280" height="500">
 <img src="http://dl.dropbox.com/s/w4if3ivftws6zy7/Screenshot_2013-03-15-09-30-39.png?m" width="280" height="500">
 <img src="http://dl.dropbox.com/s/7sx39vuc5u1oq09/Screenshot_2013-03-15-09-30-50.png" width="280" height="500">
+
+>Photo Credit: Daphne Ferreiro
